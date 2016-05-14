@@ -22,7 +22,6 @@
     "jenkins-khan/jenkins-api": "dev-master",
     "spirit-dev/php-sonarqube-api": "dev-master",
     "kbsali/redmine-api": "v1.5.7",
-    "fr3d/ldap-bundle": "v2.0.0",
     "liip/imagine-bundle": "1.4.2",
     "coresphere/console-bundle": "0.4.0",
     "lexik/maintenance-bundle": "v2.0.0",
