@@ -29,8 +29,7 @@
     "vich/uploader-bundle": "1.0.0-beta7"
   },
   "autoload": {
-    "psr-0": {
-      "SpiritDev\\Bundle\\DBoxPortalBundle\\": ""
-    }
-  }
+    "psr-0": { "SpiritDev\\Bundle\\DBoxPortalBundle": "" }
+  },
+  "target-dir": "SpiritDev/Bundle/DBoxPortalBundle"
 }
