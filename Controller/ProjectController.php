@@ -29,7 +29,7 @@ class ProjectController extends Controller {
     public function projectAction($pjt_name) {
         // Get project entity
         $em = $this->getDoctrine()->getEntityManager();
-        $project = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->findOneBy(array('name' => $pjt_name));
+        $project = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->findOneBy(array('name' => $pjt_name));
         // Get available users
         $availableUsers = $this->getAvailableUsers($em, $project);
 
@@ -63,7 +63,7 @@ class ProjectController extends Controller {
         if ($project->isCiDevManaged()) {
             $jenkinsAPI = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins');
             // Get remotes ACTIVE managed pipelines
-            $ciActivePipelines = $em->getRepository('SpiritDevBundleDBoxPortalBundle:ContinuousIntegration')->findBy(array(
+            $ciActivePipelines = $em->getRepository('SpiritDevDBoxPortalBundle:ContinuousIntegration')->findBy(array(
                 'project' => $project,
                 'active' => true
             ));
@@ -89,7 +89,7 @@ class ProjectController extends Controller {
                 }
             }
             // Get Remote UNACTIVE pipelines
-            $ciUnactivePipelines = $em->getRepository('SpiritDevBundleDBoxPortalBundle:ContinuousIntegration')->findBy(array(
+            $ciUnactivePipelines = $em->getRepository('SpiritDevDBoxPortalBundle:ContinuousIntegration')->findBy(array(
                 'project' => $project,
                 'active' => false
             ));
@@ -174,7 +174,7 @@ class ProjectController extends Controller {
             'id' => $request->request->get('userId')
         ));
         // Get project entity
-        $project = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->findOneBy(array(
+        $project = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->findOneBy(array(
             'id' => $request->request->get('projectId')
         ));
 
@@ -247,7 +247,7 @@ class ProjectController extends Controller {
             'id' => $request->request->get('userId')
         ));
         // Get project entity
-        $project = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->findOneBy(array(
+        $project = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->findOneBy(array(
             'id' => $request->request->get('projectId')
         ));
 
@@ -293,7 +293,7 @@ class ProjectController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
 
         // Get user to remove entity
-        $ciToLaunch = $em->getRepository('SpiritDevBundleDBoxPortalBundle:ContinuousIntegration')->findOneBy(array(
+        $ciToLaunch = $em->getRepository('SpiritDevDBoxPortalBundle:ContinuousIntegration')->findOneBy(array(
             'id' => $request->request->get('ciId')
         ));
 
@@ -319,7 +319,7 @@ class ProjectController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
 
         // Get user to remove entity
-        $ciLaunched = $em->getRepository('SpiritDevBundleDBoxPortalBundle:ContinuousIntegration')->findOneBy(array(
+        $ciLaunched = $em->getRepository('SpiritDevDBoxPortalBundle:ContinuousIntegration')->findOneBy(array(
             'id' => $request->request->get('ciId')
         ));
 
@@ -340,7 +340,7 @@ class ProjectController extends Controller {
 
         // Get Project entity
         $em = $this->getDoctrine()->getManager();
-        $projectToManage = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->findOneBy(array('id' => $pjtId));
+        $projectToManage = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->findOneBy(array('id' => $pjtId));
 
         // Initialize values
         $xhrStatus = JsonResponse::HTTP_CONFLICT;
@@ -460,9 +460,9 @@ class ProjectController extends Controller {
         // Get Entity Manager
         $em = $this->getDoctrine()->getManager();
         // Get related project
-        $project = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->findOneBy(array('name' => $pjt_name));
+        $project = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->findOneBy(array('name' => $pjt_name));
         // Get Dev Pipeline
-        $devPipeline = $em->getRepository('SpiritDevBundleDBoxPortalBundle:ContinuousIntegration')->findOneBy(array(
+        $devPipeline = $em->getRepository('SpiritDevDBoxPortalBundle:ContinuousIntegration')->findOneBy(array(
             'project' => $project,
             'active' => true,
             'forDevelopment' => true

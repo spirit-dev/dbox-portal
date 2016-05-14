@@ -18,7 +18,7 @@ class WebHookController extends Controller {
         // Getting gitlab API
         $gitLabAPI = $this->get('spirit_dev_dbox_portal_bundle.api.gitlab');
         // Getting project
-        $project = $this->getDoctrine()->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->findOneBy(array('id' => $pjt_id));
+        $project = $this->getDoctrine()->getRepository('SpiritDevDBoxPortalBundle:Project')->findOneBy(array('id' => $pjt_id));
 
         // Update project datas with nbCommits
         $gitBranches = $gitLabAPI->defineGitCommits($project);

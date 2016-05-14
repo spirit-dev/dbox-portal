@@ -28,16 +28,16 @@ class DefaultController extends Controller {
 
         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             // Get All projects if user is admin
-            $allProject = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->findBy(array('active' => true));
+            $allProject = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->findBy(array('active' => true));
         } else {
             // Get current user projects where he is member
-            $userMemberProjects = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->getProjectsByTeamMember($currentUser);
-            $userOwnedProjects = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->getProjectsByOwner($currentUser);
+            $userMemberProjects = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->getProjectsByTeamMember($currentUser);
+            $userOwnedProjects = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->getProjectsByOwner($currentUser);
         }
 
 
         // Get some métrics
-        $nbProjects = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->getNbActiveProjects();
+        $nbProjects = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->getNbActiveProjects();
 
         return array(
             'all_projects' => $allProject,

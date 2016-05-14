@@ -52,8 +52,8 @@ class NewSecurityHandler {
     private function registerDemand() {
 
         // Managing EM entities
-        $status = $this->em->getRepository('SpiritDevBundleDBoxPortalBundle:Status')->findOneBy(array('canonicalName' => 'new'));
-        $type = $this->em->getRepository('SpiritDevBundleDBoxPortalBundle:Type')->findOneBy(array('canonicalName' => 'new_security'));
+        $status = $this->em->getRepository('SpiritDevDBoxPortalBundle:Status')->findOneBy(array('canonicalName' => 'new'));
+        $type = $this->em->getRepository('SpiritDevDBoxPortalBundle:Type')->findOneBy(array('canonicalName' => 'new_security'));
 
         // Creating empty demand
         $demand = new Demand();

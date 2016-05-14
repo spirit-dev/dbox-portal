@@ -29,7 +29,7 @@ class DemandController extends Controller {
     public function demandsAction() {
         $user = $this->getCurrentUser();
 
-        $demands = $this->getDoctrine()->getRepository('SpiritDevBundleDBoxPortalBundle:Demand')->findBy(array('applicant' => $user));
+        $demands = $this->getDoctrine()->getRepository('SpiritDevDBoxPortalBundle:Demand')->findBy(array('applicant' => $user));
 
         return array('demands' => $demands);
     }
@@ -56,7 +56,7 @@ class DemandController extends Controller {
      * @return array
      */
     public function demandAction($id) {
-        $demand = $this->getDoctrine()->getRepository('SpiritDevBundleDBoxPortalBundle:Demand')->findOneBy(array('id' => $id));
+        $demand = $this->getDoctrine()->getRepository('SpiritDevDBoxPortalBundle:Demand')->findOneBy(array('id' => $id));
 
         return array('demand' => $demand);
     }
@@ -208,7 +208,7 @@ class DemandController extends Controller {
 
         $user = $this->getCurrentUser();
         $em = $this->getDoctrine()->getManager();
-        $userProjects = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->findBy(array('owner' => $user));
+        $userProjects = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->findBy(array('owner' => $user));
         // If current user hasn't owned projects
         if (!$userProjects || count($userProjects) == 0) {
             return $this->render('SpiritDevBundleDBoxPortalBundle:Demand/Form:demandNewPipeline.html.twig', array(
@@ -259,7 +259,7 @@ class DemandController extends Controller {
 
         $user = $this->getCurrentUser();
         $em = $this->getDoctrine()->getManager();
-        $userProjects = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->findBy(array('owner' => $user, 'ciDevManaged' => true));
+        $userProjects = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->findBy(array('owner' => $user, 'ciDevManaged' => true));
         // If current user hasn't owned projects
         if (!$userProjects || count($userProjects) == 0) {
             return $this->render('SpiritDevBundleDBoxPortalBundle:Demand/Form:demandNewSecurity.html.twig', array(

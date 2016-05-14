@@ -56,7 +56,7 @@ class NewCommentHandler {
      * @return null|object|Demand
      */
     private function registerComment() {
-        $demand = $this->em->getRepository('SpiritDevBundleDBoxPortalBundle:Demand')->findOneBy(array('id' => $this->id));
+        $demand = $this->em->getRepository('SpiritDevDBoxPortalBundle:Demand')->findOneBy(array('id' => $this->id));
         $demand->addComment($this->setCommentData($demand));
         $this->em->flush();
         return $demand;

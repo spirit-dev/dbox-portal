@@ -19,11 +19,11 @@ class TodoController extends Controller {
     public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $nbTodos = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Todo')->getNbTodos();
+        $nbTodos = $em->getRepository('SpiritDevDBoxPortalBundle:Todo')->getNbTodos();
 
         if ($nbTodos > 0) {
 
-            $todos = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Todo')->findAll();
+            $todos = $em->getRepository('SpiritDevDBoxPortalBundle:Todo')->findAll();
 
             return array(
                 'todos' => $todos
@@ -40,7 +40,7 @@ class TodoController extends Controller {
     public function menuAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $nbTodos = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Todo')->getNbTodos();
+        $nbTodos = $em->getRepository('SpiritDevDBoxPortalBundle:Todo')->getNbTodos();
 
         return $this->render('SpiritDevBundleDBoxPortalBundle:Common:menu_todos.html.twig', array('nb_todos' => $nbTodos));
 

@@ -41,8 +41,8 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
 
-        $pjt = $this->getContainer()->get('doctrine')->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->find(3);
-//        $pjtd = $this->getContainer()->get('doctrine')->getRepository('SpiritDevBundleDBoxPortalBundle:Project')->find(4);
+        $pjt = $this->getContainer()->get('doctrine')->getRepository('SpiritDevDBoxPortalBundle:Project')->find(3);
+//        $pjtd = $this->getContainer()->get('doctrine')->getRepository('SpiritDevDBoxPortalBundle:Project')->find(4);
 
 //        $gitRepoName = substr($pjt->getGitLabSshUrlToRepo(), strrpos($pjt->getGitLabSshUrlToRepo(), '/'));
 //        $gitPath = "/var/opt/gitlab/git-data/repositories/root".$gitRepoName;

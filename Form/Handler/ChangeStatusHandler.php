@@ -55,8 +55,8 @@ class ChangeStatusHandler {
         $requestParam = $this->request->request->all()['demand_change_status'];
         $newStatusId = $requestParam["status"];
         // Managing EM entities
-        $demand = $this->em->getRepository('SpiritDevBundleDBoxPortalBundle:Demand')->findOneBy(array('id' => $demandId));
-        $newStatus = $this->em->getRepository('SpiritDevBundleDBoxPortalBundle:Status')->findOneBy(array('id' => $newStatusId));
+        $demand = $this->em->getRepository('SpiritDevDBoxPortalBundle:Demand')->findOneBy(array('id' => $demandId));
+        $newStatus = $this->em->getRepository('SpiritDevDBoxPortalBundle:Status')->findOneBy(array('id' => $newStatusId));
 
         // Setting new values
         $demand->setStatus($newStatus);

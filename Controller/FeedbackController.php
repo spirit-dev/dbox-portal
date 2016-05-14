@@ -75,7 +75,7 @@ class FeedbackController extends Controller {
      */
     public function countFeedbacksAction() {
         $em = $this->getDoctrine()->getManager();
-        $countFeedbacks = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Feedback')->countUnreadedFeedbacks();
+        $countFeedbacks = $em->getRepository('SpiritDevDBoxPortalBundle:Feedback')->countUnreadedFeedbacks();
 
         return array('nb_feedbacks' => $countFeedbacks);
     }

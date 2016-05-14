@@ -27,7 +27,7 @@ class CommunicationController extends Controller {
         // Get communications dependings on roles
         if (!in_array('ROLE_ADMIN', $currentUser->getRoles())) {
             // Check DB
-            $coms = $this->getDoctrine()->getRepository('SpiritDevBundleDBoxPortalBundle:Communication')->findAvailableCommunications($currentUser->getViewedCommunications());
+            $coms = $this->getDoctrine()->getRepository('SpiritDevDBoxPortalBundle:Communication')->findAvailableCommunications($currentUser->getViewedCommunications());
             // Recompose returned datas
             foreach ($coms as $com) {
                 $returnedComs[$i]['id'] = $com->getId();
@@ -72,7 +72,7 @@ class CommunicationController extends Controller {
         // Getting necessary informaitons
         $em = $this->getDoctrine()->getEntityManager();
         $currentUser = $this->getCurrentUser();
-        $communication = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Communication')->findOneBy(array(
+        $communication = $em->getRepository('SpiritDevDBoxPortalBundle:Communication')->findOneBy(array(
             'id' => $request->request->get('com_id')
         ));
 
@@ -99,7 +99,7 @@ class CommunicationController extends Controller {
         // Getting necessary informaitons
         $em = $this->getDoctrine()->getEntityManager();
         $currentUser = $this->getCurrentUser();
-        $communication = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Communication')->findOneBy(array(
+        $communication = $em->getRepository('SpiritDevDBoxPortalBundle:Communication')->findOneBy(array(
             'id' => $request->request->get('com_id')
         ));
 

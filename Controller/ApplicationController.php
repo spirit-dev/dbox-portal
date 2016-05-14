@@ -20,7 +20,7 @@ class ApplicationController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
 
-        $applications = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Application')->findAll();
+        $applications = $em->getRepository('SpiritDevDBoxPortalBundle:Application')->findAll();
 
         return array('applications' => $applications);
     }
@@ -37,7 +37,7 @@ class ApplicationController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
 
-        $appli = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Application')->findOneBy(array('id' => $app));
+        $appli = $em->getRepository('SpiritDevDBoxPortalBundle:Application')->findOneBy(array('id' => $app));
 
         if (!$appli) {
             throw $this->createNotFoundException('The application does not exist');
@@ -60,7 +60,7 @@ class ApplicationController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
 
-        $appli = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Application')->findOneBy(array('canonicalName' => $app));
+        $appli = $em->getRepository('SpiritDevDBoxPortalBundle:Application')->findOneBy(array('canonicalName' => $app));
 
         return array('appli' => $appli);
     }

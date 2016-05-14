@@ -48,7 +48,7 @@ class TodosManager {
     public function deleteTodo($id) {
         $em = $this->container->get('doctrine')->getEntityManager();
 
-        $todo = $em->getRepository('SpiritDevBundleDBoxPortalBundle:Todo')->findOneBy(array('id' => $id));
+        $todo = $em->getRepository('SpiritDevDBoxPortalBundle:Todo')->findOneBy(array('id' => $id));
 
         $em->remove($todo);
         $em->flush();

@@ -51,8 +51,8 @@ class NewUserHandler {
      */
     private function registerDemand() {
         // Managing EM entities
-        $status = $this->em->getRepository('SpiritDevBundleDBoxPortalBundle:Status')->findOneBy(array('canonicalName' => 'new'));
-        $type = $this->em->getRepository('SpiritDevBundleDBoxPortalBundle:Type')->findOneBy(array('canonicalName' => 'new_user'));
+        $status = $this->em->getRepository('SpiritDevDBoxPortalBundle:Status')->findOneBy(array('canonicalName' => 'new'));
+        $type = $this->em->getRepository('SpiritDevDBoxPortalBundle:Type')->findOneBy(array('canonicalName' => 'new_user'));
 
         // Creating empty demand
         $demand = new Demand();
