@@ -30,5 +30,6 @@
   },
   "autoload": {
     "psr-0": { "SpiritDev\\Bundle\\DBoxPortalBundle": "" }
-  }
+  },
+  "target-dir": "SpiritDev/Bundle/DBoxPortalBundle"
 }
