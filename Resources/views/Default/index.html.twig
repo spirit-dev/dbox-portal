@@ -1,4 +1,4 @@
-{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+{% extends('SpiritDevDBoxPortalBundle::layout.html.twig') %}
 
 {% block title %}{{ 'pagetitle.index'|trans }} - {{ parent() }}{% endblock %}
 
@@ -54,7 +54,7 @@
                         {% endif %}
 
                         {# defining grantings #}
-                        {{ include('SpiritDevBundleDBoxPortalBundle:Default:index_grantings.html.twig') }}
+                        {{ include('SpiritDevDBoxPortalBundle:Default:index_grantings.html.twig') }}
 
                         <h4>{{ project.name }}</h4>
                     <span class="text-muted">
@@ -98,7 +98,7 @@
                         {% endif %}
 
                         {# defining grantings #}
-                        {{ include('@Portal/Default/index_grantings.html.twig') }}
+                        {{ include('@SpiritDevDBoxPortalBundle:Default:index_grantings.html.twig') }}
 
                         <h4>{{ project.name }}</h4>
                     <span class="text-muted">
@@ -140,7 +140,7 @@
                                  alt="{{ project.name }} thumbnail"/>
                         {% endif %}
                         {# Project grantings #}
-                        {{ include('@Portal/Default/index_grantings.html.twig') }}
+                        {{ include('@SpiritDevDBoxPortalBundle:Default:index_grantings.html.twig') }}
                         <h4>{{ project.name }}</h4>
                     <span class="text-muted">
                         {% if project.description|length > 38 %}

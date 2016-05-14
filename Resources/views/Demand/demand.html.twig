@@ -1,4 +1,4 @@
-{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+{% extends('SpiritDevDBoxPortalBundle::layout.html.twig') %}
 
 {% block title %}{{ 'pagetitle.demand'|trans }} - {{ parent() }}{% endblock %}
 
@@ -27,12 +27,12 @@
                 <div id="col-{{ demand.id }}" class="panel-collapse collapse in" role="tabpanel"
                      aria-labelledby="head-{{ demand.id }}">
                     <div class="panel-body panel-body-demand">
-                        {% include('SpiritDevBundleDBoxPortalBundle:Demand/Dashboard:demand_main.html.twig') %}
-                        {% include('SpiritDevBundleDBoxPortalBundle:Demand/Dashboard:demand_type.html.twig') %}
-                        {% include('SpiritDevBundleDBoxPortalBundle:Demand/Dashboard:demand_status.html.twig') %}
-                        {% include('SpiritDevBundleDBoxPortalBundle:Demand/Dashboard:demand_comments.html.twig') %}
+                        {% include('SpiritDevDBoxPortalBundle:Demand/Dashboard:demand_main.html.twig') %}
+                        {% include('SpiritDevDBoxPortalBundle:Demand/Dashboard:demand_type.html.twig') %}
+                        {% include('SpiritDevDBoxPortalBundle:Demand/Dashboard:demand_status.html.twig') %}
+                        {% include('SpiritDevDBoxPortalBundle:Demand/Dashboard:demand_comments.html.twig') %}
                         {% if is_granted('ROLE_ADMIN') %}
-                            {% include('SpiritDevBundleDBoxPortalBundle:Demand/Dashboard:demand_update.html.twig') %}
+                            {% include('SpiritDevDBoxPortalBundle:Demand/Dashboard:demand_update.html.twig') %}
                         {% endif %}
                     </div>
                 </div>

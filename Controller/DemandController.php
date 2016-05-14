@@ -94,7 +94,7 @@ class DemandController extends Controller {
         }
 
         // Return generated form
-        return $this->render('SpiritDevBundleDBoxPortalBundle:Demand/Form:demandNewUser.html.twig', array(
+        return $this->render('SpiritDevDBoxPortalBundle:Demand/Form:demandNewUser.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -139,7 +139,7 @@ class DemandController extends Controller {
         }
 
         // Return generated form
-        return $this->render('SpiritDevBundleDBoxPortalBundle:Demand/Form:demandNewComment.html.twig', array(
+        return $this->render('SpiritDevDBoxPortalBundle:Demand/Form:demandNewComment.html.twig', array(
             'form' => $form->createView(),
             'id' => $demandId
         ));
@@ -192,7 +192,7 @@ class DemandController extends Controller {
         }
 
         // Return generated form
-        return $this->render('SpiritDevBundleDBoxPortalBundle:Demand/Form:demandNewProject.html.twig', array(
+        return $this->render('SpiritDevDBoxPortalBundle:Demand/Form:demandNewProject.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -211,7 +211,7 @@ class DemandController extends Controller {
         $userProjects = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->findBy(array('owner' => $user));
         // If current user hasn't owned projects
         if (!$userProjects || count($userProjects) == 0) {
-            return $this->render('SpiritDevBundleDBoxPortalBundle:Demand/Form:demandNewPipeline.html.twig', array(
+            return $this->render('SpiritDevDBoxPortalBundle:Demand/Form:demandNewPipeline.html.twig', array(
                 'error' => true
             ));
         }
@@ -242,7 +242,7 @@ class DemandController extends Controller {
         }
 
         // Return generated form
-        return $this->render('SpiritDevBundleDBoxPortalBundle:Demand/Form:demandNewPipeline.html.twig', array(
+        return $this->render('SpiritDevDBoxPortalBundle:Demand/Form:demandNewPipeline.html.twig', array(
             'form' => $form->createView(),
             'userProjects' => $userProjects
         ));
@@ -262,7 +262,7 @@ class DemandController extends Controller {
         $userProjects = $em->getRepository('SpiritDevDBoxPortalBundle:Project')->findBy(array('owner' => $user, 'ciDevManaged' => true));
         // If current user hasn't owned projects
         if (!$userProjects || count($userProjects) == 0) {
-            return $this->render('SpiritDevBundleDBoxPortalBundle:Demand/Form:demandNewSecurity.html.twig', array(
+            return $this->render('SpiritDevDBoxPortalBundle:Demand/Form:demandNewSecurity.html.twig', array(
                 'error' => true
             ));
         }
@@ -294,7 +294,7 @@ class DemandController extends Controller {
         }
 
         // Return generated form
-        return $this->render('SpiritDevBundleDBoxPortalBundle:Demand/Form:demandNewSecurity.html.twig', array(
+        return $this->render('SpiritDevDBoxPortalBundle:Demand/Form:demandNewSecurity.html.twig', array(
             'form' => $form->createView(),
             'userProjects' => $userProjects
         ));

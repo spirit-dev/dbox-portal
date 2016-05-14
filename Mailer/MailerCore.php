@@ -45,7 +45,7 @@ class MailerCore {
      */
     protected function sendNewDemandAdminMail(Demand $demand, $subject) {
         // Define necessary vars
-        $template = 'SpiritDevBundleDBoxPortalBundle:Mailer/Demand:adminRegistration.html.twig'; // Template
+        $template = 'SpiritDevDBoxPortalBundle:Mailer/Demand:adminRegistration.html.twig'; // Template
         $subject = $this->getSubject($subject); // Subject
         $demandUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_demand', array('id' => $demand->getId()), true);
         $rendered = $this->templating->render($template, array(

@@ -1,4 +1,4 @@
-{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+{% extends('SpiritDevDBoxPortalBundle::layout.html.twig') %}
 
 {% block title %}{{ project.name }} - {{ parent() }}{% endblock %}
 
@@ -17,17 +17,17 @@
     {% endif %}
 
     {# HEADER #}
-    {% include('SpiritDevBundleDBoxPortalBundle:Project:project_header.html.twig') %}
+    {% include('SpiritDevDBoxPortalBundle:Project:project_header.html.twig') %}
 
     {# CONFIG #}
-    {% include('SpiritDevBundleDBoxPortalBundle:Project:project_config.html.twig') %}
+    {% include('SpiritDevDBoxPortalBundle:Project:project_config.html.twig') %}
 
     {# TOP CONTENT #}
-    {% include('SpiritDevBundleDBoxPortalBundle:Project:project_top_content.html.twig') %}
+    {% include('SpiritDevDBoxPortalBundle:Project:project_top_content.html.twig') %}
 
     {# PROJECT LINKS #}
     {% if project.vcsManaged or project.pmManaged or project.ciDevManaged or project.qaDevManaged %}
-        {% include('SpiritDevBundleDBoxPortalBundle:Project:project_links.html.twig') %}
+        {% include('SpiritDevDBoxPortalBundle:Project:project_links.html.twig') %}
     {% endif %}
 
     <div class="row">
@@ -45,25 +45,25 @@
         {% if project.pmManaged %}
             <div class="{{ colsmmdlg }}">
                 {# PM INFORMATIONS #}
-                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_pm.html.twig') %}
+                {% include('SpiritDevDBoxPortalBundle:Project:project_pm.html.twig') %}
             </div>
         {% endif %}
         {% if project.vcsManaged %}
             <div class="{{ colsmmdlg }}">
                 {# GIT INFORMATIONS #}
-                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_vcs.html.twig') %}
+                {% include('SpiritDevDBoxPortalBundle:Project:project_vcs.html.twig') %}
             </div>
         {% endif %}
         {% if project.qaDevManaged %}
             <div class="{{ colsmmdlg }}">
                 {# QA INFORMATIONS #}
-                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_qa.html.twig') %}
+                {% include('SpiritDevDBoxPortalBundle:Project:project_qa.html.twig') %}
             </div>
         {% endif %}
         {% if project.hasSecurityAssessments %}
             <div class="{{ colsmmdlg }}">
                 {# SECURITY ASSETS INFORMATIONS #}
-                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_secu.html.twig') %}
+                {% include('SpiritDevDBoxPortalBundle:Project:project_secu.html.twig') %}
             </div>
         {% endif %}
     </div>
@@ -72,7 +72,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
                 {# CI INFORMATIONS #}
-                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_ci.html.twig') %}
+                {% include('SpiritDevDBoxPortalBundle:Project:project_ci.html.twig') %}
             </div>
         </div>
     {% endif %}
@@ -81,7 +81,7 @@
         <div class="row">
             <div class="col-sm-12">
                 {# NOT MANAGED ITEMS #}
-                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_not_managed.html.twig') %}
+                {% include('SpiritDevDBoxPortalBundle:Project:project_not_managed.html.twig') %}
             </div>
         </div>
     {% endif %}

@@ -42,7 +42,7 @@ class TodoController extends Controller {
 
         $nbTodos = $em->getRepository('SpiritDevDBoxPortalBundle:Todo')->getNbTodos();
 
-        return $this->render('SpiritDevBundleDBoxPortalBundle:Common:menu_todos.html.twig', array('nb_todos' => $nbTodos));
+        return $this->render('SpiritDevDBoxPortalBundle:Common:menu_todos.html.twig', array('nb_todos' => $nbTodos));
 
     }
 

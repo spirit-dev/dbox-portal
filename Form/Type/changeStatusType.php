@@ -17,7 +17,7 @@ class changeStatusType extends AbstractType {
                 'label_attr' => array('class' => 'col-sm-2 control-label'),
                 'attr' => array('class' => 'form-control'),
                 'required' => true,
-                'class' => 'SpiritDevBundleDBoxPortalBundle:Status',
+                'class' => 'SpiritDevDBoxPortalBundle:Status',
                 'choice_label' => function ($status) {
                     return $status->getName();
                 }

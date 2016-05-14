@@ -44,7 +44,7 @@ class newProjectType extends AbstractType {
             ->add('gitLabSnippetsEnabled')
             ->add('owner', 'entity', array(
                 'required' => true,
-                'class' => 'UserBundle:User',
+                'class' => 'SpiritDevDBoxUserBundle:User',
                 'choice_label' => function ($user) {
                     return $user->getFirstname() . ' ' . $user->getLastname();
                 },
@@ -54,7 +54,7 @@ class newProjectType extends AbstractType {
             ))
             ->add('teamMembers', 'entity', array(
                 'required' => true,
-                'class' => 'UserBundle:User',
+                'class' => 'SpiritDevDBoxUserBundle:User',
                 'choice_label' => function ($user) {
                     return $user->getCommonName();
                 },

@@ -140,7 +140,7 @@ class ProjectController extends Controller {
      * @return array
      */
     private function getAvailableUsers(EntityManager $em, Project $project) {
-        $users = $em->getRepository('UserBundle:User')->getUsableUsers()->getQuery()->getResult();
+        $users = $em->getRepository('SpiritDevDBoxUserBundle:User')->getUsableUsers()->getQuery()->getResult();
 
         $returnedUsers = array();
 
@@ -170,7 +170,7 @@ class ProjectController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
 
         // Get user to remove entity
-        $userToRemove = $em->getRepository('UserBundle:User')->findOneBy(array(
+        $userToRemove = $em->getRepository('SpiritDevDBoxUserBundle:User')->findOneBy(array(
             'id' => $request->request->get('userId')
         ));
         // Get project entity
@@ -243,7 +243,7 @@ class ProjectController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
 
         // Get user to remove entity
-        $userToAdd = $em->getRepository('UserBundle:User')->findOneBy(array(
+        $userToAdd = $em->getRepository('SpiritDevDBoxUserBundle:User')->findOneBy(array(
             'id' => $request->request->get('userId')
         ));
         // Get project entity

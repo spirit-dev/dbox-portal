@@ -29,7 +29,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
 
         // Send user mail
         // Define necessary vars
-        $template = 'SpiritDevBundleDBoxPortalBundle:Mailer/Registration:userRegistration.html.twig'; // Template
+        $template = 'SpiritDevDBoxPortalBundle:Mailer/Registration:userRegistration.html.twig'; // Template
         $subject = $this->getSubject('User registration'); // Subject
         $rendered = $this->templating->render($template, array(
             'firstname' => $demand->getContent()['firstname'],
@@ -52,7 +52,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
     public function newCommentSendMail(Demand $demand, User $currentUser) {
 
         // Define necessary vars
-        $template = "SpiritDevBundleDBoxPortalBundle:Mailer/NewComment:newComment.html.twig"; // Template
+        $template = "SpiritDevDBoxPortalBundle:Mailer/NewComment:newComment.html.twig"; // Template
         $subject = $this->getSubject("New comment on your demand"); // Subject
         $demandUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_demand', array('id' => $demand->getId()), true);
 
@@ -85,7 +85,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
     public function changeStatusSendMail(Demand $demand, User $currentUser) {
         // Send User mail
         // Define necessary vars
-        $template = "SpiritDevBundleDBoxPortalBundle:Mailer/ChangeStatus:changeStatus.html.twig"; // Template
+        $template = "SpiritDevDBoxPortalBundle:Mailer/ChangeStatus:changeStatus.html.twig"; // Template
         $subject = $this->getSubject("Demand status change"); // Subject
         $demandUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_demand', array('id' => $demand->getId()), true);
         $rendered = $this->templating->render($template, array(
@@ -107,7 +107,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
      */
     public function processNewUserSendMail(Demand $demand, array $newUser) {
         // Define necessary vars
-        $template = "SpiritDevBundleDBoxPortalBundle:Mailer/Registration:userRegistrationDone.html.twig"; // Template
+        $template = "SpiritDevDBoxPortalBundle:Mailer/Registration:userRegistrationDone.html.twig"; // Template
         $subject = $this->getSubject('Registration done!'); // Subject
         $homepageUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_homepage', array(), true);
         $profileUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_user_profile_edit', array(), true);
@@ -135,7 +135,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
      */
     public function projectRequestSendMail(Demand $demand, Project $project) {
         // User mail
-        $template = "SpiritDevBundleDBoxPortalBundle:Mailer/Project:projectRequest.html.twig"; // Template
+        $template = "SpiritDevDBoxPortalBundle:Mailer/Project:projectRequest.html.twig"; // Template
         $subject = $this->getSubject('Project creation request - ' . $project->getName()); // Subject
         $demandUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_demand', array('id' => $demand->getId()), true);
         $rendered = $this->templating->render($template, array(
@@ -161,7 +161,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
      */
     public function processProjectCreationSendMail(Project $project) {
         // Define necessary vars
-        $template = "SpiritDevBundleDBoxPortalBundle:Mailer/Project:projectCreation.html.twig"; // Template
+        $template = "SpiritDevDBoxPortalBundle:Mailer/Project:projectCreation.html.twig"; // Template
         $subject = $this->getSubject('Project creation - ' . $project->getName()); // Subject
         $projectUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_project', array('pjt_name' => $project->getName()), true);
         $renderingDatas = array(
@@ -186,7 +186,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
      */
     public function processProjectManagerItemCreation($manager, Project $project) {
         // Define necessary vars
-        $template = "SpiritDevBundleDBoxPortalBundle:Mailer/Project:projectNewManager.html.twig"; // Template
+        $template = "SpiritDevDBoxPortalBundle:Mailer/Project:projectNewManager.html.twig"; // Template
         $subject = $this->getSubject('Project creation - ' . $project->getName()); // Subject
         $projectUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_project', array('pjt_name' => $project->getName()), true);
         $renderingDatas = array(
@@ -215,7 +215,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
      */
     public function projectAddUser(Project $project, User $newUser) {
         // Define necessary vars
-        $template = "SpiritDevBundleDBoxPortalBundle:Mailer/Project:projectAddUser.html.twig"; // Template
+        $template = "SpiritDevDBoxPortalBundle:Mailer/Project:projectAddUser.html.twig"; // Template
         $subject = $this->getSubject('Project user grant'); // Subject
         $projectUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_project', array('pjt_name' => $project->getName()), true);
         $renderingDatas = array(
@@ -252,7 +252,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
      */
     public function projectRemoveUser(Project $project, User $removedUser) {
         // Define necessary vars
-        $template = "SpiritDevBundleDBoxPortalBundle:Mailer/Project:projectRemoveUser.html.twig"; // Template
+        $template = "SpiritDevDBoxPortalBundle:Mailer/Project:projectRemoveUser.html.twig"; // Template
         $subject = $this->getSubject('Project user removal'); // Subject
         $renderingDatas = array(
             'project' => $project,
@@ -321,7 +321,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
      */
     public function accountUpdate(User $user, $status) {
         // Define necessary vars
-        $template = "SpiritDevBundleDBoxPortalBundle:Mailer/Profile:accountManagment.html.twig"; //template
+        $template = "SpiritDevDBoxPortalBundle:Mailer/Profile:accountManagment.html.twig"; //template
         $subject = $this->getSubject('Account ' . $status); // Subject
         $appUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_homepage');
         $rendered = $this->templating->render($template, array(
@@ -344,7 +344,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
      */
     public function newPipelineRequestSendMail(Demand $demand, $projectName) {
         // User mail
-        $template = "SpiritDevBundleDBoxPortalBundle:Mailer/Pipeline:pipelineRequest.html.twig"; // Template
+        $template = "SpiritDevDBoxPortalBundle:Mailer/Pipeline:pipelineRequest.html.twig"; // Template
         $subject = $this->getSubject('New pipeline request - ' . $projectName); // Subject
         $demandUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_demand', array('id' => $demand->getId()), true);
         $rendered = $this->templating->render($template, array(

@@ -1,4 +1,4 @@
-{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+{% extends('SpiritDevDBoxPortalBundle::layout.html.twig') %}
 
 {% block title %}{{ 'pagetitle.demand'|trans }} - {{ parent() }}{% endblock %}
 
@@ -46,7 +46,7 @@
 
             <div id="sl-dashboard" class="slot">
                 <h3 class="page-header">{{ 'demands.dashboard.formhead'|trans }}</h3>
-                {% include('SpiritDevBundleDBoxPortalBundle:Demand:demand_dashboard.html.twig') %}
+                {% include('SpiritDevDBoxPortalBundle:Demand:demand_dashboard.html.twig') %}
             </div>
 
             <div id="sl-new-project" class="hidden slot">

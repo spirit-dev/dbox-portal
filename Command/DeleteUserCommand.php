@@ -43,7 +43,7 @@ EOT
 
         // Getting DB Datas
         $em = $this->getContainer()->get('doctrine')->getManager();
-        $user = $em->getRepository('UserBundle:User')->findOneBy(array('username' => $username));
+        $user = $em->getRepository('SpiritDevDBoxUserBundle:User')->findOneBy(array('username' => $username));
 
         if ($user) {
 
