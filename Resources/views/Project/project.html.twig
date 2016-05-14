@@ -4,8 +4,8 @@
 
 {% block more_javascript %}
     {% javascripts
-    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/zeroclipboard220/dist/ZeroClipboard.js'
-    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/project.js' %}
+    '@SpiritDevDBoxPortalBundle/Resources/public/lib/zeroclipboard220/dist/ZeroClipboard.js'
+    '@SpiritDevDBoxPortalBundle/Resources/public/js/project.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock more_javascript %}
@@ -13,7 +13,7 @@
 {% block content %}
 
     {% if not project.imageName %}
-        {% set rndimg = 'bundles/portal/images/logos/project_default_logo_'~ random(3) ~'.png' %}
+        {% set rndimg = 'bundles/spiritdevdboxportal/images/logos/project_default_logo_'~ random(3) ~'.png' %}
     {% endif %}
 
     {# HEADER #}

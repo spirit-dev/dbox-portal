@@ -52,7 +52,7 @@ function resetCloneUrl() {
  * Init CopyToClipboard feature
  */
 function initCTC() {
-    ZeroClipboard.config({swfPath: 'http://portal.devtest.fr/bundles/portal/lib/zeroclipboard220/dist/ZeroClipboard.swf'});
+    ZeroClipboard.config({swfPath: 'http://portal.devtest.fr/bundles/spiritdevdboxportal/lib/zeroclipboard220/dist/ZeroClipboard.swf'});
     new ZeroClipboard(document.getElementById('copy-clone-url'));
 }
 

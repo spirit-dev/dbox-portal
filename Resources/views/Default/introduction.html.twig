@@ -2,8 +2,8 @@
 
 {% block stylesheets %}
     {% stylesheets
-    'bundles/portal/lib/bootstrap3/css/bootstrap.min.css'
-    'bundles/portal/css/common.css'
+    'bundles/spiritdevdboxportal/lib/bootstrap3/css/bootstrap.min.css'
+    'bundles/spiritdevdboxportal/css/common.css'
     filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
@@ -12,9 +12,9 @@
 
 {% block javascripts %}
     {% javascripts
-    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/jquery2/jquery-2.1.4.js'
-    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/bootstrap3/js/bootstrap.min.js'
-    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/intro.js' %}
+    '@SpiritDevDBoxPortalBundle/Resources/public/lib/jquery2/jquery-2.1.4.js'
+    '@SpiritDevDBoxPortalBundle/Resources/public/lib/bootstrap3/js/bootstrap.min.js'
+    '@SpiritDevDBoxPortalBundle/Resources/public/js/intro.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
@@ -41,7 +41,7 @@
 
                         <div class="text-center">
                             {% set dateNow = "now"|date('Y-m-d.H:i:s') %}
-                            <img src="{{ asset('bundles/portal/images/EcosysV2/EcosystemV2-intro.gif', version=dateNow) }}">
+                            <img src="{{ asset('bundles/spiritdevdboxportal/images/EcosysV2/EcosystemV2-intro.gif', version=dateNow) }}">
                         </div>
 
                     </div>

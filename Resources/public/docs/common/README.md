@@ -2,9 +2,9 @@
 
 > __You will find out many important informations about EcosystemV2 usage.__
 
-![steria logo](http://portal.devtest.fr/bundles/portal/images/logos/SOPRASTERIA_logo.png) 
+![steria logo](http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/SOPRASTERIA_logo.png) 
 
-![ecosys logo](http://portal.devtest.fr/bundles/portal/images/EcosysV2/EcosystemV2-img-full-medium.png)
+![ecosys logo](http://portal.devtest.fr/bundles/spiritdevdboxportal/images/EcosysV2/EcosystemV2-img-full-medium.png)
 
 
 ### 1. What's the main purpose of EcosystemV2 by ToolTeam ?

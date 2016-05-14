@@ -2,15 +2,15 @@
 
 {% block stylesheets %}
     {% stylesheets
-    'bundles/portal/lib/bootstrap3/css/bootstrap.min.css'
-    'bundles/portal/css/common.css'
-    'bundles/portal/css/sidebar.css'
+    'bundles/spiritdevdboxportal/lib/bootstrap3/css/bootstrap.min.css'
+    'bundles/spiritdevdboxportal/css/common.css'
+    'bundles/spiritdevdboxportal/css/sidebar.css'
     filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         {% stylesheets
-        'bundles/portal/lib/pnotify/pnotify.custom.min.css'
+        'bundles/spiritdevdboxportal/lib/pnotify/pnotify.custom.min.css'
         filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
@@ -21,18 +21,18 @@
 
 {% block javascripts %}
     {% javascripts
-    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/jquery2/jquery-2.1.4.js'
-    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/bootstrap3/js/bootstrap.min.js'
-    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/hinclude-0.9.5/hinclude.js'
-    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/common.js' %}
+    '@SpiritDevDBoxPortalBundle/Resources/public/lib/jquery2/jquery-2.1.4.js'
+    '@SpiritDevDBoxPortalBundle/Resources/public/lib/bootstrap3/js/bootstrap.min.js'
+    '@SpiritDevDBoxPortalBundle/Resources/public/lib/hinclude-0.9.5/hinclude.js'
+    '@SpiritDevDBoxPortalBundle/Resources/public/js/common.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         {% javascripts
-        '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/pnotify/pnotify.custom.min.js'
-        '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/bootbox/bootbox.min.js'
-        '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/communication.js'
-        '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/loader.js' %}
+        '@SpiritDevDBoxPortalBundle/Resources/public/lib/pnotify/pnotify.custom.min.js'
+        '@SpiritDevDBoxPortalBundle/Resources/public/lib/bootbox/bootbox.min.js'
+        '@SpiritDevDBoxPortalBundle/Resources/public/js/communication.js'
+        '@SpiritDevDBoxPortalBundle/Resources/public/js/loader.js' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endif %}
