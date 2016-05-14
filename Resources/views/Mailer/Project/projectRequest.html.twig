@@ -1,0 +1,73 @@
+{% include('SpiritDevBundleDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h1>{{ 'mail.global.header'|trans|raw }}</h1>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h3>{{ 'mail.global.hello_user'|trans({
+                    '%firstname%': firstname,
+                    '%lastname%': lastname}) }}</h3>
+
+            <p>{{ 'mail.project.request.slot1'|trans }}</p>
+            <p>{{ 'mail.project.request.slot2'|trans }}</p>
+
+
+            <table class="table">
+
+                <tr>
+                    <th>{{ 'mail.project.request.tabslot1.tab1'|trans }}</th>
+                    <td>{{ project_name }}</td>
+                </tr>
+
+                <tr>
+                    <th>{{ 'mail.project.request.tabslot1.tab2'|trans }}</th>
+                    <td>{{ project_description }}</td>
+                </tr>
+
+                <tr>
+                    <th>{{ 'mail.project.request.tabslot1.tab3'|trans }}</th>
+                    <td>{{ project_owner }}</td>
+                </tr>
+
+                <tr>
+                    <th>{{ 'mail.project.request.tabslot1.tab4'|trans }}</th>
+                    <td>
+                        <ul>
+                            {% for user in project_team %}
+                                <li>{{ user.firstname }} {{ user.lastname }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+
+            </table>
+
+            <h4>{{ 'mail.project.request.slot3'|trans }}</h4>
+            <p>{{ 'mail.project.request.slot4'|trans }}</p>
+
+            <p>{{ 'mail.project.request.slot5'|trans }}</p>
+            <a class="btn btn-success btn-small" href="{{ demand_url }}" target="_blank">{{ project_name }}</a>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
+            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
+        </div>
+
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,178 @@
+{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+
+{% block title %}{{ 'pagetitle.index'|trans }} - {{ parent() }}{% endblock %}
+
+{% block content %}
+
+    {% set rndimg = 'bundles/portal/images/logos/project_default_logo_'~ random(3) ~'.png' %}
+
+    {% if member_projects|length > 0 %}
+        {% set totalCommits = 0 %}
+        {% for project in member_projects %}
+            {% set totalCommits = totalCommits + project.gitNbCommits %}
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="page-header">{{ 'homepage.pagelabel'|trans }}</h1>
+
+    {# MASTER INFORMATIONS #}
+    {#{% if app.user.gitLabId is empty or app.user.redmineId is empty %}#}
+        {# TODO This feature is here to manage the case where a user hasn't VCS or PM or CI or QA managed account #}
+    {#<h2 class="sub-header">Master informations</h2>#}
+    {#{% if app.user.gitLabId is empty %}#}
+    {#<p>You don't have VCS Account</p>#}
+    {#{% endif %}#}
+    {#{% if app.user.redmineId is empty %}#}
+    {#<p>You don't have PM Account</p>#}
+    {#{% endif %}#}
+    {#{% endif %}#}
+
+    {# SERVERS AVAILABILITY #}
+    <h2 class="sub-header">{{ 'homepage.servers.label'|trans }}</h2>
+    {{ render_hinclude(path('spirit_dev_dbox_portal_bundle_applications_available', {'scope': "index"}), {'default': 'Loading...'}) }}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        {# ALL PROJECTS #}
+        <h2 class="sub-header">{{ 'homepage.all_projects'|trans }} {{ all_projects|length }}</h2>
+        <div class="row placeholders">
+            {% if all_projects|length > 0 %}
+                {% for project in all_projects %}
+                    <div class="col-sm-3 placeholder"
+                         onclick="window.open('{{ path('spirit_dev_dbox_portal_bundle_project', {'pjt_name': project.name}) }}', '_self');">
+                        <div class=" pjt-placeholder"></div>
+
+                        {# Defining image #}
+                        {% if not project.imageName %}
+                            {# Random image between 0 and 2 #}
+                            <img class="img-responsive"
+                                 src="{{ asset(rndimg)|imagine_filter('imgx120x90') }}"
+                                 alt="{{ project.name }} thumbnail">
+                        {% else %}
+                            <img class="img-responsive"
+                                 src="{{ vich_uploader_asset(project, 'imageFile')|imagine_filter('imgx120x90') }}"
+                                 alt="{{ project.name }} thumbnail"/>
+                        {% endif %}
+
+                        {# defining grantings #}
+                        {{ include('SpiritDevBundleDBoxPortalBundle:Default:index_grantings.html.twig') }}
+
+                        <h4>{{ project.name }}</h4>
+                    <span class="text-muted">
+                        {% if project.description|length > 38 %}
+                            {{ project.description[0:38] }}...
+                        {% else %}
+                            {{ project.description }}
+                        {% endif %}
+                    </span>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <blockquote>
+                    <p class="lead">I don't have any projects yet...</p>
+                    <footer>let's make a demand <cite title="make a demand"><a class="btn btn-link"
+                                                                               href="{{ path('spirit_dev_dbox_portal_bundle_demands') }}">here</a></cite>
+                    </footer>
+                </blockquote>
+            {% endif %}
+        </div>
+    {% else %}
+        {# MY PROJECTS IM MEMBER OF #}
+        <h2 class="sub-header">{{ 'homepage.memberof'|trans }} {{ member_projects|length }}</h2>
+        <div class="row placeholders">
+            {% if member_projects|length > 0 %}
+                {% for project in member_projects %}
+                    <div class="col-sm-3 placeholder"
+                         onclick="window.open('{{ path('spirit_dev_dbox_portal_bundle_project', {'pjt_name': project.name}) }}', '_self');">
+                        <div class=" pjt-placeholder"></div>
+
+                        {# Defining image #}
+                        {% if not project.imageName %}
+                            {# Random image between 0 and 2 #}
+                            <img class="img-responsive"
+                                 src="{{ asset(rndimg)|imagine_filter('imgx120x90') }}"
+                                 alt="{{ project.name }} thumbnail">
+                        {% else %}
+                            <img class="img-responsive"
+                                 src="{{ vich_uploader_asset(project, 'imageFile')|imagine_filter('imgx120x90') }}"
+                                 alt="{{ project.name }} thumbnail"/>
+                        {% endif %}
+
+                        {# defining grantings #}
+                        {{ include('@Portal/Default/index_grantings.html.twig') }}
+
+                        <h4>{{ project.name }}</h4>
+                    <span class="text-muted">
+                        {% if project.description|length > 38 %}
+                            {{ project.description[0:38] }}...
+                        {% else %}
+                            {{ project.description }}
+                        {% endif %}
+                    </span>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <blockquote>
+                    <p class="lead">I don't have any projects yet...</p>
+                    <footer>let's make a demand <cite title="make a demand"><a class="btn btn-link"
+                                                                               href="{{ path('spirit_dev_dbox_portal_bundle_demands') }}">here</a></cite>
+                    </footer>
+                </blockquote>
+            {% endif %}
+        </div>
+
+        {# MY OWNED PROJECTS #}
+        <h2 class="sub-header">{{ 'homepage.owned'|trans }} {{ owner_projects|length }}</h2>
+        <div class="row placeholders">
+            {% if owner_projects|length > 0 %}
+                {% for project in owner_projects %}
+                    <div class="col-sm-3 placeholder"
+                         onclick="window.open({{ path('spirit_dev_dbox_portal_bundle_project', {'pjt_name': project.name}) }});">
+                        <div class=" pjt-placeholder"></div>
+                        {# Project image #}
+                        {% if not project.imageName %}
+                            {# Random image between 0 and 2 #}
+                            <img class="img-responsive"
+                                 src="{{ asset(rndimg)|imagine_filter('imgx120x90') }}"
+                                 alt="{{ project.name }} thumbnail">
+                        {% else %}
+                            <img class="img-responsive"
+                                 src="{{ vich_uploader_asset(project, 'imageFile')|imagine_filter('imgx120x90') }}"
+                                 alt="{{ project.name }} thumbnail"/>
+                        {% endif %}
+                        {# Project grantings #}
+                        {{ include('@Portal/Default/index_grantings.html.twig') }}
+                        <h4>{{ project.name }}</h4>
+                    <span class="text-muted">
+                        {% if project.description|length > 38 %}
+                            {{ project.description[0:38] }}...
+                        {% else %}
+                            {{ project.description }}
+                        {% endif %}
+                    </span>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <blockquote>
+                    <p class="lead">I don't have any projects yet...</p>
+                    <footer>let's make a demand <cite title="make a demand"><a class="btn btn-link"
+                                                                               href="{{ path('spirit_dev_dbox_portal_bundle_demands') }}">here</a></cite>
+                    </footer>
+                </blockquote>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <h2 class="sub-header">{{ 'homepage.metrics.label'|trans }}</h2>
+
+    <dl id="index-metrics" class="dl-horizontal">
+        <dt>{{ 'homepage.metrics.active'|trans }}</dt>
+        <dd>{{ nb_projects }}</dd>
+
+        <dt>{{ 'homepage.metrics.nbmemberof'|trans }}</dt>
+        <dd>{{ member_projects|length }}</dd>
+
+        <dt>{{ 'homepage.metrics.nbowned'|trans }}</dt>
+        <dd>{{ owner_projects|length }}</dd>
+    </dl>
+
+{% endblock content %}

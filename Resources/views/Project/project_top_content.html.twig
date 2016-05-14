@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-md-3">
+
+        <div class="proj-placeholder text-center">
+            {% if not project.imageName %}
+                {# Random image between 0 and 2 #}
+                <img class="img-responsive" src="{{ asset(rndimg)|imagine_filter('imgx200x200') }}"
+                     alt="{{ project.name }} thumbnail">
+                <span class="text-muted">{{ 'project.header.nologo'|trans({'%project%': project.name}) }}</span>
+            {% else %}
+                <img class="img-responsive"
+                     src="{{ vich_uploader_asset(project, 'imageFile')|imagine_filter('imgx200x200') }}"
+                     alt="{{ project.name }} thumbnail"/>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="col-md-9">
+
+        <blockquote>
+            <h3>{{ project.name }} <span class="text-muted">-{{ project.languageType }}-</span></h3>
+            <h4 class="text-muted">- {{ project.description }}</h4>
+        </blockquote>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <blockquote>
+                    <p>{{ 'project.top_content.created'|trans }} {{ project.createdAt|date('Y-m-d') }}</p>
+                    <p>{{ 'project.top_content.updated'|trans }} {{ project.updatedAt|date('Y-m-d') }}</p>
+                </blockquote>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline">
+                    <li>
+                        <span class="label label-{{ project.vcsManaged ? "success" : "warning" }}">
+                            VCS managed
+                        </span>
+                    </li>
+                    <li>
+                        <span class="label label-{{ project.pmManaged ? "success" : "warning" }}">
+                            PM managed
+                        </span>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li>
+                        <span class="label label-{{ project.ciDevManaged ? "success" : "warning" }}">
+                            CI managed
+                        </span>
+                    </li>
+                    <li>
+                        <span class="label label-{{ project.qaDevManaged ? "success" : "warning" }}">
+                            QA managed
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <table class="table" style="margin-bottom: 0;">
+                    <tr>
+                        <td><strong>{{ 'project.top_content.owner'|trans }}</strong></td>
+                        <td>
+                            {% if project.owner.imageName %}
+                                <span>
+                                    <img class="less-maring-top"
+                                         src="{{ vich_uploader_asset(project.owner, 'imageFile')|imagine_filter('imgx14x14') }}"/>
+                                </span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-user"></span>
+                            {% endif %}
+                            {{ project.owner.commonName }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{ 'project.top_content.team'|trans }}</strong></td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for member in project.teamMembers %}
+                                    <li>
+                                        {% if member.imageName %}
+                                            <span>
+                                                <img class="less-maring-top"
+                                                     src="{{ vich_uploader_asset(member, 'imageFile')|imagine_filter('imgx14x14') }}"/>
+                                            </span>
+                                        {% else %}
+                                            <span class="glyphicon glyphicon-user"></span>
+                                        {% endif %}
+                                        {{ member.commonName }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>

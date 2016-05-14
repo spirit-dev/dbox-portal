@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="small-12">
+
+        <div class="panel-group" id="msg-{{ demand.id }}" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="msg-head-{{ demand.id }}">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#msg-{{ demand.id }}"
+                           href="#msg-col-{{ demand.id }}"
+                           aria-expanded="true" aria-controls="msg-col-{{ demand.id }}">
+                            {{ 'demands.dashboard.comments'|trans }}
+                        </a>
+                    </h4>
+                </div>
+                <div id="msg-col-{{ demand.id }}" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="msg-head-{{ demand.id }}">
+                    <div class="panel-body panel-body-demand">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {% for comment in demand.comments %}
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            {{ comment.content }}
+                                        </div>
+                                        <div class="panel-footer">
+                                            <ul class="list-inline demand-comment-panel-footer">
+                                                <li>{{ 'demands.ncommentform.com_user'|trans }}
+                                                    <b>{{ comment.user.username }}</b></li>
+                                                <li>{{ 'demands.ncommentform.com_date'|trans }}
+                                                    <b>{{ comment.createdat is empty ? "" : comment.createdat|date("Y-m-d H:m") }}</b>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                {{ render_hinclude(path('spirit_dev_dbox_portal_bundle_demand_add_comment', {'demandId': demand.id}), {'default': 'Loading...'}) }}
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

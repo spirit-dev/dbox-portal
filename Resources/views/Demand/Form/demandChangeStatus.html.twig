@@ -1,0 +1,26 @@
+<fieldset>
+    <label>{{ 'demands.nstatusform.formhead'|trans }}</label>
+
+    <form class="form-horizontal"
+          action="{{ path('easyadmin_demand_change_status', {'demandId': id}) }}" {{ form_enctype(form) }}
+          method="POST">
+
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                {{ form_widget(form.status) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                {{ form_widget(form.save) }}
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+
+    </form>
+</fieldset>

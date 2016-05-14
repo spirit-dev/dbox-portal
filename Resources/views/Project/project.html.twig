@@ -1,0 +1,89 @@
+{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+
+{% block title %}{{ project.name }} - {{ parent() }}{% endblock %}
+
+{% block more_javascript %}
+    {% javascripts
+    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/zeroclipboard220/dist/ZeroClipboard.js'
+    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/project.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock more_javascript %}
+
+{% block content %}
+
+    {% if not project.imageName %}
+        {% set rndimg = 'bundles/portal/images/logos/project_default_logo_'~ random(3) ~'.png' %}
+    {% endif %}
+
+    {# HEADER #}
+    {% include('SpiritDevBundleDBoxPortalBundle:Project:project_header.html.twig') %}
+
+    {# CONFIG #}
+    {% include('SpiritDevBundleDBoxPortalBundle:Project:project_config.html.twig') %}
+
+    {# TOP CONTENT #}
+    {% include('SpiritDevBundleDBoxPortalBundle:Project:project_top_content.html.twig') %}
+
+    {# PROJECT LINKS #}
+    {% if project.vcsManaged or project.pmManaged or project.ciDevManaged or project.qaDevManaged %}
+        {% include('SpiritDevBundleDBoxPortalBundle:Project:project_links.html.twig') %}
+    {% endif %}
+
+    <div class="row">
+
+        {% if project.pmManaged and project.vcsManaged and project.qaDevManaged and project.hasSecurityAssessments %}
+            {% set colsmmdlg = "col-sm-12 col-md-4 col-lg-3" %}
+        {% elseif project.pmManaged and project.vcsManaged and project.qaDevManaged %}
+            {% set colsmmdlg = "col-sm-12 col-md-4 col-lg-4" %}
+        {% elseif project.pmManaged and project.vcsManaged %}
+            {% set colsmmdlg = "col-sm-12 col-md-6 col-lg-6" %}
+        {% else %}
+            {% set colsmmdlg = "col-sm-12 col-md-12 col-lg-12" %}
+        {% endif %}
+
+        {% if project.pmManaged %}
+            <div class="{{ colsmmdlg }}">
+                {# PM INFORMATIONS #}
+                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_pm.html.twig') %}
+            </div>
+        {% endif %}
+        {% if project.vcsManaged %}
+            <div class="{{ colsmmdlg }}">
+                {# GIT INFORMATIONS #}
+                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_vcs.html.twig') %}
+            </div>
+        {% endif %}
+        {% if project.qaDevManaged %}
+            <div class="{{ colsmmdlg }}">
+                {# QA INFORMATIONS #}
+                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_qa.html.twig') %}
+            </div>
+        {% endif %}
+        {% if project.hasSecurityAssessments %}
+            <div class="{{ colsmmdlg }}">
+                {# SECURITY ASSETS INFORMATIONS #}
+                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_secu.html.twig') %}
+            </div>
+        {% endif %}
+    </div>
+
+    {% if project.ciDevManaged %}
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                {# CI INFORMATIONS #}
+                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_ci.html.twig') %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if not project.vcsManaged or not project.pmManaged or not project.ciDevManaged or not project.qaDevManaged %}
+        <div class="row">
+            <div class="col-sm-12">
+                {# NOT MANAGED ITEMS #}
+                {% include('SpiritDevBundleDBoxPortalBundle:Project:project_not_managed.html.twig') %}
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock content %}

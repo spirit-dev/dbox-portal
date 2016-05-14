@@ -1,0 +1,83 @@
+<h3 class="sub-header pjt-c-sub-header">{{ 'project.secu_info.title'|trans }}</h3>
+<div class="row">
+    <div class="col-sm-12">
+
+        {# STATIC ANALYSIS #}
+        <h4 class="sub-header">{{ 'project.secu_info.static.title'|trans }}</h4>
+
+        {# CHECK DEPEDENCY BUTTONS #}
+        <button type="button" class="btn btn-primary secu-btn" data-toggle="modal" data-target="#cdr">
+            {{ 'project.secu_info.static.btn_modal1'|trans }}
+        </button>
+        <button type="button" class="btn btn-primary secu-btn" data-toggle="modal" data-target="#cdv">
+            {{ 'project.secu_info.static.btn_modal2'|trans }}
+        </button>
+        <button type="button" class="btn btn-primary secu-btn" data-toggle="modal" data-target="#zsr">
+            {{ 'project.secu_info.static.btn_modal3'|trans }}
+        </button>
+
+        {# CHECK DEPENDENCY REPORT MODAL #}
+        <div class="modal fade" id="cdr" tabindex="-1" role="dialog" aria-labelledby="cdrLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="cdrLabel">{{ 'project.secu_info.static.btn_modal1'|trans }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="{{ (path('spirit_dev_dbox_portal_bundle_project_security_report', {'report': "1", "pjt_name": project.name})) }}"
+                                scrolling="auto"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# CHECK VULNERABILITIES MODAL #}
+        <div class="modal fade" id="cdv" tabindex="-1" role="dialog" aria-labelledby="cdvLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="cdvLabel">{{ 'project.secu_info.static.btn_modal2'|trans }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="{{ (path('spirit_dev_dbox_portal_bundle_project_security_report', {'report': "2", "pjt_name": project.name})) }}"
+                                scrolling="auto"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# ZAP SCANNER REPORT MODAL #}
+        <div class="modal fade" id="zsr" tabindex="-1" role="dialog" aria-labelledby="zsrLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="zsrLabel">{{ 'project.secu_info.static.btn_modal2'|trans }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="{{ (path('spirit_dev_dbox_portal_bundle_project_security_report', {'report': "3", "pjt_name": project.name})) }}"
+                                scrolling="auto"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

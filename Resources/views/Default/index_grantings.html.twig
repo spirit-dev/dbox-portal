@@ -1,0 +1,63 @@
+{% if not project.gitCommitLastUpdate is empty %}
+
+    {% set format = "Y-m-d" %}
+
+    {# Setting formated dates #}
+    {% set dateTen = "now"|date_modify("-10 day")|date(format) %}
+    {% set dateSeven = "now"|date_modify("-7 day")|date(format) %}
+    {% set dateThree = "now"|date_modify("-3 day")|date(format) %}
+    {% set dateNow = "now"|date(format) %}
+    {% set pjt_date = project.gitCommitLastUpdate|date(format) %}
+
+    {# Analyzing scale #}
+    {% if pjt_date >= dateTen and pjt_date < dateSeven %}
+        <img class="tooltiped staring_1" data-toggle="tooltip" data-placement="left" title="Updated last week"
+             src="{{ asset('bundles/portal/images/signs/Stared1.png') }}">
+    {% elseif pjt_date >= dateSeven and pjt_date < dateThree %}
+        <img class="tooltiped staring_1" data-toggle="tooltip" data-placement="left" title="Updated this week"
+             src="{{ asset('bundles/portal/images/signs/Stared3.png') }}">
+    {% elseif pjt_date >= dateThree and pjt_date < dateNow %}
+        <img class="tooltiped staring_1" data-toggle="tooltip" data-placement="left" title="Updated last three days"
+             src="{{ asset('bundles/portal/images/signs/Stared6.png') }}">
+    {% elseif pjt_date == dateNow %}
+        <img class="tooltiped staring_1" data-toggle="tooltip" data-placement="left" title="Updated today"
+             src="{{ asset('bundles/portal/images/signs/Stared9.png') }}">
+    {% endif %}
+
+{% endif %}
+
+{% if project.gitNbCommits > 0 %}
+
+    {# Staring by total #}
+    {% if project.gitNbCommits >= 50 %}
+        <img class="tooltiped staring_2" data-toggle="tooltip" data-placement="left" title="> 50 commits"
+             src="{{ asset('bundles/portal/images/signs/cl1.png') }}">
+    {% elseif project.gitNbCommits >= 100 %}
+        <img class="tooltiped staring_2" data-toggle="tooltip" data-placement="left" title="> 100 commits"
+             src="{{ asset('bundles/portal/images/signs/cl2.png') }}">
+    {% elseif project.gitNbCommits >= 200 %}
+        <img class="tooltiped staring_2" data-toggle="tooltip" data-placement="left" title="> 200 commits"
+             src="{{ asset('bundles/portal/images/signs/cl3.png') }}">
+    {% elseif project.gitNbCommits >= 500 %}
+        <img class="tooltiped staring_2" data-toggle="tooltip" data-placement="left" title="> 500 commits"
+             src="{{ asset('bundles/portal/images/signs/cl4.png') }}">
+    {% elseif project.gitNbCommits >= 1000 %}
+        <img class="tooltiped staring_2" data-toggle="tooltip" data-placement="left" title="> 1000 commits"
+             src="{{ asset('bundles/portal/images/signs/cl5.png') }}">
+    {% elseif project.gitNbCommits >= 1500 %}
+        <img class="tooltiped staring_2" data-toggle="tooltip" data-placement="left" title="> 1500 commits"
+             src="{{ asset('bundles/portal/images/signs/cl6.png') }}">
+    {% elseif project.gitNbCommits >= 2000 %}
+        <img class="tooltiped staring_2" data-toggle="tooltip" data-placement="left" title="> 2000 commits"
+             src="{{ asset('bundles/portal/images/signs/cl7.png') }}">
+    {% elseif project.gitNbCommits >= 4000 %}
+        <img class="tooltiped staring_2" data-toggle="tooltip" data-placement="left" title="> 4000 commits"
+             src="{{ asset('bundles/portal/images/signs/cl8.png') }}">
+    {% elseif project.gitNbCommits >= 6000 %}
+        <img class="tooltiped staring_2" data-toggle="tooltip" data-placement="left" title="> 6000 commits"
+             src="{{ asset('bundles/portal/images/signs/cl9.png') }}">
+    {% elseif project.gitNbCommits >= 10000 %}
+        <img class="tooltiped staring_2" data-toggle="tooltip" data-placement="left" title="> 10000 commits"
+             src="{{ asset('bundles/portal/images/signs/cl10.png') }}">
+    {% endif %}
+{% endif %}

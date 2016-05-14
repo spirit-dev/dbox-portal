@@ -1,0 +1,56 @@
+{% include('SpiritDevBundleDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h1>{{ 'mail.global.header'|trans|raw }}</h1>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <h3>{{ 'mail.global.hello_user'|trans({
+                    '%firstname%': user.firstname,
+                    '%lastname%': user.lastname}) }}</h3>
+
+            {% if status == "deletion" %}
+                <p>{{ 'mail.user.account.deletion.slot1'|trans }}</p>
+                <p>{{ 'mail.user.account.deletion.slot2'|trans }}</p>
+                <p>{{ 'mail.user.account.deletion.slot3'|trans }}</p>
+                <p>{{ admin_mail }}</p>
+            {% elseif status == "deactivation" %}
+                <p>{{ 'mail.user.account.deactivation.slot1'|trans }}</p>
+                <p>{{ 'mail.user.account.deactivation.slot2'|trans }}</p>
+                <p>{{ 'mail.user.account.deactivation.slot3'|trans }}</p>
+                <p>{{ 'mail.user.account.deactivation.slot4'|trans }}</p>
+                <p>{{ admin_mail }}</p>
+            {% elseif status == "activation" %}
+                <p>{{ 'mail.user.account.activation.slot1'|trans }}</p>
+                <h5>{{ 'mail.user.account.activation.slot2'|trans }}</h5>
+            {% endif %}
+
+            <p>{{ 'mail.global.connect_app'|trans }}</p>
+            {% if status == "activation" %}
+                <a class="btn btn-success btn-small" href="{{ app_url }}"
+                   target="_blank">Ecosystem V2</a>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
+            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
+        </div>
+
+    </div>
+
+{% endblock content %}

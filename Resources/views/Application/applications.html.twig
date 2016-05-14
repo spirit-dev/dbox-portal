@@ -1,0 +1,21 @@
+{% for appli in applications %}
+
+    <li class="left-menu-item">
+        <div class="left-menu-item-main">
+            <a href="{{ path('spirit_dev_dbox_portal_bundle_application_redirect', {'app': appli.id}) }}">
+                <ul class="list-inline">
+                    <li>
+                        <img class="left-menu-logo" src="{{ appli.captionUri }}"/>
+                    </li>
+                    <li class="left-menu-item-text">{{ appli.name }}</li>
+                </ul>
+            </a>
+        </div>
+        <div class="left-menu-item-link pull-right">
+            <a href="{{ appli.url }}" target="_blank">
+                <img src="{{ asset('bundles/portal/images/icons/glyphicons_050_link.png') }}"/>
+            </a>
+        </div>
+    </li>
+
+{% endfor %}

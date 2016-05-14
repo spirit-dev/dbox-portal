@@ -1,0 +1,84 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('spirit_dev_dbox_portal_bundle_homepage') }}">
+                <ul class="list-inline">
+                    <li><img class="top-menu-logo"
+                             src="{{ asset('bundles/portal/images/logos/SOPRASTERIA_logo_only.png') }}">
+                    </li>
+                    <li class="top-menu-item-text custom-light">Ecosystem V2</li>
+                </ul>
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and no_server_check is not defined %}
+                {{ render_hinclude(path('spirit_dev_dbox_portal_bundle_applications_available', {'scope': "menu"}), {'default': 'Loading...'}) }}
+            {% endif %}
+            <ul class="nav navbar-nav navbar-right">
+
+                <li>
+                    <div id="gen-loader" class="menu-loader custom-hidden">
+                    </div>
+                </li>
+
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {% if is_granted("ROLE_ADMIN") %}
+
+                        {{ render(path('spirit_dev_dbox_portal_bundle_feedbacks')) }}
+
+                        {{ render(path('spirit_dev_dbox_portal_bundle_todos_menu')) }}
+
+                        <li>
+                            <a class="custom-light" href="{{ path('easyadmin') }}">
+                                <span class="glyphicon glyphicon-wrench"></span> {{ 'menu.admin'|trans }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a class="custom-light {{ app.user.imageName is not null ? "profile-no-margin" : "" }}"
+                           href="{{ path('spirit_dev_dbox_portal_bundle_user_profile_show') }}">
+                            {% if app.user.imageName %}
+                                <span>
+                                    <img class="img-responsive-menu-profile"
+                                         src="{{ vich_uploader_asset(app.user, 'imageFile')|imagine_filter('imgx40x40') }}"/>
+                                </span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-user"></span>
+                            {% endif %}
+
+                            {{ 'menu.profile'|trans }} {{ app.user.username }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="custom-light" href="{{ path('fos_user_security_logout') }}">
+                            <span class="glyphicon glyphicon-off"></span> {{ 'menu.logout'|trans }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="custom-light" href="{{ path('spirit_dev_dbox_portal_bundle_demand_new_user') }}">
+                            <span class="glyphicon glyphicon-eye-open"></span> {{ 'menu.register'|trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="custom-light" href="{{ path('fos_user_security_login') }}">
+                            <span class="glyphicon glyphicon-log-in"></span> {{ 'menu.login'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a class="custom-light" href="{{ path('spirit_dev_dbox_portal_bundle_help') }}">
+                        <span class="glyphicon glyphicon-question-sign"></span> {{ 'menu.help'|trans }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

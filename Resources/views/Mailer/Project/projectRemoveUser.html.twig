@@ -1,0 +1,73 @@
+{% include('SpiritDevBundleDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h1>{{ 'mail.global.header'|trans|raw }}</h1>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            {% if scope == 'admin' %}
+                <h3>{{ 'mail.global.hello_admin'|trans }}</h3>
+            {% elseif scope == 'owner' %}
+                <h3>{{ 'mail.global.hello_user'|trans({
+                        '%firstname%': project.owner.firstname,
+                        '%lastname%': project.owner.lastname}) }}</h3>
+            {% elseif scope == 'user' %}
+                <h3>{{ 'mail.global.hello_user'|trans({
+                        '%firstname%': user.firstname,
+                        '%lastname%': user.lastname}) }}</h3>
+            {% endif %}
+
+
+            {% if scope == 'admin' %}
+                <p>{{ 'mail.project.remove_user.adm.slot1'|trans }}</p>
+                <table>
+                    <tr>
+                        <td>{{ 'mail.project.remove_user.common.tab1'|trans }}</td>
+                        <td><strong>{{ project.name }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'mail.project.remove_user.common.tab2'|trans }}</td>
+                        <td><strong>{{ user.commonName }}</strong></td>
+                    </tr>
+                </table>
+            {% elseif scope == 'owner' %}
+                <p>{{ 'mail.project.remove_user.owner.slot1'|trans }}</p>
+                <table>
+                    <tr>
+                        <td>{{ 'mail.project.remove_user.common.tab1'|trans }}</td>
+                        <td><strong>{{ project.name }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'mail.project.remove_user.common.tab2'|trans }}</td>
+                        <td><strong>{{ user.commonName }}</strong></td>
+                    </tr>
+                </table>
+            {% elseif scope == 'user' %}
+                <p>{{ project.owner.commonName }} {{ 'mail.project.remove_user.user.slot1'|trans }}</p>
+                <strong>{{ project.name }}</strong>
+                <p>{{ 'mail.project.remove_user.user.slot2'|trans }}</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
+            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
+        </div>
+
+    </div>
+
+{% endblock content %}

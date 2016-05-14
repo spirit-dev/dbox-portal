@@ -1,0 +1,36 @@
+{
+  "name": "spirit-dev/dbox-portal",
+  "type": "symfony-bundle",
+  "description": "A simple portal",
+  "homepage": "https://github.com/spirit-dev/dbox-portal",
+  "keywords": [
+    "portal"
+  ],
+  "license": "GPLv3",
+  "authors": [
+    {
+      "name": "Jean Bordat",
+      "email": "bordat.jean@gmail.com",
+      "homepage": "http://jean.bordat.me/"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.2",
+    "doctrine/doctrine-fixtures-bundle": "2.3.0",
+    "symfony/assetic-bundle": "v2.7.1",
+    "m4tthumphrey/php-gitlab-api": "7.13.0",
+    "jenkins-khan/jenkins-api": "dev-master",
+    "spirit-dev/php-sonarqube-api": "dev-master",
+    "kbsali/redmine-api": "v1.5.7",
+    "fr3d/ldap-bundle": "v2.0.0",
+    "liip/imagine-bundle": "1.4.2",
+    "coresphere/console-bundle": "0.4.0",
+    "lexik/maintenance-bundle": "v2.0.0",
+    "vich/uploader-bundle": "1.0.0-beta7"
+  },
+  "autoload": {
+    "psr-0": {
+      "SpiritDev\\Bundle\\DBoxPortalBundle\\": ""
+    }
+  }
+}

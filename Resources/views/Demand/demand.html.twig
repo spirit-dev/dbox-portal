@@ -1,0 +1,43 @@
+{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+
+{% block title %}{{ 'pagetitle.demand'|trans }} - {{ parent() }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <h1 class="page-header">{{ 'demands.dashboard.demand'|trans }} - {{ demand.id }}</h1>
+    </div>
+
+    <div class="row">
+        <a class="btn btn-lg btn-primary"
+           href="{{ path('spirit_dev_dbox_portal_bundle_demands') }}">{{ 'demands.dashboard.btn_return'|trans }}</a>
+    </div>
+
+    <div class="row">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel" style="border-color: {{ demand.status.color }}">
+                <div class="panel-heading" role="tab" id="head-{{ demand.id }}"
+                     style="background-color: {{ demand.status.color }}; border-color: {{ demand.status.color }}; color: #fff;">
+                    <h4 class="panel-title">
+                        {{ 'demands.dashboard.demand'|trans }} {{ demand.askdate is empty ? "" : demand.askdate|date("Y-m-d") }}
+                        -
+                        {{ demand.type.name }}
+                    </h4>
+                </div>
+                <div id="col-{{ demand.id }}" class="panel-collapse collapse in" role="tabpanel"
+                     aria-labelledby="head-{{ demand.id }}">
+                    <div class="panel-body panel-body-demand">
+                        {% include('SpiritDevBundleDBoxPortalBundle:Demand/Dashboard:demand_main.html.twig') %}
+                        {% include('SpiritDevBundleDBoxPortalBundle:Demand/Dashboard:demand_type.html.twig') %}
+                        {% include('SpiritDevBundleDBoxPortalBundle:Demand/Dashboard:demand_status.html.twig') %}
+                        {% include('SpiritDevBundleDBoxPortalBundle:Demand/Dashboard:demand_comments.html.twig') %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {% include('SpiritDevBundleDBoxPortalBundle:Demand/Dashboard:demand_update.html.twig') %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

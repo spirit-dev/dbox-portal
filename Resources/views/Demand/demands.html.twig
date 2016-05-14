@@ -1,0 +1,70 @@
+{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+
+{% block title %}{{ 'pagetitle.demand'|trans }} - {{ parent() }}{% endblock %}
+
+{% block more_javascript %}
+    {% javascripts
+    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/demand.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% block more_more_javascript %}
+    {% endblock more_more_javascript %}
+
+{% endblock more_javascript %}
+
+{% block content %}
+
+    <h1 class="page-header">{{ 'demands.leftmenu.demands'|trans }} Ecosystem</h1>
+
+    <div class="row">
+        <div class="col-sm-2">
+
+            <div class="slot">
+                <h4 class="page-header">{{ 'demands.leftmenu.dashboard'|trans }}</h4>
+                <a href="#dashboard" id="dm-dashboard"
+                   class="btn btn-success btn-block">{{ 'demands.leftmenu.btn.dashboard'|trans }}</a>
+
+                <div class="space-bottom"></div>
+
+                <h4 class="page-header">{{ 'demands.leftmenu.projects'|trans }}</h4>
+                <a href="#new_project" id="dm-new-project"
+                   class="btn btn-primary btn-block cmargin-bot-4">{{ 'demands.leftmenu.btn.projects'|trans }}</a>
+                <a href="#new_pipeline" id="dm-new-pipeline"
+                   class="btn btn-primary btn-block">{{ 'demands.leftmenu.btn.pipeline'|trans }}</a>
+
+                <div class="space-bottom"></div>
+                <h4 class="page-header">{{ 'demands.leftmenu.security'|trans }}</h4>
+                <a href="#new_security" id="dm-new-security"
+                   class="btn btn-primary btn-block">{{ 'demands.leftmenu.btn.security'|trans }}</a>
+
+
+            </div>
+        </div>
+
+        <div class="col-sm-10">
+
+            <div id="sl-dashboard" class="slot">
+                <h3 class="page-header">{{ 'demands.dashboard.formhead'|trans }}</h3>
+                {% include('SpiritDevBundleDBoxPortalBundle:Demand:demand_dashboard.html.twig') %}
+            </div>
+
+            <div id="sl-new-project" class="hidden slot">
+                <h3 class="page-header">{{ 'demands.nprojectform.formhead'|trans }}</h3>
+                {{ render_hinclude(path('spirit_dev_dbox_portal_bundle_demand_new_project'), {'default': 'Loading...'}) }}
+            </div>
+
+            <div id="sl-new-pipeline" class="hidden slot">
+                <h3 class="page-header">{{ 'demands.npipelineform.formhead'|trans }}</h3>
+                {{ render_hinclude(path('spirit_dev_dbox_portal_bundle_demand_new_pipeline'), {'default': 'Loading...'}) }}
+            </div>
+
+            <div id="sl-new-security" class="hidden slot">
+                <h3 class="page-header">{{ 'demands.nsecurityform.formhead'|trans }}</h3>
+                {{ render_hinclude(path('spirit_dev_dbox_portal_bundle_demand_new_security'), {'default': 'Loading...'}) }}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}

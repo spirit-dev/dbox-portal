@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="small-12">
+
+        <div class="panel-group" id="upd-{{ demand.id }}" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="upd-head-{{ demand.id }}">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#upd-{{ demand.id }}"
+                           href="#upd-col-{{ demand.id }}"
+                           aria-expanded="true" aria-controls="upd-col-{{ demand.id }}">
+                            {{ 'demands.dashboard.update'|trans }}
+                        </a>
+                    </h4>
+                </div>
+                <div id="upd-col-{{ demand.id }}" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="upd-head-{{ demand.id }}">
+                    <div class="panel-body panel-body-demand">
+
+                        <div class="row">
+
+                            {# CHANGE STATUS #}
+                            <div class="col-sm-6">
+                                {{ render_hinclude(path('easyadmin_demand_change_status', {'demandId': demand.id}), {'default': 'Loading...'}) }}
+                            </div>
+
+                            {# PROCESS IF NEW USER TYPE & UNRESOLVED STATUS #}
+                            {% if demand.status.canonicalname != "resolved" %}
+                                <div class="col-sm-6">
+                                    <fieldset>
+                                        <label>{{ 'demands.dashboard.process'|trans }}</label>
+                                        <br/>
+                                        <a href="{{ path('easyadmin_demand_process', {'demandId': demand.id}) }}"
+                                           class="btn btn-warning">Auto-process user</a>
+                                    </fieldset>
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

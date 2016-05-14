@@ -1,0 +1,20 @@
+/*.custom-tabs li.active a {*/
+/*border-bottom-color: #fff !important;*/
+/*border-left-color: #00a3ff !important;*/
+/*border-right-color: #00a3ff !important;*/
+/*border-top-color: #00a3ff !important;*/
+/*}*/
+/*.custom-tabs li a {*/
+/*border-bottom-color: #00a3ff !important;*/
+/*border-left-color: #fff;*/
+/*border-right-color: #fff;*/
+/*border-top-color: #fff;*/
+/*}*/
+/*.custom-tabs li a:hover, .custom-tabs li a:focus {*/
+/*background-color: #B5DEE8;*/
+/*text-shadow: 0 0 20px #337ab7 !important;*/
+/*}*/
+
+.admin_content {
+    margin-top: 10px;
+}

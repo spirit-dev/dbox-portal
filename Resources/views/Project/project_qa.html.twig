@@ -1,0 +1,147 @@
+<h3 class="sub-header pjt-c-sub-header">{{ 'project.qa_info.title'|trans }}</h3>
+<div class="row">
+
+    {# PREPARING VALUES #}
+    {% set qa_resolved_issues = qa_issues['qaResolvedIssues']['paging']['total'] %}
+    {% set qa_unresolved_issues = qa_issues['qaUnresolvedIssues']['paging']['total'] %}
+
+    {% set qa_total_issues = qa_resolved_issues + qa_unresolved_issues %}
+
+    {% set qa_info_issues = qa_issues['qaInfoIssues']['paging']['total'] %}
+    {% set qa_minor_issues = qa_issues['qaMinorIssues']['paging']['total'] %}
+    {% set qa_major_issues = qa_issues['qaMajorIssues']['paging']['total'] %}
+    {% set qa_critical_issues = qa_issues['qaCriticalIssues']['paging']['total'] %}
+    {% set qa_blocker_issues = qa_issues['qaBlockerIssues']['paging']['total'] %}
+
+    {% set qa_ri_percent = (qa_resolved_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
+    {% set qa_ui_percent = (qa_unresolved_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
+
+    {% set qa_info_percent = (qa_info_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
+    {% set qa_minor_percent = (qa_minor_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
+    {% set qa_major_percent = (qa_major_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
+    {% set qa_critical_percent = (qa_critical_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
+    {% set qa_blocker_percent = (qa_blocker_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
+
+    {# ISSUES RATION #}
+    <div class="col-sm-12">
+        <h4 class="sub-header">{{ 'project.qa_info.issues_ratio'|trans }}</h4>
+        <p>{{ 'project.qa_info.total_issues'|trans }} {{ qa_total_issues }}</p>
+        {% if qa_total_issues > 0 %}
+            <div class="progress qa-progress">
+                <div class="progress-bar progress-bar-success" style="width: {{ qa_ri_percent }}%">
+                    {{ qa_ri_percent }}% Resolved
+                </div>
+                <div class="progress-bar progress-bar-danger progress-bar-striped" style="width: {{ qa_ui_percent }}%">
+                    {{ qa_ui_percent }}% Unresolved
+                </div>
+            </div>
+        {% else %}
+            <p>No issues yet!</p>
+        {% endif %}
+    </div>
+
+    {# ISSUES PER SEVERITY #}
+    <div class="col-sm-12">
+        <h4 class="sub-header">{{ 'project.qa_info.issue_severities'|trans }}</h4>
+
+        {# ISSUES SEVERITIES RATIO #}
+        <div class="progress qa-progress">
+            <div class="progress-bar progress-bar-info" style="width: {{ qa_info_percent }}%">
+                {{ qa_info_issues }} Info
+            </div>
+            <div class="progress-bar cprogress-bar-minor" style="width: {{ qa_minor_percent }}%">
+                {{ qa_minor_issues }} Minor
+            </div>
+            <div class="progress-bar cprogress-bar-major" style="width: {{ qa_major_percent }}%">
+                {{ qa_major_issues }} Major
+            </div>
+            <div class="progress-bar progress-bar-warning" style="width: {{ qa_critical_percent }}%">
+                {{ qa_critical_issues }} Critical
+            </div>
+            <div class="progress-bar progress-bar-danger" style="width: {{ qa_blocker_percent }}%">
+                {{ qa_blocker_issues }} Blocker
+            </div>
+        </div>
+
+        {# BLOCKER ISSUES #}
+        {% if qa_blocker_issues > 0 %}
+            <div class="row qa-issue-severity">
+                <div class="col-sm-2">
+                    <p>Blocker</p>
+                </div>
+                <div class="col-sm-10">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-danger" style="width: {{ qa_blocker_percent }}%">
+                            {{ qa_blocker_issues }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {# CRITICAL ISSUES #}
+        {% if qa_critical_issues > 0 %}
+            <div class="row qa-issue-severity">
+                <div class="col-sm-2">
+                    <p>Critical</p>
+                </div>
+                <div class="col-sm-10">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning" style="width: {{ qa_critical_percent }}%">
+                            {{ qa_critical_issues }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {# MAJOR ISSUES #}
+        {% if qa_major_issues > 0 %}
+            <div class="row qa-issue-severity">
+                <div class="col-sm-2">
+                    <p>Major</p>
+                </div>
+                <div class="col-sm-10">
+                    <div class="progress">
+                        <div class="progress-bar cprogress-bar-major" style="width: {{ qa_major_percent }}%">
+                            {{ qa_major_issues }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {# MINOR ISSUES #}
+        {% if qa_minor_issues > 0 %}
+            <div class="row qa-issue-severity">
+                <div class="col-sm-2">
+                    <p>Minor</p>
+                </div>
+                <div class="col-sm-10">
+                    <div class="progress">
+                        <div class="progress-bar cprogress-bar-minor" style="width: {{ qa_minor_percent }}%">
+                            {{ qa_minor_issues }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {# INFO ISSUES #}
+        {% if qa_info_issues > 0 %}
+            <div class="row qa-issue-severity">
+                <div class="col-sm-2">
+                    <p>Info</p>
+                </div>
+                <div class="col-sm-10">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info" style="width: {{ qa_info_percent }}%">
+                            {{ qa_info_issues }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+
+{% set application = appli %}
+
+{% block title %}{{ application.name }} {{ parent() }}{% endblock %}
+
+{% block content %}
+
+    <div class="no-margin">
+        <iframe src="{{ application.url }}" scrolling="auto"></iframe>
+    </div>
+
+{% endblock content %}

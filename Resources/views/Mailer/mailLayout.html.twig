@@ -1,0 +1,28 @@
+{% block stylesheets %}
+    {% stylesheets
+    'bundles/portal/lib/bootstrap3/css/bootstrap.min.css'
+    'bundles/portal/css/common.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="off-canvas-wrap" data-offcanvas>
+        <div class="main-content inner-wrap">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 main">
+                        <div class="row">
+                            {% block content %}
+                            {% endblock content %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock body %}

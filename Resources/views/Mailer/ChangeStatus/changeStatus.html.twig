@@ -1,0 +1,41 @@
+{% include('SpiritDevBundleDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h1>{{ 'mail.global.header'|trans|raw }}</h1>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <h3>{{ 'mail.global.hello_user'|trans({
+                    '%firstname%': user.firstname,
+                    '%lastname%': user.lastname}) }}</h3>
+            <p>{{ 'mail.user.change_status.slot1'|trans }}</p>
+            <p>{{ 'mail.user.change_status.slot2'|trans({
+                    '%status%': demand.status.name}) }}</p>
+            <p>{{ 'mail.user.change_status.slot3'|trans }}
+                <a class="btn btn-primary"
+                   href="{{ demand_url }}">{{ 'mail.user.change_status.link1'|trans }}</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
+            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
+        </div>
+
+    </div>
+
+{% endblock content %}

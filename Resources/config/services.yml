@@ -1,0 +1,92 @@
+#parameters:
+#    user_bundle.security.handler.login_success_handler.class: UserBundle\Security\Handler\LoginSuccessHandler
+#    user_bundle.ldap.ldap_driver.class: UserBundle\Ldap\LdapDriver
+
+services:
+
+    spirit_dev_dbox_portal_bundle.form.type.demand_new_user:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Type\newUserType
+        tags:
+            - { name: form.type, alias: demand_new_user }
+
+    spirit_dev_dbox_portal_bundle.form.handler.demand_new_user:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Handler\NewUserHandler
+        arguments: [@request_stack, @doctrine.orm.entity_manager, @service_container]
+
+    spirit_dev_dbox_portal_bundle.form.type.demand_new_comment:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Type\newCommentType
+        tags:
+            - { name: form.type, alias: demand_new_comment }
+
+    spirit_dev_dbox_portal_bundle.form.handler.demand_new_comment:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Handler\NewCommentHandler
+        arguments: [@request_stack, @doctrine.orm.entity_manager, @service_container]
+
+    spirit_dev_dbox_portal_bundle.form.type.demand_change_status:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Type\changeStatusType
+        tags:
+            - { name: form.type, alias: demand_change_status }
+
+    spirit_dev_dbox_portal_bundle.form.handler.demand_change_status:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Handler\ChangeStatusHandler
+        arguments: [@request_stack, @doctrine.orm.entity_manager, @service_container]
+
+    spirit_dev_dbox_portal_bundle.form.type.demand_new_project:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Type\newProjectType
+        tags:
+            - { name: form.type, alias: demand_new_project }
+
+    spirit_dev_dbox_portal_bundle.form.handler.demand_new_project:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Handler\NewProjectHandler
+        arguments: [@request_stack, @doctrine.orm.entity_manager, @service_container]
+
+    spirit_dev_dbox_portal_bundle.form.type.new_communication:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Type\newComType
+        tags:
+            - { name: form.type, alias: new_communication }
+
+    spirit_dev_dbox_portal_bundle.form.handler.new_communication:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Handler\NewCommunicationHandler
+        arguments: [@request_stack, @doctrine.orm.entity_manager, @service_container]
+
+    spirit_dev_dbox_portal_bundle.form.type.new_pipeline:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Type\newPipelineType
+        tags:
+            - { name: form.type, alias: demand_new_pipeline }
+
+    spirit_dev_dbox_portal_bundle.form.handler.new_pipeline:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Handler\NewPipelineHandler
+        arguments: [@request_stack, @doctrine.orm.entity_manager, @service_container]
+
+    spirit_dev_dbox_portal_bundle.form.type.new_security:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Type\newSecurityType
+        tags:
+            - { name: form.type, alias: demand_new_security }
+
+    spirit_dev_dbox_portal_bundle.form.handler.new_security:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Form\Handler\NewSecurityHandler
+        arguments: [@request_stack, @doctrine.orm.entity_manager, @service_container]
+
+    spirit_dev_dbox_portal_bundle.mailer:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Mailer\Mailer
+        arguments: [@swiftmailer.mailer, @router, @templating, @service_container]
+
+    spirit_dev_dbox_portal_bundle.api.gitlab:
+        class: SpiritDev\Bundle\DBoxPortalBundle\API\GitLabAPI
+        arguments: [@service_container]
+
+    spirit_dev_dbox_portal_bundle.api.jenkins:
+        class: SpiritDev\Bundle\DBoxPortalBundle\API\JenkinsAPI
+        arguments: [@service_container]
+
+    spirit_dev_dbox_portal_bundle.api.redmine:
+        class: SpiritDev\Bundle\DBoxPortalBundle\API\RedmineAPI
+        arguments: [@service_container]
+
+    spirit_dev_dbox_portal_bundle.api.sonar:
+        class: SpiritDev\Bundle\DBoxPortalBundle\API\SonarAPI
+        arguments: [@service_container]
+
+    spirit_dev_dbox_portal_bundle.todos.manager:
+        class: SpiritDev\Bundle\DBoxPortalBundle\Todo\TodosManager
+        arguments: [@service_container]

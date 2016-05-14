@@ -1,0 +1,197 @@
+<form class="form-horizontal" action="{{ path('spirit_dev_dbox_portal_bundle_demand_new_project') }}" {{ form_enctype(form) }}
+      method="POST">
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.name, 'demands.nprojectform.name'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.languageType, 'demands.nprojectform.languageType'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.languageType, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.description, 'demands.nprojectform.description'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.imageFile, 'demands.nprojectform.logo'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-9">
+
+            <div class="panel-group" id="projectAttributes" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingVcs">
+                        <h4 class="panel-title">
+                            <a class="text-center" role="button" data-toggle="collapse" data-parent="#projectAttributes"
+                               href="#collapseVcs"
+                               aria-expanded="true" aria-controls="collapseVcs">
+                                {{ 'demands.nprojectform.manage_vcs'|trans }}
+                            </a>
+
+                            <div class="panel-title-form">
+                                <label class="radio-inline">
+                                    <input type="radio" name="vcsManage" id="vcsManageYes" value="yes"
+                                           onchange="vcsNewProjectChange(this)"> Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="vcsManage" id="vcsManageNo" value="no"
+                                           onchange="vcsNewProjectChange(this)" checked="checked"> No
+                                </label>
+                            </div>
+
+                        </h4>
+                    </div>
+                    <div id="collapseVcs" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="headingVcs">
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="checkbox">
+                                        <label>
+                                            {{ form_widget(form.gitLabIssueEnabled) }} {{ form_label(form.gitLabIssueEnabled, 'demands.nprojectform.issueenabled'|trans) }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="checkbox">
+                                        <label>
+                                            {{ form_widget(form.gitLabWikiEnabled) }} {{ form_label(form.gitLabWikiEnabled, 'demands.nprojectform.wikienabled'|trans) }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="checkbox">
+                                        <label>
+                                            {{ form_widget(form.gitLabSnippetsEnabled) }} {{ form_label(form.gitLabSnippetsEnabled, 'demands.nprojectform.snippetsenabled'|trans) }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingPm">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#projectAttributes"
+                               href="#collapsePm" aria-expanded="false" aria-controls="collapsePm">
+                                {{ 'demands.nprojectform.manage_pm'|trans }}
+                            </a>
+
+                            <div class="panel-title-form">
+                                <label class="radio-inline">
+                                    <input type="radio" name="pmManage" id="pmManageYes" value="yes"
+                                           onchange="pmNewProjectChange(this)"> Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="pmManage" id="pmManageNo" value="no"
+                                           onchange="pmNewProjectChange(this)" checked="checked"> No
+                                </label>
+                            </div>
+                        </h4>
+                    </div>
+                    {#<div id="collapsePm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPm">#}
+                    {#<div class="panel-body">#}
+                    {#RIEN POUR l'INSTANT#}
+                    {#</div>#}
+                    {#</div>#}
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingCi">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#projectAttributes"
+                               href="#collapseCi" aria-expanded="false" aria-controls="collapseCi">
+                                {{ 'demands.nprojectform.manage_ci'|trans }}
+                            </a>
+
+                            <div class="panel-title-form">
+                                <label class="radio-inline">
+                                    <input type="radio" name="ciManage" id="ciManageYes" value="yes"
+                                           onchange="ciNewProjectChange(this)"> Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="ciManage" id="ciManageNo" value="no"
+                                           onchange="ciNewProjectChange(this)" checked="checked"> No
+                                </label>
+                            </div>
+                        </h4>
+                    </div>
+                    <div id="collapseCi" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="headingCi">
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="checkbox">
+                                        <label>
+                                            {{ form_widget(form.ciDevManaged) }} {{ form_label(form.ciDevManaged, 'demands.nprojectform.manage_ci_dev'|trans) }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="checkbox">
+                                        <label>
+                                            {{ form_widget(form.qaDevManaged) }} {{ form_label(form.qaDevManaged, 'demands.nprojectform.manage_qa_dev'|trans) }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.owner, 'demands.nprojectform.owner'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.owner, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.teamMembers, 'demands.nprojectform.members'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.teamMembers, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+    </div>
+
+    {{ form_rest(form) }}
+
+    {{ form_end(form) }}
+
+</form>

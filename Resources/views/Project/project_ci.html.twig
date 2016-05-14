@@ -1,0 +1,153 @@
+<h3 class="sub-header pjt-c-sub-header">{{ 'project.ci_info.title'|trans }}</h3>
+<div class="row">
+
+    {% if managed_pipes|length > 0 %}
+
+        {% for ci in managed_pipes %}
+
+            {# PREPARE SOME VARS #}
+            {% set panel_context = 'panel-default' %}
+            {% set currentBuild = null %}
+
+            {# DEFINE RELATED BUILD #}
+            {% for build in builds %}
+                {% if build['ci'] == ci.ciName %}
+                    {% set currentBuild = build %}
+                {% endif %}
+            {% endfor %}
+
+            {# DEFINE PANEL CONTEXT DEPENDING ON BUILD STATUS #}
+            {% if not currentBuild is null %}
+                {% if currentBuild['result'] == 'FAILURE' %}
+                    {% set panel_context = 'panel-danger' %}
+                {% elseif currentBuild['result'] == 'SUCCESS' %}
+                    {% set panel_context = 'panel-success' %}
+                {% elseif currentBuild['result'] == 'RUNNING' %}
+                    {% set panel_context = 'panel-info' %}
+                {% elseif currentBuild['result'] == 'WAITING' %}
+                    {% set panel_context = 'panel-primary' %}
+                {% elseif currentBuild['result'] == 'UNSTABLE' %}
+                    {% set panel_context = 'panel-warning' %}
+                {% elseif currentBuild['result'] == 'ABORTED' %}
+                    {% set panel_context = 'panel-warning' %}
+                {% endif %}
+            {% endif %}
+
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="panel {{ panel_context }} panel-ci">
+
+                    <div class="panel-heading">
+                        <strong>{{ ci.ciName }}</strong> {{ not currentBuild is null ? "#"~currentBuild['number'] }}
+                        <div class="pull-right">
+                            <a class="tooltiped" data-toggle="tooltip" data-placement="left"
+                               title="{{ 'project.tooltip.ci.link'|trans }}" href="{{ ci.accessUrl }}"
+                               target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+
+                        {% if currentBuild|length == 0 %}
+                            <p>{{ 'project.ci_info.no_build_yet'|trans|raw }}</p>
+                        {% else %}
+                            <p>{{ 'project.ci_info.last_build_status'|trans({'%status%': currentBuild['result']})|raw }}</p>
+                            <p>
+                                {{ 'project.ci_info.last_build_timestamp'|trans({'%timestamp%': currentBuild['timestamp']|date('Y-m-d H:i')})|raw }}
+                                <a class="pull-right tooltiped btn-console"
+                                   href="{{ currentBuild['url'] }}console"
+                                   target="_blank"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ 'project.tooltip.ci.console'|trans }}">
+                                    <span class="glyphicon glyphicon-console"></span>
+                                </a>
+                            </p>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="panel-footer">
+
+                        {% if not ci.parametrized %}
+                            {% set onclick = "launchJob('"~ci.id~"');" %}
+                        {% else %}
+                            {% set onclick = "launchJob('"~ci.id~"','"~ci.parameters|json_encode~"');" %}
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <button class="btn btn-link btn-ci-launch tooltiped"
+                                        onclick="{{ onclick }}"
+                                        data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="{{ 'project.tooltip.ci.launch'|trans }}">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </button>
+                            </div>
+                            <div class="col-sm-11">
+                                <div id="pb-content"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if project.ciDevManaged and unmanaged_pipes|length >= 0 %}
+        {% for ci in unmanaged_pipes %}
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="panel panel-warning panel-ci">
+
+                    <div class="panel-heading">
+                        <strong>{{ ci.ciName }}</strong>
+                        <div class="pull-right">
+                            {#<a class="tooltiped" data-toggle="tooltip" data-placement="left"#}
+                            {#title="{{ 'project.tooltip.ci.link'|trans }}" href="{{ ci.accessUrl }}"#}
+                            {#target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>#}
+                            <span class="glyphicon glyphicon-alert"></span>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img src="{{ asset('bundles/portal/images/under_construction2.png') }}">
+                            </div>
+                            <div class="col-sm-8 text-center unmanaged-pipes-container">
+                                <div class="col-sm-12">
+                                    <p>{{ 'project.ci_info.no_ci_active1'|trans }}</p>
+                                </div>
+
+                                <div class="col-sm-12 unmanaged-pipes-bottom">
+                                    <strong class="text-muted">{{ 'project.ci_info.no_ci_active2'|trans }}</strong>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+
+{% if project.ciDevManaged and managed_pipes|length > 0 %}
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <strong>
+                        {{ 'project.ci_info.new_pipeline.1'|trans }}
+                        <a href="{{ path('spirit_dev_dbox_portal_bundle_demands') }}#new_pipeline">{{ 'project.ci_info.new_pipeline.2'|trans }}</a>
+                    </strong>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,26 @@
+{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+
+{% block title %}{{ 'pagetitle.demand'|trans }} - {{ parent() }}{% endblock %}
+
+{% block more_javascript %}
+    {% javascripts
+    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/demand.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% block more_more_javascript %}
+    {% endblock more_more_javascript %}
+
+{% endblock more_javascript %}
+
+{% block content %}
+
+    <h1 class="page-header">{{ 'help.header'|trans }}</h1>
+
+    {# TODO admins profiles #}
+    <p>Add Admins profiles</p>
+
+    {# TODO git informations #}
+    <p>Add git informations</p>
+
+{% endblock %}

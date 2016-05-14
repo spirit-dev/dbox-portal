@@ -1,0 +1,40 @@
+<div class="row">
+
+    {# DEMAND ID #}
+    <div class="small-12">
+        <div class="row">
+            <div class="col-sm-4"><b>{{ 'demands.dashboard.demand_id'|trans }}</b></div>
+            <div class="col-sm-8"><a
+                        href="{{ path('spirit_dev_dbox_portal_bundle_demand', {'id': demand.id}) }}">{{ demand.id }}</a></div>
+        </div>
+    </div>
+    {# DEMAND TYPE #}
+    <div class="small-12">
+        <div class="row">
+            <div class="col-sm-4"><b>{{ 'demands.dashboard.type'|trans }}</b></div>
+            <div class="col-sm-8"><span class="label label-info">{{ demand.type.name }}</span></div>
+        </div>
+    </div>
+    {# DEMAND ASK DATE #}
+    <div class="small-12">
+        <div class="row">
+            <div class="col-sm-4"><b>{{ 'demands.dashboard.ask_date'|trans }}</b></div>
+            <div class="col-sm-8">{{ demand.askdate is empty ? "" : demand.askdate|date("Y-m-d") }}</div>
+        </div>
+    </div>
+    {# DEMAND UPDATE DATE #}
+    <div class="small-12">
+        <div class="row">
+            <div class="col-sm-4"><b>{{ 'demands.dashboard.update_date'|trans }}</b></div>
+            <div class="col-sm-8">{{ demand.updatedate is empty ? "" : demand.updatedate|date("Y-m-d H:i") }}</div>
+        </div>
+    </div>
+    {# DEMAND RESOLUTION DATE #}
+    <div class="small-12">
+        <div class="row">
+            <div class="col-sm-4"><b>{{ 'demands.dashboard.resolution_date'|trans }}</b></div>
+            <div class="col-sm-8">{{ demand.resolutiondate is empty ? "" : demand.resolutiondate|date("Y-m-d H:i") }}</div>
+        </div>
+    </div>
+
+</div>

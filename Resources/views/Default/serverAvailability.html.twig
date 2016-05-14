@@ -1,0 +1,95 @@
+{% if scope == "index" %}
+
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                VCS - GitLab
+                {% if vcs %}
+                    <span class="label label-success">{{ 'homepage.servers.available'|trans }}</span>
+                {% elseif vcs is null %}
+                    <span class="label label-warning">{{ 'homepage.servers.unreachable'|trans }}</span>
+                {% elseif not vcs %}
+                    <span class="label label-danger">{{ 'homepage.servers.unavailable'|trans }}</span>
+                {% endif %}
+            </h4>
+        </div>
+        <div class="col-sm-3">
+            <h4>
+                PM - Redmine
+                {% if pm %}
+                    <span class="label label-success">{{ 'homepage.servers.available'|trans }}</span>
+                {% elseif pm is null %}
+                    <span class="label label-warning">{{ 'homepage.servers.unreachable'|trans }}</span>
+                {% elseif not pm %}
+                    <span class="label label-danger">{{ 'homepage.servers.unavailable'|trans }}</span>
+                {% endif %}
+            </h4>
+        </div>
+        <div class="col-sm-3">
+            <h4>
+                QA - Sonar
+                {% if qa %}
+                    <span class="label label-success">{{ 'homepage.servers.available'|trans }}</span>
+                {% elseif qa is null %}
+                    <span class="label label-warning">{{ 'homepage.servers.unreachable'|trans }}</span>
+                {% elseif not qa %}
+                    <span class="label label-danger">{{ 'homepage.servers.unavailable'|trans }}</span>
+                {% endif %}
+            </h4>
+        </div>
+        <div class="col-sm-3">
+            <h4>
+                CI - Jenkins
+                {% if ci %}
+                    <span class="label label-success">{{ 'homepage.servers.available'|trans }}</span>
+                {% elseif ci is null %}
+                    <span class="label label-warning">{{ 'homepage.servers.unreachable'|trans }}</span>
+                {% elseif not ci %}
+                    <span class="label label-danger">{{ 'homepage.servers.unavailable'|trans }}</span>
+                {% endif %}
+            </h4>
+        </div>
+    </div>
+
+{% elseif scope == "menu" %}
+
+    <ul class="nav navbar-nav navbar-left">
+        <li>
+            {% if vcs %}
+                <a href="#" class="custom-light-success">VCS <span class="glyphicon glyphicon-certificate"></span></a>
+            {% elseif vcs is null %}
+                <a href="#" class="custom-light-duno">VCS <span class="glyphicon glyphicon-certificate"></span></a>
+            {% elseif not vcs %}
+                <a href="#" class="custom-light-error">VCS <span class="glyphicon glyphicon-certificate"></span></a>
+            {% endif %}
+        </li>
+        <li>
+            {% if pm %}
+                <a href="#" class="custom-light-success">PM <span class="glyphicon glyphicon-certificate"></span></a>
+            {% elseif pm is null %}
+                <a href="#" class="custom-light-duno">PM <span class="glyphicon glyphicon-certificate"></span></a>
+            {% elseif not pm %}
+                <a href="#" class="custom-light-error">PM <span class="glyphicon glyphicon-certificate"></span></a>
+            {% endif %}
+        </li>
+        <li>
+            {% if qa %}
+                <a href="#" class="custom-light-success">QA <span class="glyphicon glyphicon-certificate"></span></a>
+            {% elseif qa is null %}
+                <a href="#" class="custom-light-duno">QA <span class="glyphicon glyphicon-certificate"></span></a>
+            {% elseif not qa %}
+                <a href="#" class="custom-light-error">QA <span class="glyphicon glyphicon-certificate"></span></a>
+            {% endif %}
+        </li>
+        <li>
+            {% if ci %}
+                <a href="#" class="custom-light-success">CI <span class="glyphicon glyphicon-certificate"></span></a>
+            {% elseif ci is null %}
+                <a href="#" class="custom-light-duno">CI <span class="glyphicon glyphicon-certificate"></span></a>
+            {% elseif not ci %}
+                <a href="#" class="custom-light-error">CI <span class="glyphicon glyphicon-certificate"></span></a>
+            {% endif %}
+        </li>
+    </ul>
+
+{% endif %}

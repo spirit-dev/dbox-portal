@@ -1,0 +1,426 @@
+pagetitle:
+    index: Welcome
+    demand: Demands
+    admin: Admin
+
+left:
+    menu:
+        home: Home
+        demand: Demands
+
+menu:
+    profile: Profil
+    login: Login
+    register: Registration
+    logout: Logout
+    help: Help
+    admin: Administration
+    todos: Todos (%nb_todos%)
+    feedbacks: Feedbacks (%nb_feedbacks%)
+
+demands:
+    leftmenu:
+        dashboard: Demands dashboard
+        demands: Demands
+        users: Users
+        btn:
+            new_users: New user
+            projects: New project
+            dashboard: Dashboard
+            pipeline: New Pipeline
+            security: Security improvment
+        projects: Projects
+        admin: Admin
+        security: Security
+    dashboard:
+        formhead: Demands dashboard
+        demand: Demand
+        demand_id: Demand ID
+        type: Demand related to
+        ask_date: Asked the
+        update_date: Updated
+        resolution_date: Resolved the
+        content: Demand content
+        status: Demand status
+        btn_return: Return to demands dashboard
+        comments: Comments
+        tab:
+            new: New demand
+            processing: Processing demand
+            cancelled: Demand cancelled
+            resolved: Resolved demand
+            problem: Demand having problem
+        update: Update demand
+        process: Process demand
+    nusersform:
+        formhead: Registration
+        email: E-mail
+        firstname: Firstname
+        lastname: Lastname
+        username: Username
+        submit: Submit registration request
+    nprojectform:
+        formhead: New project demand
+        name: Project name
+        description: Brief description
+        languageType: Language type
+        logo: Project logo
+        issueenabled: Enable issue ?
+        wikienabled: Enable wiki ?
+        snippetsenabled: Enable snippets ?
+        owner: Select project owner
+        members: Select projet members
+        submit: Send project creation request
+        manage_vcs: Manage VCS
+        manage_pm: Manage PM
+        manage_ci: Manage CI
+        manage_ci_dev: Enable Continuous Integration (Dev pipeline) ?
+        manage_qa_dev: Enable Quality Analysis (Dev pipeline) ?
+    ncommentform:
+        formhead: Add new comment
+        content: Comment
+        com_user: Commented by :
+        com_date: the :
+        submit: Add comment
+    nstatusform:
+        formhead: Change demand status
+        status: New status
+        submit: Change status
+    resolution:
+        formhead: Demand resolution
+        returnto: Return to demand(s).
+    npipelineform:
+        formhead: New CI pipeline demand
+        noproject:
+            1: Sorry, you have no owned projects!
+            2: You may contact you project owner to create this kind of demand.
+        submit: Send demand
+        project: Project
+        ticketid: Requestor Ticket/Demand Id
+        pipelinetype: Pipeline type
+        servertarget:
+            placeholder: Common server name or ip like 123.123.123.123
+            label: Server target
+        moreinfo:
+            placeholder: Write any information you may find important to notify !
+            label: More information
+    nsecurityform:
+        formhead: Applicative security improvements
+        noproject:
+            1: Sorry, you have no owned projects! Or your owned projects have no continuous integration plan!
+            2: You may contact you project owner to create this kind of demand.
+        securityanalysis: Type of security analysis
+        mention1: A remote Web server where this project is hosted have to be defined.
+
+project:
+    header:
+        project: Project
+        nologo: %project% has no logo yet...
+    settings:
+        settings: Settings
+        teammembers: Team members
+        adduser: Add user
+        not_managed:
+            title: Create items
+            vcs:
+                title: Create VCS
+                tooltip: Create Git Repository
+            pm:
+                title: Create PM
+                tooltip: Create Project Manager (Redmine)
+            ci:
+                title: Create CI
+                tooltip: Create Continuous Integration (Dev pipeline only)
+            qa:
+                title: Create QA
+                tooltip: Create Quality Analysis (Binded to CI Dev Pipeline)
+    top_content:
+        created: Created :
+        updated: Updated :
+        owner: Owner
+        team: Team
+    project_links:
+        title: Project links
+        project_urls:
+            title: Project URL(s)
+            select: Select URL
+        clone_url:
+            title: Clone URL
+    pm_info:
+        title: Project managment
+        issues: Issues
+        total_issues: Total issues
+        bug_issues: Bug issues
+        evol_issues: Evolution issues
+        test_issues: Test cases
+        qa_issues: QA issues
+    vcs_info:
+        title: VCS informations
+        total_commits: Total commits
+    qa_info:
+        title: QA informations
+        issues_ratio: Issue resolutions
+        issue_severities: Issues per severities
+        total_issues: Total issues:
+    secu_info:
+        title: Security assessments
+        static:
+            title: Static analysis
+            btn_modal1: Check report
+            btn_modal2: Check vulnerabilities
+            btn_modal3: Zap Scanner report
+    ci_info:
+        title: Continuous Integration
+        last_build_status: Last build status: <strong>%status%</strong>
+        last_build_timestamp: Last build started: <strong>%timestamp%</strong>
+        no_build_yet: This pipeline have never been built yet! <br/> Click bellow to launch a build
+        no_ci_active1: You have requested a Development Pipeline for this project. But the pipeline is not active yet
+        no_ci_active2: Your administrator is working on it.
+        no_ci_active3: If not make a demand (here - TODO).
+        new_pipeline:
+            1: Create a new pipeline by
+            2: clicking here
+    tooltip:
+        teammember:
+            remove: Remove %member% from project
+            owner: %member% is the project owner
+            add: Add new user to project
+        project_link:
+            goto: Click to go to this url
+            clipboard: Click to copy url to clipboard
+        branch:
+            protected: %branch% branch is protected
+        ci:
+            link: Go to the remote job
+            launch: Launch this job by clicking here
+            console: Click here to see the console output for this job
+    not_managed:
+        title: Some items are not managed.
+        vcs: This project has currently no VCS repository !
+        pm: This project has currently no Project Manager bound !
+        ci: This project has currently no CI pipeline defined !
+        qa: This project has currently no Quality Analyis defined (require CI) !
+        manager_action: You may ask your project manager to create it if necessary.
+
+communication:
+    form:
+        formhead: Prepare new communication
+        showfrom: Start from
+        showto: End to
+        active: Is active
+        type: Type of communication
+        title:  Title
+        content: Content
+        submit: Register communication
+
+flashbag:
+    demand:
+        new_user:
+            success: This demand for a new user creation have been well registred. It will be treated as soon as possible.
+            error: An error occured while registering this new demand. Sorry for any convenience caused.
+        new_comment:
+            success: Your comment have been well aded.
+            error: Sorry an error occured while adding a comment to this demand. Sorry for any convenience caused.
+        change_status:
+            success: Your demand status has well changed.
+            error: Sorry status changment has been refused. Sorry for any convenience caused.
+        processing_user:
+            success: LDAP New-User auto-processing OK.
+            error: LDAP New-User auto-processing has encountered a problem!
+        new_project:
+            success: Your project creation demand have been well added.
+            error: Sorry an error occured! Sorry for any convenience caused.
+        processing_project:
+            success: Project creation auto-processing OK.
+            error: Project creation auto-processing has encountered a problem!
+        processing_deletion_project:
+            success: Project deletion auto-processing OK.
+            error: Project deletion auto-processing has encountered a problem!
+        new_pipeline:
+            success: Your new pipeline creation have been well registered.
+            error: Sorry an error occured while registering your demand. Sorry for any convenience caused.
+        new_security:
+            success: This security improvment demand have been well registred.
+            error: Sorry an error occured while registering this security demand.
+    project:
+        rm_member:
+            not_allowed: Sorry your are not allowed to execute a team member deletion from this project!!
+            success: Team member successfully removed from this project!
+            error: Sorry an error occured. Team member could not be removed.
+        add_member:
+            not_allowed: Sorry you are not allowed to add a team member to this project!!
+            success: Team member successfully added.
+            error: Sorry an error occured while adding a team member to this project.
+    new_communication:
+        success: Your communication have been well registered.
+        error: Sorry an error occured while registering this communication.
+
+mail:
+    global:
+        header: Ecosystem V2.
+        header_admin: Ecosystem V2 - Admin contact.
+        footer:
+            slot1: Best regards,
+            slot2: The tool's Team.
+        hello_user: Hello %firstname% %lastname% !
+        hello_admin: Hello Admin !
+    user:
+        register_demand:
+            slot2: You have sent a registration request.
+            slot3: You request will be considered as soon as possible by our administrator.
+            slot4: Thank's for registering.
+        change_status:
+            slot1: The status of your demand is in progress.
+            slot2: Your demand is now : %status%
+            slot3: Check out by following
+            link1: this link
+        registration_done:
+            slot1: Your account have been created by an administrator.
+            slot2: Bellow, you will find every informations about your account.
+            tabh: Here are your informations
+            tab1: Firstname
+            tab2: Lastname
+            tab3: Username
+            tab4: Mail
+            tab5: Your clear password
+            slot3: You can now get connected to your account by following
+            link1: this link
+            slot4: Once you're connected for the first time, you should change your password.
+            slot5: You can follow this link to change it!
+            link2: Here.
+            slot6: Remember, no will ask you your password.
+        account:
+            deletion:
+                slot1: Your account have been definitively deleted !
+                slot2: You will not be able to access to the EcosystemV2.
+                slot3: You can either write to your administrator at the following address(es):
+            deactivation:
+                slot1: Your account have been deactivated by an administrator.
+                slot2: This action may be temporary !
+                slot3: By the way your will not be able to access to EcosystemV2 !
+                slot4: You can write an email to following address(es):
+            activation:
+                slot1: Your account have been activated by an administrator.
+                slot2: Welcome back to your EcosystemV2.
+    project:
+        request:
+            slot1: You've requested the craetion of a new project.
+            slot2: Find bellow some informations you've requested for this project:
+            tabslot1:
+                tab1: Project name
+                tab2: Description
+                tab3: Owner
+                tab4: Team working on
+            slot3: Your demand will be processed as soon as possible.
+            slot4: You will be informed by mail about the developments.
+            slot5: Follow the related demand via this link.
+
+        creation:
+            slot1: A new project have been created for you and your team.
+            slot2: You are now allowed to access to the %project_name% project.
+            slot3: You will find bellow every information about this project.
+            tabslot1:
+                tabh: Common
+                tab1: Project name
+                tab2: Description
+                tab3: Owner
+                tab4: Team working on
+            tabslot2:
+                tabh: Git
+                tab1: Project URL
+                tab2: Project clone URI
+            tabslot3:
+                tabh: Project Manager
+                tab1: Project URL
+            tabslot4:
+                tabh: Continuous integration
+                tab1: More info here
+            tabslot5:
+                tabh: Qality Analysis
+                tab1: More info here
+            not_managed: Not managed
+            slot4: You can click here to access project informations
+            slot5: Now it's up to you!
+            slot6: Enjoy!
+        new_manager:
+            slot1: Your project have a new manager.
+            slot2: Check bellow, the corresponding informations.
+        add_user:
+            adm:
+                slot1: A new user have been added to the following project:
+            owner:
+                slot1: You have been adding a new user to your project:
+            user:
+                slot1: have granted you some accesses to the following project:
+                slot2: You will find the necessary informations below:
+                slot3: You can start working on this project.
+                tabslot1:
+                    tab1: Project name
+                    tab2: Project description
+                    tab3: Project owner
+                    tab4: Project team
+                    tab5: Project URL's
+            common:
+                tab1: Project
+                tab2: User
+        remove_user:
+            adm:
+                slot1: A user have been demoved from project:
+            owner:
+                slot1: You have removed the following user from your project:
+            user:
+                slot1: have removed you from this project:
+                slot2: Until now you won't be able to access to this project.
+            common:
+                tab1: Project
+                tab2: User
+    pipeline:
+        request:
+            slot1: You have requested a new Pipeline creation for the following project.
+            slot2: Your demand will be processed as soon as possible.
+            slot3: You will be informed by mail about the developments.
+            slot4: Follow the related demand via this link.
+
+    admin:
+        register_demand:
+            slot1: Hello Admin
+            slot2: you have received a new demand request:
+            slot3: Demand type:
+            slot4: Go directly to the demand
+            link1: to process
+    both:
+        new_comment:
+            slot1: Someone have commented your demand.
+            slot2: Take a look by following
+            link1: this link.
+homepage:
+    pagelabel: Dashboard
+    all_projects: Projects --
+    memberof: Projects member --
+    owned: My owned projects --
+    metrics:
+        label: Some metrics
+        active: Active projects
+        nbmemberof: Nb projects i'm member of
+        nbowned: Nb owned projects
+    servers:
+        label: Servers availability
+        available: Available
+        unavailable: Stopped
+        unreachable: Unreachable
+    long_operation: This operation may take some times !
+
+admin:
+    pagelabel: Administration
+    resolution:
+        user_deletion:
+            title: User deletion
+            return_to: Return to users
+        user_de_actvate:
+            title: User (De)Activate
+
+intro:
+    skip: Skip intro !
+
+help:
+    header: Welcome to EcosystemV2 help

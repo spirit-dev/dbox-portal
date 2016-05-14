@@ -1,0 +1,31 @@
+<h2 class="sub-header">{{ 'project.not_managed.title'|trans }}</h2>
+{% if not project.vcsManaged %}
+    <p>{{ 'project.not_managed.vcs'|trans }}</p>
+{% endif %}
+
+{% if not project.pmManaged %}
+    <p>{{ 'project.not_managed.pm'|trans }}</p>
+{% endif %}
+
+{% if not project.ciDevManaged %}
+    <p>{{ 'project.not_managed.ci'|trans }}</p>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <strong>
+                        {{ 'project.ci_info.new_pipeline.1'|trans }}
+                        <a href="{{ path('spirit_dev_dbox_portal_bundle_demands') }}#new_pipeline">{{ 'project.ci_info.new_pipeline.2'|trans }}</a>
+                    </strong>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% if not project.qaDevManaged and not project.ciDevManaged %}
+    <p>{{ 'project.not_managed.qa'|trans }}</p>
+{% endif %}
+
+<hr>
+<h4>{{ 'project.not_managed.manager_action'|trans }}</h4>

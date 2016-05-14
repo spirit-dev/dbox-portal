@@ -1,0 +1,27 @@
+<fieldset>
+    <label>{{ 'demands.ncommentform.formhead'|trans }}</label>
+
+    <form class="form-horizontal"
+          action="{{ path('spirit_dev_dbox_portal_bundle_demand_add_comment', {'demandId': id}) }}" {{ form_enctype(form) }}
+          method="POST">
+
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                {{ form_widget(form.content) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                {{ form_widget(form.save) }}
+            </div>
+        </div>
+
+
+        {{ form_end(form) }}
+
+    </form>
+</fieldset>

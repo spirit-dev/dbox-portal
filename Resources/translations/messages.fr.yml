@@ -1,0 +1,19 @@
+left:
+    menu:
+        home: Accueil
+        demand: Demandes
+        
+menu:
+    profile: Profile
+    login: Connexion
+    logout: Déconnexion
+    help: Aide
+    
+demands:
+    demands: Demandes
+    users: Utilisateurs
+    btn:
+        new_users: Nouvel utilisateur
+        projects: Nouveau projet
+    projects: Projets
+    admin: Admin

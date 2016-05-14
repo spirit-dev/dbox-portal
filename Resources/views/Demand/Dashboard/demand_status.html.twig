@@ -1,0 +1,39 @@
+{% if demand.status.canonicalname == 'new' %}
+    {% set pg_value = 10 %}
+    {% set pg_class = "" %}
+{% elseif demand.status.canonicalname == 'processing' %}
+    {% set pg_value = 50 %}
+    {% set pg_class = "progress-bar-striped active" %}
+{% elseif demand.status.canonicalname == 'cancelled' %}
+    {% set pg_value = 50 %}
+    {% set pg_class = "progress-bar-striped" %}
+{% elseif demand.status.canonicalname == 'resolved' %}
+    {% set pg_value = 100 %}
+    {% set pg_class = "progress-bar-striped" %}
+{% elseif demand.status.canonicalname == 'problem' %}
+    {% set pg_value = 50 %}
+    {% set pg_class = "progress-bar-striped active" %}
+{% endif %}
+
+<div class="row">
+
+    <div class="small-12">
+        <div class="row">
+            <div class="col-sm-4"><b>{{ 'demands.dashboard.status'|trans }}</b></div>
+            <div class="col-sm-2"><span class="label"
+                                        style="background-color: {{ demand.status.color }};">{{ demand.status.name }}</span>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="progress">
+                    <div class="progress-bar {{ pg_class }}" role="progressbar" aria-valuenow="{{ pg_value }}"
+                         aria-valuemin="0"
+                         aria-valuemax="100"
+                         style="width: {{ pg_value }}%; background-color: {{ demand.status.color }};">
+                        <span class="sr-only">{{ pg_value }}% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

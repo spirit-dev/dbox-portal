@@ -1,0 +1,124 @@
+<div class="row">
+    <div class="small-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'demands.dashboard.content'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+
+                {% if demand.type.canonicalname == 'new_user' %}
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.nusersform.email'|trans }}</li>
+                        <li><b>{{ demand.content.user_mail }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.nusersform.firstname'|trans }}</li>
+                        <li><b>{{ demand.content.firstname }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.nusersform.lastname'|trans }}</li>
+                        <li><b>{{ demand.content.lastname }}</b></li>
+                    </ul>
+
+                {% elseif demand.type.canonicalname == 'new_project' %}
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.nprojectform.name'|trans }}</li>
+                        <li><b>{{ demand.content.name }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.nprojectform.description'|trans }}</li>
+                        <li><b>{{ demand.content.description }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.nprojectform.issueenabled'|trans }}</li>
+                        <li><b>{{ demand.content.git_issues }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.nprojectform.wikienabled'|trans }}</li>
+                        <li><b>{{ demand.content.git_wiki }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.nprojectform.snippetsenabled'|trans }}</li>
+                        <li><b>{{ demand.content.git_snippets }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.nprojectform.owner'|trans }}</li>
+                        <li><b>{{ demand.content.owner }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.nprojectform.members'|trans }}</li>
+                        <li><b>{{ demand.content.team_members }}</b></li>
+                    </ul>
+
+                {% elseif demand.type.canonicalName == "new_pipeline" %}
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.npipelineform.project'|trans }}</li>
+                        <li><b>{{ demand.content.project }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.npipelineform.ticketid'|trans }}</li>
+                        <li><b>{{ demand.content.requestor_ticket }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.npipelineform.pipelinetype'|trans }}</li>
+                        <li><b>{{ demand.content.pipeline_type }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.npipelineform.servertarget.label'|trans }}</li>
+                        <li><b>{{ demand.content.server_target }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.npipelineform.moreinfo.label'|trans }}</li>
+                        <li><b>{{ demand.content.more_info }}</b></li>
+                    </ul>
+
+                {% elseif demand.type.canonicalName == "new_security" %}
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.npipelineform.project'|trans }}</li>
+                        <li><b>{{ demand.content.project }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.npipelineform.ticketid'|trans }}</li>
+                        <li><b>{{ demand.content.requestor_ticket }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.npipelineform.pipelinetype'|trans }}</li>
+                        <li><b>{{ demand.content.security_type }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.npipelineform.servertarget.label'|trans }}</li>
+                        <li><b>{{ demand.content.server_target }}</b></li>
+                    </ul>
+
+                    <ul class="list-inline">
+                        <li>{{ 'demands.npipelineform.moreinfo.label'|trans }}</li>
+                        <li><b>{{ demand.content.more_info }}</b></li>
+                    </ul>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+</div>

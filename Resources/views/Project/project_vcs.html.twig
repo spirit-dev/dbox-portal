@@ -1,0 +1,43 @@
+<h3 class="sub-header pjt-c-sub-header">{{ 'project.vcs_info.title'|trans }}</h3>
+<div class="row">
+    {# BRANCHES #}
+    <div class="col-sm-6">
+        <h4 class="sub-header">Branches</h4>
+        {% if git_branches|length > 0 %}
+            <ul class="list-group">
+                {# BRANCHES TOTAL COMMITS #}
+                <li id="total-commits" class="small-list-group-item list-group-item">
+                    <span class="badge">{{ project.gitNbCommits }}</span>
+                    {{ 'project.vcs_info.total_commits'|trans }}
+                </li>
+                {# LIST BRANCHES #}
+                {% for branch in git_branches %}
+                    <li class="small-list-group-item list-group-item">
+                        {% if branch.protected %}
+                            <span class="tooltiped glyphicon glyphicon-lock" aria-hidden="true"
+                                  data-toggle="tooltip" data-placement="top"
+                                  title="{{ 'project.tooltip.branch.protected'|trans({'%branch%': branch.name}) }}"></span>
+                        {% endif %}
+                        <span class="badge">{{ branch.nb_commits }}</span>
+                        {{ branch.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>There is no branches yet. This repository has not been initiated.</p>
+        {% endif %}
+    </div>
+    {# TAGS #}
+    <div class="col-sm-6">
+        <h4 class="sub-header">Tags</h4>
+        {% if git_tags|length > 0 %}
+            <ul class="list-group">
+                {% for tag in git_tags %}
+                    <li class="small-list-group-item list-group-item"> {{ tag.name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>This repository has no tag.</p>
+        {% endif %}
+    </div>
+</div>

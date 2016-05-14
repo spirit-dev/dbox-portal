@@ -1,0 +1,41 @@
+{% extends('SpiritDevBundleDBoxPortalBundle::layout.html.twig') %}
+
+{% block title %}Todos - {{ parent() }}{% endblock %}
+
+{% block more_javascript %}
+    {% javascripts
+    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/todos.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock more_javascript %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <button id="sendTodos" class="btn btn-warning">Remove selected todos</button>
+
+            <button id="checkAll" class="btn btn-info">Check all</button>
+            <button id="uncheckAll" class="btn btn-info">Uncheck all</button>
+
+        </div>
+
+    </div>
+
+    <table id="todo-tbl" class="table table-condensed">
+
+        {% for todo in todos %}
+            <tr onclick="todocheck(this);">
+                <td class="hidden-td">{{ todo.id }}</td>
+                <td class="content-td">
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                    {{ todo.content|raw }}
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock content %}

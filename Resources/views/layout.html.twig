@@ -1,0 +1,98 @@
+{% extends('::base.html.twig') %}
+
+{% block stylesheets %}
+    {% stylesheets
+    'bundles/portal/lib/bootstrap3/css/bootstrap.min.css'
+    'bundles/portal/css/common.css'
+    'bundles/portal/css/sidebar.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% stylesheets
+        'bundles/portal/lib/pnotify/pnotify.custom.min.css'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endif %}
+    {% block more_stylesheets %}
+    {% endblock more_stylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts
+    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/jquery2/jquery-2.1.4.js'
+    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/bootstrap3/js/bootstrap.min.js'
+    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/hinclude-0.9.5/hinclude.js'
+    '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/common.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% javascripts
+        '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/pnotify/pnotify.custom.min.js'
+        '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/lib/bootbox/bootbox.min.js'
+        '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/communication.js'
+        '@SpiritDev\Bundle\DBoxPortalBundle/Resources/public/js/loader.js' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
+    {% block more_javascript %}
+    {% endblock more_javascript %}
+{% endblock javascripts %}
+
+{% block body %}
+
+    {# GENERAL LOADER #}
+    <div id="lg-loader" class="large-loader-background custom-hidden">
+        <div class="large-loader-loading-wrapper">
+            <span class="large-loader-loading-icon"></span>
+            <span class="large-loader-loading-text">{{ 'homepage.long_operation'|trans }}</span>
+        </div>
+    </div>
+
+    <div class="off-canvas-wrap" data-offcanvas>
+        <div class="main-content inner-wrap">
+
+            {% include('SpiritDevBundleDBoxPortalBundle:Common:menu.html.twig') %}
+
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div id="left-content" class="col-sm-2 col-md-2">
+                        {% include('SpiritDevBundleDBoxPortalBundle:Common:left-menu.html.twig') %}
+                    </div>
+
+                    <div id="central-content" class="col-sm-10 col-md-10 main">
+
+                        {% for type, messages in app.session.flashBag.all %}
+                            {% for message in messages %}
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="text-center">
+                                            <div class="FB-{{ type }}">
+                                                {{ message|trans() }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                        <div class="row">
+                            {% block content %}
+                            {% endblock content %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# FEEDBACK FEATURE #}
+            <div id="feedback-btn" class="feedback-slot custom-light">
+                <span class="glyphicon glyphicon-comment"></span>
+                <span class="small-text">Feedback</span>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock body %}

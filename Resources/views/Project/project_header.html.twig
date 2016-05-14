@@ -1,0 +1,9 @@
+<div class="project-header display-block">
+    <h1 class="page-header display-inline-block">{{ 'project.header.project'|trans }} -- {{ project.name }}</h1>
+
+    {% if project.owner.id == app.user.id or is_granted("ROLE_ADMIN") %}
+        <button id="btn-pjt-config" class="btn btn-large btn-default pull-right display-inline-block">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </button>
+    {% endif %}
+</div>

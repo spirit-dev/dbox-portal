@@ -1,0 +1,80 @@
+<h3 class="sub-header pjt-c-sub-header">{{ 'project.project_links.project_urls.title'|trans }}</h3>
+<div class="row">
+    {# PROJECT TOOLS LINKS #}
+    <div class="col-md-6">
+        <label class="control-label" for="goto_url">{{ 'project.project_links.project_urls.title'|trans }}</label>
+        <div class="input-group">
+            <div class="input-group-btn">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        {{ 'project.project_links.project_urls.select'|trans }} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% if project.gitLabWebUrl is not empty %}
+                            <li onclick="switchGotoUrl('gitlab')"><a href="#">Gitlab</a></li>
+                        {% endif %}
+                        {% if project.redmineWebUrl is not empty %}
+                            <li onclick="switchGotoUrl('redmine')"><a href="#">Redmine</a></li>
+                        {% endif %}
+                        {% if project.ciDevManaged %}
+                            <li onclick="switchGotoUrl('jenkins')"><a href="#">Jenkins</a></li>
+                        {% endif %}
+                        {% if project.qaDevManaged %}
+                            <li onclick="switchGotoUrl('sonar')"><a href="#">Sonar</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            {% if project.gitLabWebUrl is not empty %}
+                <input id="gitlab_hurl" type="hidden" value="{{ project.gitLabWebUrl }}">
+            {% endif %}
+            {% if project.redmineWebUrl is not empty %}
+                <input id="redmine_hurl" type="hidden" value="{{ project.redmineWebUrl }}">
+            {% endif %}
+            {% if project.ciDevManaged %}
+                <input id="jenkins_hurl" type="hidden" value="{{ ci_view_url }}{{ project.name }}">
+            {% endif %}
+            {% if project.qaDevManaged %}
+                <input id="sonar_hurl" type="hidden" value="{{ project.sonarProjectUrl }}">
+            {% endif %}
+
+            <input id="goto_url" type="text" class="form-control" value="{{ project.gitLabWebUrl }}" readonly>
+
+            <div class="input-group-btn">
+                <button id="btn_goto" type="button" class="tooltiped btn btn-default"
+                        onclick="window.open($(goto_url).val());" data-toggle="tooltip" data-placement="left"
+                        title="{{ 'project.tooltip.project_link.goto'|trans }}">
+                    <span class="glyphicon glyphicon-new-window"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    {# PROJECT CLONE URLS #}
+    <div class="col-md-6">
+        <label class="control-label" for="clone-url">{{ 'project.project_links.clone_url.title'|trans }}</label>
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button id="btn-clone-uri-http" type="button" class="btn active btn-default"
+                        onclick="switchCloneUrl('http');">HTTP
+                </button>
+                <button id="btn-clone-uri-ssh" type="button" class="btn btn-default"
+                        onclick="switchCloneUrl('ssh');">SSH
+                </button>
+            </div>
+            <input id="http-url" type="hidden" value="{{ project.gitLabHttpUrlToRepo }}">
+            <input id="ssh-url" type="hidden" value="{{ project.gitLabSshUrlToRepo }}">
+            <input id="clone-url" type="text" class="form-control"
+                   value="{{ project.gitLabHttpUrlToRepo }}"
+                   readonly>
+            <div class="input-group-btn">
+                <button id="copy-clone-url" data-clipboard-text="{{ project.gitLabHttpUrlToRepo }}"
+                        type="button" class="tooltiped btn btn-default" data-toggle="tooltip" data-placement="left"
+                        title="{{ 'project.tooltip.project_link.clipboard'|trans }}">
+                    <span class="glyphicon glyphicon-copy"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

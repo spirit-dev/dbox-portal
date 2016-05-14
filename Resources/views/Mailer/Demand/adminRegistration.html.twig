@@ -1,0 +1,50 @@
+{% include('SpiritDevBundleDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h1>{{ 'mail.global.header_admin'|trans|raw }}</h1>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h3>{{ 'mail.admin.register_demand.slot1'|trans }}</h3>
+            <p>{{ 'mail.admin.register_demand.slot2'|trans }}</p>
+
+            <p>{{ 'mail.admin.register_demand.slot3'|trans }} {{ demand.type.name }}</p>
+
+
+            {#<table>#}
+                {#<tr>#}
+            {#<td>{{ 'mail.admin.register_demand.list1'|trans }}</td>#}
+            {#<td>{{ demand.content['firstname'] }}</td>#}
+                {#</tr>#}
+            {#<tr>#}
+            {#<td>{{ 'mail.admin.register_demand.list2'|trans }}</td>#}
+            {#<td>{{ demand.content['lastname'] }}</td>#}
+            {#</tr>#}
+            {#</table>#}
+
+            <p>{{ 'mail.admin.register_demand.slot4'|trans }}
+                <a class="btn btn-primary"
+                   href="{{ demand_url }}">{{ 'mail.admin.register_demand.link1'|trans }}</a>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
+            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
+        </div>
+
+    </div>
+
+{% endblock content %}

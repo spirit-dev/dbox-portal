@@ -1,0 +1,7 @@
+{% if nb_feedbacks > 0 %}
+    <li>
+        <a class="custom-light" href="{{ path('easyadmin', {'action': 'list', 'entity': 'Feedback'}) }}">
+            <span class="glyphicon glyphicon-comment"></span> {{ 'menu.feedbacks'|trans({'%nb_feedbacks%': nb_feedbacks}) }}
+        </a>
+    </li>
+{% endif %}

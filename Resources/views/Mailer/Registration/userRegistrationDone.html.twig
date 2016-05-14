@@ -1,0 +1,75 @@
+{% include('SpiritDevBundleDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h1>{{ 'mail.global.header'|trans|raw }}</h1>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h3>{{ 'mail.global.hello_user'|trans({
+                    '%firstname%': firstname,
+                    '%lastname%': lastname}) }}</h3>
+
+            <h4>{{ 'mail.user.registration_done.slot1'|trans }}</h4>
+            <p>{{ 'mail.user.registration_done.slot2'|trans }}</p>
+            <br/>
+            <table>
+                <tr>
+                    <th colspan="2">{{ 'mail.user.registration_done.tabh'|trans }}</th>
+                </tr>
+                <tr>
+                    <td>{{ 'mail.user.registration_done.tab1'|trans }}</td>
+                    <td>{{ firstname }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'mail.user.registration_done.tab2'|trans }}</td>
+                    <td>{{ lastname }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'mail.user.registration_done.tab3'|trans }}</td>
+                    <td>{{ username }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'mail.user.registration_done.tab4'|trans }}</td>
+                    <td>{{ mail }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'mail.user.registration_done.tab5'|trans }}</td>
+                    <td>{{ clear_password }}</td>
+                </tr>
+            </table>
+            <br/>
+            <p>
+                {{ 'mail.user.registration_done.slot3'|trans }}
+                <a class="btn btn-primary"
+                   href="{{ homepage_url }}">{{ 'mail.user.registration_done.link1'|trans }}</a>
+            </p>
+            <h5>{{ 'mail.user.registration_done.slot4'|trans }}</h5>
+            <p>
+                {{ 'mail.user.registration_done.slot5'|trans }}
+                <a class="btn btn-primary"
+                   href="{{ profile_url }}">{{ 'mail.user.registration_done.link2'|trans }}</a>
+            </p>
+            <br/>
+            <h5>{{ 'mail.user.registration_done.slot6'|trans }}</h5>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
+            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
+        </div>
+
+    </div>
+
+{% endblock content %}

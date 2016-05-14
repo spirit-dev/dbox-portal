@@ -1,0 +1,67 @@
+<div id="sidebar" class="sidebar">
+    <ul class="nav nav-sidebar left-menu">
+
+        <li class="left-menu-caret">
+
+            <div class="row">
+
+                <div class="col-sm-2" onclick="toggleNav('right');">
+                    <img id="push-left"
+                         src="{{ asset('bundles/portal/images/icons/glyphicons_224_chevron-left.png') }}">
+                </div>
+
+                <div class="col-sm-2 col-sm-offset-8" onclick="toggleNav('left');">
+                    <img id="push-right"
+                         src="{{ asset('bundles/portal/images/icons/glyphicons_224_chevron-right.png') }}">
+                </div>
+
+            </div>
+
+            {#<ul class="list-inline list-unstyled">#}
+            {#<li>#}
+            {#<img id="push-left"#}
+            {#src="{{ asset('bundles/portal/images/icons/glyphicons_224_chevron-right.png') }}"#}
+            {#onclick="toggleNav('right');">#}
+            {#</li>#}
+            {#<li>#}
+            {#<img id="push-right"#}
+            {#src="{{ asset('bundles/portal/images/icons/glyphicons_224_chevron-left.png') }}"#}
+            {#onclick="toggleNav('left');">#}
+            {#</li>#}
+            {#</ul>#}
+        </li>
+
+        <hr id="sidebar-hr"/>
+
+        <li {% if app.request.attributes.get('_route') ==  'homepage' %}class="active"{% endif %}>
+            <a href="{{ path('spirit_dev_dbox_portal_bundle_homepage') }}">
+                <ul class="list-inline">
+                    <li><img class="left-menu-logo" src="{{ asset('bundles/portal/images/logos/HOME_logo.png') }}"></li>
+                    <li class="left-menu-item-text">{{ 'left.menu.home'|trans }}</li>
+                </ul>
+            </a>
+        </li>
+        <li {% if app.request.attributes.get('_route') ==  'demand' %}class="active"{% endif %}>
+            <a href="{{ path('spirit_dev_dbox_portal_bundle_demands') }}">
+                <ul class="list-inline">
+                    <li><img class="left-menu-logo" src="{{ asset('bundles/portal/images/logos/DEMAND_logo.png') }}">
+                    </li>
+                    <li class="left-menu-item-text">{{ 'left.menu.demand'|trans }}</li>
+                </ul>
+            </a>
+        </li>
+
+        <hr/>
+
+        {{ render(path('spirit_dev_dbox_portal_bundle_applications')) }}
+
+    </ul>
+
+
+    <ul class="nav nav-sidebar signature">
+        <li>
+            <p>EcosystemV2 - 0.13 - Alpha ed.</p>
+            <p>By Jean Bordat</p>
+        </li>
+    </ul>
+</div>

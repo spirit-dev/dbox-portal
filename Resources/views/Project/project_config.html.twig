@@ -1,0 +1,114 @@
+{% if project.owner.id == app.user.id or is_granted("ROLE_ADMIN") %}
+    <div id="pjt-settings" class="panel panel-default" style="display: none;">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ 'project.settings.settings'|trans }}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+
+                {# TEAM MEMBERS - REMOVE #}
+                <div class="col-md-3">
+                    <label>{{ 'project.settings.teammembers'|trans }}</label>
+                    <ul class="list-group">
+                        {% for member in project.teamMembers %}
+                            <li class="small-list-group-item list-group-item">
+                                {{ member.commonName }}
+                                {% if member != project.owner %}
+                                    <button class="tooltiped btn btn-vvsm btn-warning pull-right"
+                                            onclick="removeUserFromProject('{{ project.id }}', '{{ member.id }}')"
+                                            data-toggle="tooltip" data-placement="left"
+                                            title="{{ 'project.tooltip.teammember.remove'|trans({'%member%': member.commonName}) }}">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                {% else %}
+                                    <span class="tooltiped glyphicon glyphicon-ban-circle pull-right"
+                                          data-toggle="tooltip" data-placement="left"
+                                          title="{{ 'project.tooltip.teammember.owner'|trans({'%member%': member.commonName}) }}"></span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {# TEAM MEMBERS - ADD #}
+                {% if available_user|length > 0 %}
+                    <div class="col-md-3">
+                        <label for="add-user">{{ 'project.settings.adduser'|trans }}</label>
+                        <div class="input-group">
+                            <select id="add-user" class="form-control input-sm">
+                                {% for user in available_user %}
+                                    <option value="{{ user.id }}">{{ user.commonName }}</option>
+                                {% endfor %}
+                            </select>
+
+                            <div class="input-group-btn">
+                                <button type="button" class="tooltiped btn btn-default btn-sm"
+                                        onclick="addUserToProject('{{ project.id }}')" data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="{{ 'project.tooltip.teammember.add'|trans }}">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {# ITEM NOT MANAGED #}
+                {% if not project.vcsManaged or not project.pmManaged or not project.ciDevManaged or not project.qaDevManaged %}
+                    <div class="col-md-2">
+                        <label>{{ 'project.settings.not_managed.title'|trans }}</label>
+                        <div class="row">
+
+                            {% if not project.vcsManaged %}
+                                <div class="col-sm-6">
+                                    <button onclick="createItem('vcs', {{ project.id }});"
+                                            class="btn btn-primary btn-xs settings-btn tooltiped" data-toggle="tooltip"
+                                            data-placement="right"
+                                            title="{{ 'project.settings.not_managed.vcs.tooltip'|trans }}">
+                                        {{ 'project.settings.not_managed.vcs.title'|trans }}
+                                    </button>
+                                </div>
+                            {% endif %}
+
+                            {% if not project.pmManaged %}
+                                <div class="col-sm-6">
+                                    <button onclick="createItem('pm', {{ project.id }});"
+                                            class="btn btn-primary btn-xs settings-btn tooltiped" data-toggle="tooltip"
+                                            data-placement="right"
+                                            title="{{ 'project.settings.not_managed.pm.tooltip'|trans }}">
+                                        {{ 'project.settings.not_managed.pm.title'|trans }}
+                                    </button>
+                                </div>
+                            {% endif %}
+
+                            {% if not project.ciDevManaged %}
+                                <div class="col-sm-6">
+                                    <button onclick="createItem('ci', {{ project.id }});"
+                                            class="btn btn-primary btn-xs settings-btn tooltiped" data-toggle="tooltip"
+                                            data-placement="right"
+                                            title="{{ 'project.settings.not_managed.ci.tooltip'|trans }}">
+                                        {{ 'project.settings.not_managed.ci.title'|trans }}
+                                    </button>
+                                </div>
+                            {% endif %}
+
+                            {% if not project.qaDevManaged and project.ciDevManaged %}
+                                <div class="col-sm-6">
+                                    <button onclick="createItem('qa', {{ project.id }});"
+                                            class="btn btn-primary btn-xs settings-btn tooltiped" data-toggle="tooltip"
+                                            data-placement="right"
+                                            title="{{ 'project.settings.not_managed.qa.tooltip'|trans }}">
+                                        {{ 'project.settings.not_managed.qa.title'|trans }}
+                                    </button>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                        <p>
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

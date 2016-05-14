@@ -1,0 +1,63 @@
+{% if error is defined %}
+
+    <h4>{{ 'demands.npipelineform.noproject.1'|trans }}</h4>
+    <h5>{{ 'demands.npipelineform.noproject.2'|trans }}</h5>
+
+{% else %}
+    <form class="form-horizontal" method="post"
+          action="{{ path('spirit_dev_dbox_portal_bundle_demand_new_pipeline') }}" {{ form_enctype(form) }}>
+
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div class="form-group">
+            <label for="project_related"
+                   class="col-sm-3 control-label">{{ 'demands.npipelineform.project'|trans }}</label>
+            <div class="col-sm-9">
+                <select id="project_related" class="form-control" name="project">
+                    {% for project in userProjects %}
+                        <option value="{{ project.name }}">{{ project.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.ticketId, 'demands.npipelineform.ticketid'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
+            <div class="col-sm-9">
+                {{ form_widget(form.ticketId, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.pipelineType, 'demands.npipelineform.pipelinetype'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
+            <div class="col-sm-9">
+                {{ form_widget(form.pipelineType, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.serverTarget, 'demands.npipelineform.servertarget.label'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
+            <div class="col-sm-9">
+                {{ form_widget(form.serverTarget, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.moreInfo, 'demands.npipelineform.moreinfo.label'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
+            <div class="col-sm-9">
+                {{ form_widget(form.moreInfo, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+        </div>
+
+        {{ form_rest(form) }}
+
+        {{ form_end(form) }}
+    </form>
+{% endif %}

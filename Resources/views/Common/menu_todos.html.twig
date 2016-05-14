@@ -1,0 +1,7 @@
+{% if nb_todos > 0 %}
+    <li>
+        <a class="custom-light" href="{{ path('spirit_dev_dbox_portal_bundle_todos') }}">
+            <span class="glyphicon glyphicon-pushpin"></span> {{ 'menu.todos'|trans({'%nb_todos%': nb_todos}) }}
+        </a>
+    </li>
+{% endif %}
