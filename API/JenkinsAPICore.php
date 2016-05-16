@@ -1,4 +1,23 @@
 <?php
+/**
+ * Copyright (c) 2016. Spirit-Dev
+ * Licensed under GPLv3 GNU License - http://www.gnu.org/licenses/gpl-3.0.html
+ *    _             _
+ *   /_`_  ._._/___/ | _
+ * . _//_//// /   /_.'/_'|/
+ *    /
+ *    
+ * Since 2K10 until today
+ *  
+ * Hex            53 70 69 72 69 74 2d 44 65 76
+ *  
+ * By             Jean Bordat
+ * Twitter        @Ji_Bay_
+ * Mail           <bordat.jean@gmail.com>
+ *  
+ * File           JenkinsAPICore.php
+ * Updated the    16/05/16 12:28
+ */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
 
@@ -13,22 +32,67 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 abstract class JenkinsAPICore {
 
+    /**
+     *
+     */
     const GET = 'get';
+    /**
+     *
+     */
     const POST = 'post';
+    /**
+     *
+     */
     const DEFAULT_JOB_NAME = "default_job_pipeline";
+    /**
+     * @var
+     */
     protected $jenkinsUrl;
+    /**
+     * @var
+     */
     protected $jenkinsProto;
+    /**
+     * @var
+     */
     protected $jenkinsUser;
+    /**
+     * @var
+     */
     protected $jenkinsToken;
 
+    /**
+     * @var
+     */
     protected $basePath;
+    /**
+     * @var string
+     */
     protected $configFile;
+    /**
+     * @var string
+     */
     protected $configFileBkpFolder;
+    /**
+     * @var string
+     */
     protected $configFileBkpFile;
+    /**
+     * @var string
+     */
     protected $userBasePath;
+    /**
+     * @var string
+     */
     protected $userConfigFileTemplate;
 
+    /**
+     * @var Jenkins
+     */
     protected $jenkinsClient;
+    /**
+     * @var bool
+     */
     protected $serverAvailable;
 
     /**
@@ -37,11 +101,11 @@ abstract class JenkinsAPICore {
      */
     public function __construct(ContainerInterface $container) {
         // Applying API connection info
-        $this->jenkinsUrl = $container->getParameter("jenkins_api")["url"];
-        $this->jenkinsProto = $container->getParameter("jenkins_api")["protocol"];
-        $this->jenkinsUser = $container->getParameter("jenkins_api")["user"];
-        $this->jenkinsToken = $container->getParameter("jenkins_api")["token"];
-        $this->basePath = $container->getParameter("jenkins_api")["path"];
+        $this->jenkinsUrl = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.url");
+        $this->jenkinsProto = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.protocol");
+        $this->jenkinsUser = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.user");
+        $this->jenkinsToken = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.token");
+        $this->basePath = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.path");
 
         // Initialiazing local variables
         $this->configFile = $this->basePath . "config.xml";

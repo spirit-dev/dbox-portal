@@ -22,22 +22,16 @@
             </div>
         </div>
 
-        <div class="form-group">
-            {{ form_label(form.ticketId, 'demands.npipelineform.ticketid'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}
-            <div class="col-sm-9">
-                {{ form_widget(form.ticketId, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+        {#<div class="form-group">#}
+            {#{{ form_label(form.ticketId, 'demands.npipelineform.ticketid'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}#}
+            {#<div class="col-sm-9">#}
+                {#{{ form_widget(form.ticketId, {'attr': {'class': 'form-control'}}) }}#}
+            {#</div>#}
+        {#</div>#}
 
         <div class="form-group">
-            {#{{ form_label(form.securityAnalysis, 'demands.npipelineform.pipelinetype'|trans, {'label_attr':{'class': 'col-sm-3 control-label'}}) }}#}
             <label class="col-sm-3 control-label">{{ 'demands.nsecurityform.securityanalysis'|trans }}</label>
             <div class="col-sm-9">
-                {#{{ form_widget(form.securityAnalysis, {'attr': {'class': 'form-control'}}) }}#}
-                {#{% for key, securityAnalyze in form.securityAnalysis.children %}#}
-                {#{{ form_widget(securityAnalyze) }} {{ form_label(securityAnalyze) }}#}
-                {#<br>#}
-                {#{% endfor %}#}
                 <div class="radio">
                     <label>
                         <input type="radio" name="securityAnalysis" id="securityAnalysis0" value="static" checked

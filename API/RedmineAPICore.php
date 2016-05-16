@@ -1,4 +1,23 @@
 <?php
+/**
+ * Copyright (c) 2016. Spirit-Dev
+ * Licensed under GPLv3 GNU License - http://www.gnu.org/licenses/gpl-3.0.html
+ *    _             _
+ *   /_`_  ._._/___/ | _
+ * . _//_//// /   /_.'/_'|/
+ *    /
+ *    
+ * Since 2K10 until today
+ *  
+ * Hex            53 70 69 72 69 74 2d 44 65 76
+ *  
+ * By             Jean Bordat
+ * Twitter        @Ji_Bay_
+ * Mail           <bordat.jean@gmail.com>
+ *  
+ * File           RedmineAPICore.php
+ * Updated the    16/05/16 12:30
+ */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
 
@@ -40,9 +59,21 @@ abstract class RedmineAPICore {
         'monitoring_controlling_project'
     ];
 
+    /**
+     *
+     */
     const BUG_TRACKER = 2;
+    /**
+     *
+     */
     const EVOL_TRACKER = 3;
+    /**
+     *
+     */
     const TEST_TRACKER = 3;
+    /**
+     *
+     */
     const QA_TRACKER = 3;
 
     /**
@@ -57,6 +88,9 @@ abstract class RedmineAPICore {
      *
      */
     const API_PROJECT = 'project';
+    /**
+     *
+     */
     const API_ISSUE = 'issue';
     /**
      *
@@ -95,9 +129,9 @@ abstract class RedmineAPICore {
      */
     public function __construct(ContainerInterface $container) {
         // Getting datas
-        $this->redmineUrl = $container->getParameter('redmine_api')['url'];
-        $this->redmineToken = $container->getParameter('redmine_api')['token'];
-        $this->redminePort = $container->getParameter('redmine_api')['port'];
+        $this->redmineUrl = $container->getParameter('spirit_dev_d_box_portal.redmine_api.url');
+        $this->redmineToken = $container->getParameter('spirit_dev_d_box_portal.redmine_api.token');
+        $this->redminePort = $container->getParameter('spirit_dev_d_box_portal.redmine_api.port');
 
         $this->router = $container->get('router');
 
