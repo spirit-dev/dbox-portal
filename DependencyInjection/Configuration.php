@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Configuration.php
- * Updated the    16/05/16 11:42
+ * Updated the    17/05/16 08:50
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -80,6 +80,7 @@ class Configuration implements ConfigurationInterface {
                 ->scalarNode('user')->end()
                 ->scalarNode('token')->end()
                 ->scalarNode('path')->end()
+                ->scalarNode('default_pipeline_name')->end()
             ->end()
         ->end()
         ->arrayNode('redmine_api')
@@ -88,6 +89,18 @@ class Configuration implements ConfigurationInterface {
                 ->scalarNode('protocol')->end()
                 ->integerNode('port')->end()
                 ->scalarNode('token')->end()
+
+                ->integerNode('role_dev')->end()
+                ->integerNode('role_manager')->end()
+                ->arrayNode('pm_modules')
+                    ->prototype('scalar')->end()
+                ->end()
+                ->integerNode('bug_tracker')->end()
+                ->integerNode('evol_tracker')->end()
+                ->integerNode('test_tracker')->end()
+                ->integerNode('qa_tracker')->end()
+                ->integerNode('auth_source')->end()
+                
             ->end()
         ->end()
         ->arrayNode('sonar_api')

@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           RedmineAPI.php
- * Updated the    15/05/16 11:47
+ * Updated the    17/05/16 08:50
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -88,7 +88,7 @@ class RedmineAPI extends RedmineAPICore implements RedmineAPICoreInterface {
         $params['firstname'] = $user->getFirstName();
         $params['lastname'] = $user->getLastName();
         $params['mail'] = $user->getEmail();
-        $params['auth_source_id'] = $this::AUTH_SOURCE_ID;
+        $params['auth_source_id'] = $this->authSourceId;
 
         return $this->redmineClient->api($this::API_USER)->create($params);
 
@@ -238,8 +238,8 @@ class RedmineAPI extends RedmineAPICore implements RedmineAPICoreInterface {
         $xml->addChild('is_public', 'false');
 
         // Adding modules
-        for ($i = 0; $i < count($this::PM_MODULES); $i++) {
-            $xml->addChild('enabled_module_names', $this::PM_MODULES[$i]);
+        foreach ($this->pmModules as $pmModule) {
+            $xml->addChild('enabled_module_names', $pmModule);
         }
 
         return $this->sendRequest(
@@ -300,12 +300,12 @@ class RedmineAPI extends RedmineAPICore implements RedmineAPICoreInterface {
         // Adding users with developper role
         foreach ($users as $user) {
             if ($user != $owner) {
-                $returnArray[] = $this->addProjectMemberships($project, $user, $this::ROLE_DEV);
+                $returnArray[] = $this->addProjectMemberships($project, $user, $this->roleDev);
             }
         }
 
         // Adding project owner
-        $returnArray[] = $this->addProjectMemberships($project, $owner, $this::ROLE_MANAGER);
+        $returnArray[] = $this->addProjectMemberships($project, $owner, $this->roleManager);
 
         return $returnArray;
     }

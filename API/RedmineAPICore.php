@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           RedmineAPICore.php
- * Updated the    16/05/16 12:30
+ * Updated the    17/05/16 08:53
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -31,50 +31,37 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 abstract class RedmineAPICore {
 
     /**
-     *
+     * @var
      */
-    const ROLE_DEV = 3;
+    protected $roleDev;
     /**
-     *
+     * @var
      */
-    const ROLE_MANAGER = 4;
+    protected $roleManager;
     /**
-     *
+     * @var
      */
-    const PM_MODULES = [
-        'issue_tracking',
-        'time_tracking',
-        'news',
-        'documents',
-        'files',
-        'wiki',
-        'repository',
-        'boards',
-        'calendar',
-        'gantt',
-        'agile',
-//        'dashboard',
-        'dmsf',
-        'favorite_projects',
-        'monitoring_controlling_project'
-    ];
-
+    protected $pmModules;
     /**
-     *
+     * @var
      */
-    const BUG_TRACKER = 2;
+    protected $trackerBug;
     /**
-     *
+     * @var
      */
-    const EVOL_TRACKER = 3;
+    protected $trackerEvol;
     /**
-     *
+     * @var
      */
-    const TEST_TRACKER = 3;
+    protected $trackerTest;
     /**
-     *
+     * @var
      */
-    const QA_TRACKER = 3;
+    protected $trackerQa;
+    /**
+     * @var
+     */
+    protected $authSourceId;
 
     /**
      *
@@ -92,10 +79,6 @@ abstract class RedmineAPICore {
      *
      */
     const API_ISSUE = 'issue';
-    /**
-     *
-     */
-    const AUTH_SOURCE_ID = 1;
 
     /**
      * @var
@@ -133,6 +116,17 @@ abstract class RedmineAPICore {
         $this->redmineToken = $container->getParameter('spirit_dev_d_box_portal.redmine_api.token');
         $this->redminePort = $container->getParameter('spirit_dev_d_box_portal.redmine_api.port');
 
+        // Setting constants
+        $this->roleDev = $container->getParameter('spirit_dev_d_box_portal.redmine_api.role_dev');
+        $this->roleManager = $container->getParameter('spirit_dev_d_box_portal.redmine_api.role_manager');
+        $this->pmModules = $container->getParameter('spirit_dev_d_box_portal.redmine_api.pm_modules');
+        $this->trackerBug = $container->getParameter('spirit_dev_d_box_portal.redmine_api.bug_tracker');
+        $this->trackerEvol = $container->getParameter('spirit_dev_d_box_portal.redmine_api.evol_tracker');
+        $this->trackerTest = $container->getParameter('spirit_dev_d_box_portal.redmine_api.test_tracker');
+        $this->trackerQa = $container->getParameter('spirit_dev_d_box_portal.redmine_api.qa_tracker');
+        $this->authSourceId = $container->getParameter('spirit_dev_d_box_portal.redmine_api.auth_source');
+
+        // Setting router
         $this->router = $container->get('router');
 
         // Initialize connection

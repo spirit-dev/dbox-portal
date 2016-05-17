@@ -16,16 +16,16 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           ProjectController.php
- * Updated the    16/05/16 12:28
+ * Updated the    17/05/16 08:58
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
-use SpiritDev\Bundle\DBoxPortalBundle\Entity\Project;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use SpiritDev\Bundle\DBoxPortalBundle\Entity\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -71,10 +71,10 @@ class ProjectController extends Controller {
         // Get PM datas
         if ($project->isPmManaged()) {
             $pmApi = $this->get('spirit_dev_dbox_portal_bundle.api.redmine');
-            $pmBugs = $pmApi->getIssues($project, $pmApi::BUG_TRACKER);
-            $pmEvols = $pmApi->getIssues($project, $pmApi::EVOL_TRACKER);
-            $pmTests = $pmApi->getIssues($project, $pmApi::TEST_TRACKER);
-            $pmQa = $pmApi->getIssues($project, $pmApi::QA_TRACKER);
+            $pmBugs = $pmApi->getIssues($project, $this->getParameter('spirit_dev_dbox_portal.redmine_api.bug_tracker'));
+            $pmEvols = $pmApi->getIssues($project, $this->getParameter('spirit_dev_dbox_portal.redmine_api.evol_tracker'));
+            $pmTests = $pmApi->getIssues($project, $this->getParameter('spirit_dev_dbox_portal.redmine_api.test_tracker'));
+            $pmQa = $pmApi->getIssues($project, $this->getParameter('spirit_dev_dbox_portal.redmine_api.qa_tracker'));
         } else {
             $pmBugs = null;
             $pmEvols = null;
@@ -283,7 +283,7 @@ class ProjectController extends Controller {
             $this->get('spirit_dev_dbox_portal_bundle.api.gitlab')->addTeamMember($project->getGitLabProjectId(), $userToAdd);
             // Update PM
             $redmineApi = $this->get('spirit_dev_dbox_portal_bundle.api.redmine');
-            $redmineApi->addProjectMemberships($project, $userToAdd, $redmineApi::ROLE_DEV);
+            $redmineApi->addProjectMemberships($project, $userToAdd, $this->getParameter('spirit_dev_d_box_portal.redmine_api.role_dev'));
             // Update Jenkins
             $this->get('spirit_dev_dbox_portal_bundle.todos.manager')->addTodo(sprintf('Jenkins: Add user %s to project %s', $userToAdd->getUsername(), $project->getName()));
             // Update Sonar

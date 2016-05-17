@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           JenkinsAPICore.php
- * Updated the    16/05/16 12:28
+ * Updated the    17/05/16 08:23
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -40,10 +40,7 @@ abstract class JenkinsAPICore {
      *
      */
     const POST = 'post';
-    /**
-     *
-     */
-    const DEFAULT_JOB_NAME = "default_job_pipeline";
+    
     /**
      * @var
      */
@@ -60,6 +57,11 @@ abstract class JenkinsAPICore {
      * @var
      */
     protected $jenkinsToken;
+
+    /**
+     * @var
+     */
+    protected $defaultJobName;
 
     /**
      * @var
@@ -106,6 +108,9 @@ abstract class JenkinsAPICore {
         $this->jenkinsUser = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.user");
         $this->jenkinsToken = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.token");
         $this->basePath = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.path");
+        
+        // Important values
+        $this->defaultJobName = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.default_pipeline_name");
 
         // Initialiazing local variables
         $this->configFile = $this->basePath . "config.xml";

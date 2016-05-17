@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           SpiritDevDBoxPortalExtension.php
- * Updated the    16/05/16 12:29
+ * Updated the    17/05/16 08:50
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -76,6 +76,7 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config['jenkins_api'], 'user', 'jenkins_api.user', true);
         $this->checkConfig($container, $config['jenkins_api'], 'token', 'jenkins_api.token', true);
         $this->checkConfig($container, $config['jenkins_api'], 'path', 'jenkins_api.path', true);
+        $this->checkConfig($container, $config['jenkins_api'], 'default_pipeline_name', 'jenkins_api.default_pipeline_name', true);
 
         // Checking Redmine configuration
         $this->checkConfig($container, $config, 'redmine_api', 'redmine_api', false);
@@ -83,6 +84,15 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config['redmine_api'], 'protocol', 'redmine_api.protocol', true);
         $this->checkConfig($container, $config['redmine_api'], 'port', 'redmine_api.port', true);
         $this->checkConfig($container, $config['redmine_api'], 'token', 'redmine_api.token', true);
+        
+        $this->checkConfig($container, $config['redmine_api'], 'role_dev', 'redmine_api.role_dev', true);
+        $this->checkConfig($container, $config['redmine_api'], 'role_manager', 'redmine_api.role_manager', true);
+        $this->checkConfig($container, $config['redmine_api'], 'pm_modules', 'redmine_api.pm_modules', true);
+        $this->checkConfig($container, $config['redmine_api'], 'bug_tracker', 'redmine_api.bug_tracker', true);
+        $this->checkConfig($container, $config['redmine_api'], 'evol_tracker', 'redmine_api.evol_tracker', true);
+        $this->checkConfig($container, $config['redmine_api'], 'test_tracker', 'redmine_api.test_tracker', true);
+        $this->checkConfig($container, $config['redmine_api'], 'qa_tracker', 'redmine_api.qa_tracker', true);
+        $this->checkConfig($container, $config['redmine_api'], 'auth_source', 'redmine_api.auth_source', true);
 
         // Checking Sonar configuration
         $this->checkConfig($container, $config, 'sonar_api', 'sonar_api', false);
