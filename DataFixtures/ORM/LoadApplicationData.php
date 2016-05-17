@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           LoadApplicationData.php
- * Updated the    15/05/16 11:47
+ * Updated the    17/05/16 09:34
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DataFixtures\ORM;
@@ -41,7 +41,8 @@ class LoadApplicationData implements FixtureInterface {
         $redmine = new Application();
         $redmine->setName('Redmine - PM');
         $redmine->setCanonicalName('redmine');
-        $redmine->setCaptionUri('http://portal.devtest.fr/images/REDMINE_logo.png');
+        $redmine->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/REDMINE.png');
+
         $redmine->setUrl('http://redmine.devtest.fr/');
         $redmine->setOrder('1');
         $manager->persist($redmine);
@@ -50,7 +51,7 @@ class LoadApplicationData implements FixtureInterface {
         $gitlab = new Application();
         $gitlab->setName('GitLab - VCS');
         $gitlab->setCanonicalName('gitlab');
-        $gitlab->setCaptionUri('http://portal.devtest.fr/images/GITLAB_logo.png');
+        $gitlab->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/GITLAB.png');
         $gitlab->setUrl('http://git.devtest.fr/');
         $gitlab->setOrder(2);
         $manager->persist($gitlab);
@@ -59,7 +60,7 @@ class LoadApplicationData implements FixtureInterface {
         $sonar = new Application();
         $sonar->setName('Sonar - QA');
         $sonar->setCanonicalName('sonar');
-        $sonar->setCaptionUri('http://portal.devtest.fr/images/SONAR_logo.png');
+        $sonar->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/SONAR.png');
         $sonar->setUrl('http://sonar.devtest.fr/');
         $sonar->setOrder(3);
         $manager->persist($sonar);
@@ -68,7 +69,7 @@ class LoadApplicationData implements FixtureInterface {
         $jenkins = new Application();
         $jenkins->setName('Jenkins - CI');
         $jenkins->setCanonicalName('jenkins');
-        $jenkins->setCaptionUri('http://portal.devtest.fr/images/JENKINS_logo.png');
+        $jenkins->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/JENKINS.png');
         $jenkins->setUrl('http://jenkins.devtest.fr/');
         $jenkins->setOrder(4);
         $manager->persist($jenkins);
