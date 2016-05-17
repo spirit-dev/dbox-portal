@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           ProjectController.php
- * Updated the    17/05/16 08:58
+ * Updated the    17/05/16 21:17
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -71,10 +71,10 @@ class ProjectController extends Controller {
         // Get PM datas
         if ($project->isPmManaged()) {
             $pmApi = $this->get('spirit_dev_dbox_portal_bundle.api.redmine');
-            $pmBugs = $pmApi->getIssues($project, $this->getParameter('spirit_dev_dbox_portal.redmine_api.bug_tracker'));
-            $pmEvols = $pmApi->getIssues($project, $this->getParameter('spirit_dev_dbox_portal.redmine_api.evol_tracker'));
-            $pmTests = $pmApi->getIssues($project, $this->getParameter('spirit_dev_dbox_portal.redmine_api.test_tracker'));
-            $pmQa = $pmApi->getIssues($project, $this->getParameter('spirit_dev_dbox_portal.redmine_api.qa_tracker'));
+            $pmBugs = $pmApi->getIssues($project, $this->getParameter('spirit_dev_d_box_portal.redmine_api.bug_tracker'));
+            $pmEvols = $pmApi->getIssues($project, $this->getParameter('spirit_dev_d_box_portal.redmine_api.evol_tracker'));
+            $pmTests = $pmApi->getIssues($project, $this->getParameter('spirit_dev_d_box_portal.redmine_api.test_tracker'));
+            $pmQa = $pmApi->getIssues($project, $this->getParameter('spirit_dev_d_box_portal.redmine_api.qa_tracker'));
         } else {
             $pmBugs = null;
             $pmEvols = null;
@@ -331,7 +331,7 @@ class ProjectController extends Controller {
     }
 
     /**
-     * @Security("has_role('ROLE_USER')")
+     * Security("has_role('ROLE_USER')")
      * @Route("/project_ci_job_progress", name="spirit_dev_dbox_portal_bundle_project_ci_job_progress")
      * @param Request $request
      * @return JsonResponse
@@ -348,6 +348,42 @@ class ProjectController extends Controller {
 
         $ciProgress = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->getProgression($ciLaunched);
         return new JsonResponse(json_encode($ciProgress), JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     * @Route("/project_ci_job_progress_sse", name="spirit_dev_dbox_portal_bundle_project_ci_job_progress_sse")
+     * @param Request $request
+     */
+    public function projectLaunchedProgressionSSEAction(Request $request) {
+
+        // Get CI id progression to reach
+        $ciId = $request->get('ciId');
+
+        // Get entity manager
+        $em = $this->getDoctrine()->getEntityManager();
+
+        // Get user to remove entity
+        $ciLaunched = $em->getRepository('SpiritDevDBoxPortalBundle:ContinuousIntegration')->findOneBy(array(
+            'id' => $ciId
+        ));
+
+        function sendMsg($id, $msg) {
+            header('Content-Type: text/event-stream');
+            header('Cache-Control: no-cache'); // recommended to prevent caching of event data.
+            echo "event: progress\n";
+            echo 'data: {"progress": "' . $msg . '"}';
+            echo "\n\n";
+            ob_flush();
+            flush();
+        }
+
+        $serverTime = time();
+        while (1) {
+            $ciProgress = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->getProgression($ciLaunched);
+            sendMsg($serverTime, $ciProgress);
+        }
+
     }
 
     /**

@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2016. Spirit-Dev
+ * Licensed under GPLv3 GNU License - http://www.gnu.org/licenses/gpl-3.0.html
+ *    _             _
+ *   /_`_  ._._/___/ | _
+ * . _//_//// /   /_.'/_'|/
+ *    /
+ *    
+ * Since 2K10 until today
+ *  
+ * Hex            53 70 69 72 69 74 2d 44 65 76
+ *  
+ * By             Jean Bordat
+ * Twitter        @Ji_Bay_
+ * Mail           <bordat.jean@gmail.com>
+ *  
+ * File           project.js
+ * Updated the    17/05/16 21:17
+ */
+
 /**
  * Created by JuanitoP on 29/10/2015.
  */
@@ -369,47 +389,94 @@ function removeProgressBar() {
  */
 function reachProgression(ciId) {
 
-    var previousVal = 'null';
-    var userPrevented = false;
+    if (!!window.EventSource) {
+        // Creating socket
+        var source = new EventSource('/project_ci_job_progress_sse?ciId=' + ciId);
 
-    setTimeout(function () {
-        var timeouted = setInterval(function () {
-            showLoader();
-            $.ajax({
-                type: 'POST',
-                url: '/project_ci_job_progress',
-                data: {
-                    ciId: ciId
-                }
-            }).done(function (data) {
-                if (parseInt(data)) {
-                    updateProgressBar(data);
-                    previousVal = data;
-                } else if (data === 'null') {
-                    if (parseInt(previousVal)) {
-                        window.clearInterval(timeouted);
-                        removeProgressBar();
-                        if (!userPrevented) {
-                            showCommunication('Job completed', 'The job you\'ve launched have been finished.<br/>The page will be reloaded', 'success');
-                            userPrevented = true;
-                        }
-                        reloadPage();
+        // Initializing some vars
+        var previousVal = 'null';
+
+        // Listening for
+        source.addEventListener('progress', function (e) {
+            if (e.origin != 'http://portal.devtest.fr') {
+                alert('Origin was not http://portal.devtest.fr - Closing Socket');
+                source.close();
+                return;
+            }
+            // console.log('SSE receiving datas');
+            var obj = JSON.parse(e.data);
+            console.log(obj.progress);
+
+            if (parseInt(obj.progress)) {
+                updateProgressBar(obj.progress);
+                previousVal = obj.progress;
+            } else if (obj.progress === 'null') {
+                if (parseInt(previousVal)) {
+                    removeProgressBar();
+                    if (!userPrevented) {
+                        showCommunication('Job completed', 'The job you\'ve launched have been finished.<br/>The page will be reloaded', 'success');
                     }
+                    source.close();
+                    reloadPage();
                 }
-            }).always(function () {
-                hideLoader();
-            });
-        }, 2000);
+            }
+        }, false);
+
+        // source.addEventListener('open', function(e) {
+        //     console.log('SSE openened');
+        // }, false);
+
+        source.addEventListener('error', function (e) {
+            if (e.readyState == EventSource.CLOSED) {
+                console.log('SSE error');
+            }
+        }, false);
+    } else {
+        console.log('No SSE, using old ajax poll');
+
+        var previousVal = 'null';
+        var userPrevented = false;
 
         setTimeout(function () {
-            if (previousVal === 'null') {
-                window.clearInterval(timeouted);
-                removeProgressBar();
-                reloadPage();
-            }
-        }, 20000);
+            var timeouted = setInterval(function () {
+                showLoader();
+                $.ajax({
+                    type: 'POST',
+                    url: '/project_ci_job_progress',
+                    data: {
+                        ciId: ciId
+                    }
+                }).done(function (data) {
+                    if (parseInt(data)) {
+                        updateProgressBar(data);
+                        previousVal = data;
+                    } else if (data === 'null') {
+                        if (parseInt(previousVal)) {
+                            window.clearInterval(timeouted);
+                            removeProgressBar();
+                            if (!userPrevented) {
+                                showCommunication('Job completed', 'The job you\'ve launched have been finished.<br/>The page will be reloaded', 'success');
+                                userPrevented = true;
+                            }
+                            reloadPage();
+                        }
+                    }
+                }).always(function () {
+                    hideLoader();
+                });
+            }, 2000);
 
-    }, 1000);
+            setTimeout(function () {
+                if (previousVal === 'null') {
+                    window.clearInterval(timeouted);
+                    removeProgressBar();
+                    reloadPage();
+                }
+            }, 20000);
+
+        }, 1000);
+    }
+
 }
 
 /**
