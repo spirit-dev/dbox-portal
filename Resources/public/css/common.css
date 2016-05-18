@@ -15,7 +15,7 @@
  * Mail           <bordat.jean@gmail.com>
  *
  * File           common.css
- * Updated the    17/05/16 21:19
+ * Updated the    18/05/16 18:07
  */
 
 /*
@@ -467,8 +467,13 @@ iframe {
     padding: 3px 15px;
 }
 
-.panel-ci > .panel-footer > .row, .panel-ci > .panel-footer > .row > .col-sm-11 > #pb-content > #pb {
+.panel-ci > .panel-footer > .row, .panel-ci > .panel-footer > .row > .col-sm-11 > #pb-content > #pb,
+.panel-ci > .panel-footer > .row, .panel-ci > .panel-footer > .row > .col-sm-12 > #pb-content > #pb {
     margin-bottom: 0;
+}
+
+#pb-content {
+    margin-bottom: 5px;
 }
 
 .panel-ci > .panel-footer > .row > .col-sm-11 > #pb-content > #pb {

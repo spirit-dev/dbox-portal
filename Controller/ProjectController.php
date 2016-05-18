@@ -6,7 +6,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           ProjectController.php
- * Updated the    18/05/16 21:59
+ * Updated the    18/05/16 18:06
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -369,10 +369,21 @@ class ProjectController extends Controller {
         header("Cache-Control: no-cache");
         header("Connection: keep-alive");
 
-        function sendMsg($id, $msg) {
+        // If connection is closed and then reopened then browser sends last event id that it received.
+        // So server can continue sending data from that even and not to send all events again.
+        // Note that it is incremented by one, because we have to send next value (after last id).
+        // HTTP header value is Last-Event-ID and should be accessible by HTTP_LAST_EVENT_ID field.
+        $lastId = $_SERVER["HTTP_LAST_EVENT_ID"];
+        if (isset($lastId) && !empty($lastId) && is_numeric($lastId)) {
+            $lastId = intval($lastId);
+            $lastId++;
+        } else {
+            $lastId = 0;
+        }
 
+        function sendMsg($id, $msg) {
 //            echo "retry: 10000\n";
-            echo "event: progress\n";
+//            echo "event: progress\n";
             echo "id: $id\n";
             echo 'data: {"progress": "' . $msg . '"}';
             echo "\n\n";
@@ -380,47 +391,16 @@ class ProjectController extends Controller {
             flush();
         }
 
-        $serverTime = time();
-        $previousVal = 0;
-        $sentOnce = false;
-        $ciProgress = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->getProgression($ciLaunched);
-        $ciProgress = intval($ciProgress) ? intval($ciProgress) : 0;
         while (true) {
-            if ($previousVal == 0) {
-                if (!$sentOnce) {
-                    $sentOnce = true;
-                    sendMsg($serverTime, $ciProgress);
-                }
-            } else if ($previousVal > 0) {
-                if ($ciProgress > $previousVal) {
-                    sendMsg($serverTime, $ciProgress);
-                }
-            }
-            $previousVal = $ciProgress;
             $ciProgress = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->getProgression($ciLaunched);
-            $ciProgress = intval($ciProgress) ? intval($ciProgress) : 0;
+            try {
+                $percent = intval($ciProgress);
+                sendMsg($lastId, $percent);
+                $lastId++;
+            } catch (\Exception $e) {
+                sendMsg($lastId, 0);
+            }
         }
-
-
-//        // Set necessary headers
-//        header("Content-Type: text/event-stream");
-//        header("Cache-Control: no-cache");
-//
-//        function sendMsg($id, $msg) {
-//            echo "retry: 10000\n";
-//            echo "event: progress\n";
-//            echo "id: $id\n";
-//            echo 'data: {"progress": "' . $msg . '"}';
-//            echo "\n\n";
-//            ob_flush();
-//            flush();
-//        }
-//
-//        $ciProgress = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->getProgression($ciLaunched);
-//        $ciProgress = intval($ciProgress) ? intval($ciProgress) : 0;
-//        $serverTime = time();
-//        sendMsg($serverTime, $ciProgress);
-
     }
 
     /**
