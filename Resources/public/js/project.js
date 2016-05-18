@@ -5,7 +5,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -15,7 +15,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           project.js
- * Updated the    17/05/16 21:17
+ * Updated the    18/05/16 18:07
  */
 
 /**
@@ -343,7 +343,7 @@ function launchJobRequest(ciId, parametersToTransmit) {
         }
     }).done(function (data) {
         if (data) {
-            displayProgressBar();
+            displayProgressBar(ciId);
             reachProgression(ciId);
         }
     }).fail(function (data) {
@@ -356,7 +356,9 @@ function launchJobRequest(ciId, parametersToTransmit) {
 /**
  * Function displaying the progress bar
  */
-function displayProgressBar() {
+function displayProgressBar(ciId) {
+    $('#slot-ci-launch-job-' + ciId).hide();
+    $('#slot-progress-bar-' + ciId).removeClass('col-sm-11').addClass('col-sm-12');
     var progressBar = '<div class="progress" id="pb">' +
         '<div id="pb-pb" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"' +
         'aria-valuemax="100" style="width: 0%;">0%' +
@@ -371,6 +373,11 @@ function displayProgressBar() {
  */
 function updateProgressBar(percent) {
     var pb = $('#pb-pb');
+    if (percent === 100) {
+        pb.addClass('progress-bar-success');
+    } else {
+        pb.removeClass('progress-bar-success');
+    }
     pb.attr('aria-valuenow', percent);
     pb.attr('style', 'width: ' + percent + '%;');
     pb.html(percent + '%');
@@ -394,41 +401,35 @@ function reachProgression(ciId) {
         var source = new EventSource('/project_ci_job_progress_sse?ciId=' + ciId);
 
         // Initializing some vars
-        var previousVal = 'null';
+        var previousVal = 0;
 
-        // Listening for
+        // Listening for server side event
         source.addEventListener('progress', function (e) {
             if (e.origin != 'http://portal.devtest.fr') {
                 alert('Origin was not http://portal.devtest.fr - Closing Socket');
                 source.close();
                 return;
             }
-            // console.log('SSE receiving datas');
+            console.log(e);
             var obj = JSON.parse(e.data);
-            console.log(obj.progress);
 
-            if (parseInt(obj.progress)) {
+            if (parseInt(obj.progress) === 0 && parseInt(obj.progress) < previousVal) {
+                updateProgressBar(100);
+                console.log('SSE closing connection');
+                source.close();
+                // removeProgressBar();
+                showCommunication('Job completed', 'The job you\'ve launched have been finished.<br/>The page will be reloaded', 'success');
+                reloadPage(1000);
+            }
+            else if (parseInt(obj.progress)) {
                 updateProgressBar(obj.progress);
                 previousVal = obj.progress;
-            } else if (obj.progress === 'null') {
-                if (parseInt(previousVal)) {
-                    removeProgressBar();
-                    if (!userPrevented) {
-                        showCommunication('Job completed', 'The job you\'ve launched have been finished.<br/>The page will be reloaded', 'success');
-                    }
-                    source.close();
-                    reloadPage();
-                }
             }
         }, false);
 
-        // source.addEventListener('open', function(e) {
-        //     console.log('SSE openened');
-        // }, false);
-
         source.addEventListener('error', function (e) {
             if (e.readyState == EventSource.CLOSED) {
-                console.log('SSE error');
+                console.log('SSE connection closed');
             }
         }, false);
     } else {

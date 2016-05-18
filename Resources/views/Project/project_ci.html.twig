@@ -18,19 +18,25 @@
 
             {# DEFINE PANEL CONTEXT DEPENDING ON BUILD STATUS #}
             {% if not currentBuild is null %}
-                {% if currentBuild['result'] == 'FAILURE' %}
-                    {% set panel_context = 'panel-danger' %}
-                {% elseif currentBuild['result'] == 'SUCCESS' %}
-                    {% set panel_context = 'panel-success' %}
-                {% elseif currentBuild['result'] == 'RUNNING' %}
-                    {% set panel_context = 'panel-info' %}
-                {% elseif currentBuild['result'] == 'WAITING' %}
-                    {% set panel_context = 'panel-primary' %}
-                {% elseif currentBuild['result'] == 'UNSTABLE' %}
-                    {% set panel_context = 'panel-warning' %}
-                {% elseif currentBuild['result'] == 'ABORTED' %}
-                    {% set panel_context = 'panel-warning' %}
-                {% endif %}
+            {% if currentBuild['result'] == 'FAILURE' %}
+            {% set panel_context = 'panel-danger' %}
+            {% elseif currentBuild['result'] == 'SUCCESS' %}
+                {% set panel_context = 'panel-success' %}
+            {% elseif currentBuild['result'] == 'RUNNING' %}
+            <script>
+                document.addEventListener("DOMContentLoaded", function (event) {
+                    displayProgressBar({{ ci.id }});
+                    reachProgression({{ ci.id }});
+                });
+            </script>
+            {% set panel_context = 'panel-info' %}
+            {% elseif currentBuild['result'] == 'WAITING' %}
+                {% set panel_context = 'panel-primary' %}
+            {% elseif currentBuild['result'] == 'UNSTABLE' %}
+                {% set panel_context = 'panel-warning' %}
+            {% elseif currentBuild['result'] == 'ABORTED' %}
+                {% set panel_context = 'panel-warning' %}
+            {% endif %}
             {% endif %}
 
             <div class="col-sm-6 col-md-6 col-lg-4">
@@ -74,7 +80,7 @@
                         {% endif %}
 
                         <div class="row">
-                            <div class="col-sm-1">
+                            <div id="slot-ci-launch-job-{{ ci.id }}" class="col-sm-1">
                                 <button class="btn btn-link btn-ci-launch tooltiped"
                                         onclick="{{ onclick }}"
                                         data-toggle="tooltip"
@@ -83,7 +89,7 @@
                                     <span class="glyphicon glyphicon-play"></span>
                                 </button>
                             </div>
-                            <div class="col-sm-11">
+                            <div id="slot-progress-bar-{{ ci.id }}" class="col-sm-11">
                                 <div id="pb-content"></div>
                             </div>
                         </div>

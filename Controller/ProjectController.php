@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           ProjectController.php
- * Updated the    18/05/16 11:05
+ * Updated the    18/05/16 18:06
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -359,31 +359,48 @@ class ProjectController extends Controller {
 
         // Get CI id progression to reach
         $ciId = $request->get('ciId');
-
-        // Get entity manager
         $em = $this->getDoctrine()->getEntityManager();
-
-        // Get user to remove entity
         $ciLaunched = $em->getRepository('SpiritDevDBoxPortalBundle:ContinuousIntegration')->findOneBy(array(
             'id' => $ciId
         ));
 
+        // Set necessary headers
+        header("Content-Type: text/event-stream");
+        header("Cache-Control: no-cache");
+        header("Connection: keep-alive");
+
+        // If connection is closed and then reopened then browser sends last event id that it received.
+        // So server can continue sending data from that even and not to send all events again.
+        // Note that it is incremented by one, because we have to send next value (after last id).
+        // HTTP header value is Last-Event-ID and should be accessible by HTTP_LAST_EVENT_ID field.
+        $lastId = $_SERVER["HTTP_LAST_EVENT_ID"];
+        if (isset($lastId) && !empty($lastId) && is_numeric($lastId)) {
+            $lastId = intval($lastId);
+            $lastId++;
+        } else {
+            $lastId = 0;
+        }
+
         function sendMsg($id, $msg) {
-            header('Content-Type: text/event-stream');
-            header('Cache-Control: no-cache'); // recommended to prevent caching of event data.
-            echo "event: progress\n";
+//            echo "retry: 10000\n";
+//            echo "event: progress\n";
+            echo "id: $id\n";
             echo 'data: {"progress": "' . $msg . '"}';
             echo "\n\n";
             ob_flush();
             flush();
         }
 
-        $serverTime = time();
-        while (1) {
+        while (true) {
             $ciProgress = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->getProgression($ciLaunched);
-            sendMsg($serverTime, $ciProgress);
+            try {
+                $percent = intval($ciProgress);
+                sendMsg($lastId, $percent);
+                $lastId++;
+            } catch (\Exception $e) {
+                sendMsg($lastId, 0);
+            }
         }
-
     }
 
     /**
