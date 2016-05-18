@@ -6,7 +6,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           ProjectController.php
- * Updated the    17/05/16 21:17
+ * Updated the    18/05/16 11:05
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -388,7 +388,7 @@ class ProjectController extends Controller {
 
     /**
      * @Security("has_role('ROLE_USER')")
-     * @Route("/project_add_manager", name="postal_bundle_project_add_manager")
+     * @Route("/project_add_manager", name="spirit_dev_dbox_portal_bundle_project_add_manager")
      * @param Request $request
      * @return RedirectResponse
      */

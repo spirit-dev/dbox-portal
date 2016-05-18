@@ -2,7 +2,7 @@
     <label>{{ 'demands.nstatusform.formhead'|trans }}</label>
 
     <form class="form-horizontal"
-          action="{{ path('easyadmin_demand_change_status', {'demandId': id}) }}" {{ form_enctype(form) }}
+          action="{{ path('spirit_dev_dbox_admin_demand_change_status', {'demandId': id}) }}" {{ form_enctype(form) }}
           method="POST">
 
         {{ form_start(form) }}
