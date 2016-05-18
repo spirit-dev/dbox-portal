@@ -16,19 +16,6 @@
                 </div>
 
             </div>
-
-            {#<ul class="list-inline list-unstyled">#}
-            {#<li>#}
-            {#<img id="push-left"#}
-            {#src="{{ asset('bundles/spiritdevdboxportal/images/icons/glyphicons_224_chevron-right.png') }}"#}
-            {#onclick="toggleNav('right');">#}
-            {#</li>#}
-            {#<li>#}
-            {#<img id="push-right"#}
-            {#src="{{ asset('bundles/spiritdevdboxportal/images/icons/glyphicons_224_chevron-left.png') }}"#}
-            {#onclick="toggleNav('left');">#}
-            {#</li>#}
-            {#</ul>#}
         </li>
 
         <hr id="sidebar-hr"/>
@@ -60,7 +47,7 @@
 
     <ul class="nav nav-sidebar signature">
         <li>
-            <p>EcosystemV2 - 0.13 - Alpha ed.</p>
+            <p>EcosystemV2 - {{ version }}</p>
             <p>By Jean Bordat</p>
         </li>
     </ul>
