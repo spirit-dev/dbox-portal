@@ -5,7 +5,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *  
+ *    
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -15,7 +15,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           project.js
- * Updated the    18/05/16 18:07
+ * Updated the    18/05/16 22:02
  */
 
 /**
@@ -410,8 +410,8 @@ function reachProgression(ciId) {
                 source.close();
                 return;
             }
-            console.log(e);
             var obj = JSON.parse(e.data);
+            console.log(obj.progress);
 
             if (parseInt(obj.progress) === 0 && parseInt(obj.progress) < previousVal) {
                 updateProgressBar(100);

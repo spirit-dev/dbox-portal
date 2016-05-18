@@ -25,8 +25,10 @@
             {% elseif currentBuild['result'] == 'RUNNING' %}
             <script>
                 document.addEventListener("DOMContentLoaded", function (event) {
-                    displayProgressBar({{ ci.id }});
-                    reachProgression({{ ci.id }});
+                    setTimeout(function () {
+                        displayProgressBar({{ ci.id }});
+                        reachProgression({{ ci.id }});
+                    }, 5000);
                 });
             </script>
             {% set panel_context = 'panel-info' %}
