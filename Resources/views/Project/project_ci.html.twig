@@ -42,7 +42,7 @@
             {% endif %}
 
             <div class="col-sm-6 col-md-6 col-lg-4">
-                <div class="panel {{ panel_context }} panel-ci">
+                <div id="panel-ci-{{ ci.id }}" class="panel {{ panel_context }} panel-ci">
 
                     <div class="panel-heading">
                         <strong>{{ ci.ciName }}</strong> {{ not currentBuild is null ? "#"~currentBuild['number'] }}

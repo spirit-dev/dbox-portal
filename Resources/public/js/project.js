@@ -15,7 +15,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           project.js
- * Updated the    18/05/16 22:02
+ * Updated the    19/05/16 12:58
  */
 
 /**
@@ -357,11 +357,18 @@ function launchJobRequest(ciId, parametersToTransmit) {
  * Function displaying the progress bar
  */
 function displayProgressBar(ciId) {
+
+    // Setting ci slot in right color
+    $('#panel-ci-' + ciId).removeClass('panel-warning').addClass('panel-info');
+
+    // Hiding launch button
     $('#slot-ci-launch-job-' + ciId).hide();
+
+    // Display progress bar
     $('#slot-progress-bar-' + ciId).removeClass('col-sm-11').addClass('col-sm-12');
     var progressBar = '<div class="progress" id="pb">' +
-        '<div id="pb-pb" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"' +
-        'aria-valuemax="100" style="width: 0%;">0%' +
+        '<div id="pb-pb" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0"' +
+        'aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0%' +
         '</div>' +
         '</div>';
     $('#pb-content').append(progressBar);
@@ -402,6 +409,11 @@ function reachProgression(ciId) {
 
         // Initializing some vars
         var previousVal = 0;
+        var pgUpdateLiss = function (timeout, value) {
+            setTimeout(function () {
+                updateProgressBar(value);
+            }, timeout);
+        }
 
         // Listening for server side event
         source.addEventListener('progress', function (e) {
@@ -422,8 +434,12 @@ function reachProgression(ciId) {
                 reloadPage(1000);
             }
             else if (parseInt(obj.progress)) {
-                updateProgressBar(obj.progress);
-                previousVal = obj.progress;
+                var diff = parseInt(obj.progress) - previousVal
+                var diffTime = 6000 / diff;
+                for (var i = 0; i < diff; i++) {
+                    pgUpdateLiss((diffTime * i), (previousVal + i + 1));
+                }
+                previousVal = parseInt(obj.progress);
             }
         }, false);
 

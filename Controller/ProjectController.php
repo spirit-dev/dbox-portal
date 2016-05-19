@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           ProjectController.php
- * Updated the    18/05/16 22:02
+ * Updated the    19/05/16 12:58
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -367,11 +367,9 @@ class ProjectController extends Controller {
         // Set necessary headers
         header("Content-Type: text/event-stream");
         header("Cache-Control: no-cache");
-        header("Connection: keep-alive");
 
         function sendMsg($id, $msg) {
-
-//            echo "retry: 10000\n";
+            echo "retry: 5000\n";
             echo "event: progress\n";
             echo "id: $id\n";
             echo 'data: {"progress": "' . $msg . '"}';
@@ -380,46 +378,10 @@ class ProjectController extends Controller {
             flush();
         }
 
-        $serverTime = time();
-        $previousVal = 0;
-        $sentOnce = false;
         $ciProgress = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->getProgression($ciLaunched);
         $ciProgress = intval($ciProgress) ? intval($ciProgress) : 0;
-        while (true) {
-            if ($previousVal == 0) {
-                if (!$sentOnce) {
-                    $sentOnce = true;
-                    sendMsg($serverTime, $ciProgress);
-                }
-            } else if ($previousVal > 0) {
-                if ($ciProgress > $previousVal) {
-                    sendMsg($serverTime, $ciProgress);
-                }
-            }
-            $previousVal = $ciProgress;
-            $ciProgress = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->getProgression($ciLaunched);
-            $ciProgress = intval($ciProgress) ? intval($ciProgress) : 0;
-        }
-
-
-//        // Set necessary headers
-//        header("Content-Type: text/event-stream");
-//        header("Cache-Control: no-cache");
-//
-//        function sendMsg($id, $msg) {
-//            echo "retry: 10000\n";
-//            echo "event: progress\n";
-//            echo "id: $id\n";
-//            echo 'data: {"progress": "' . $msg . '"}';
-//            echo "\n\n";
-//            ob_flush();
-//            flush();
-//        }
-//
-//        $ciProgress = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->getProgression($ciLaunched);
-//        $ciProgress = intval($ciProgress) ? intval($ciProgress) : 0;
-//        $serverTime = time();
-//        sendMsg($serverTime, $ciProgress);
+        $serverTime = time();
+        sendMsg($serverTime, $ciProgress);
 
     }
 
