@@ -13,14 +13,14 @@
     {% set qa_critical_issues = qa_issues['qaCriticalIssues']['paging']['total'] %}
     {% set qa_blocker_issues = qa_issues['qaBlockerIssues']['paging']['total'] %}
 
-    {% set qa_ri_percent = (qa_resolved_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
-    {% set qa_ui_percent = (qa_unresolved_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
+    {% set qa_ri_percent = qa_total_issues > 0 ? (qa_resolved_issues * 100 / qa_total_issues)|number_format(0, '.', ',') : 0 %}
+    {% set qa_ui_percent = qa_total_issues > 0 ? (qa_unresolved_issues * 100 / qa_total_issues)|number_format(0, '.', ',') : 0 %}
 
-    {% set qa_info_percent = (qa_info_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
-    {% set qa_minor_percent = (qa_minor_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
-    {% set qa_major_percent = (qa_major_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
-    {% set qa_critical_percent = (qa_critical_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
-    {% set qa_blocker_percent = (qa_blocker_issues * 100 / qa_total_issues)|number_format(0, '.', ',') %}
+    {% set qa_info_percent = qa_total_issues > 0 ? (qa_info_issues * 100 / qa_total_issues)|number_format(0, '.', ',') : 0 %}
+    {% set qa_minor_percent = qa_total_issues > 0 ? (qa_minor_issues * 100 / qa_total_issues)|number_format(0, '.', ',') : 0 %}
+    {% set qa_major_percent = qa_total_issues > 0 ? (qa_major_issues * 100 / qa_total_issues)|number_format(0, '.', ',') : 0 %}
+    {% set qa_critical_percent = qa_total_issues > 0 ? (qa_critical_issues * 100 / qa_total_issues)|number_format(0, '.', ',') : 0 %}
+    {% set qa_blocker_percent = qa_total_issues > 0 ? (qa_blocker_issues * 100 / qa_total_issues)|number_format(0, '.', ',') : 0 %}
 
     {# ISSUES RATION #}
     <div class="col-sm-12">

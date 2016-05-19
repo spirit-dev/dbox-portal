@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           ProjectController.php
- * Updated the    19/05/16 12:58
+ * Updated the    19/05/16 15:57
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -138,7 +138,7 @@ class ProjectController extends Controller {
             $qaIssues = null;
         }
 
-        return array(
+        $returnArray = array(
             'project' => $project,
             'git_datas' => $gitDatas,
             'git_branches' => $gitBranches,
@@ -154,6 +154,8 @@ class ProjectController extends Controller {
             'ci_view_url' => isset($ciViewUrl) ? $ciViewUrl : null,
             'qa_issues' => $qaIssues
         );
+
+        return $returnArray;
     }
 
     /**
