@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           CommunicationRepository.php
- * Updated the    16/05/16 14:52
+ * Updated the    19/05/16 15:49
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Entity;
@@ -33,7 +33,7 @@ class CommunicationRepository extends EntityRepository {
      * @param $alreadyViewedComs
      * @return mixed
      */
-    public function findAvailableCommunications($alreadyViewedComs) {
+    public function findAvailableCommunications($alreadyViewedComs, $project) {
         $dateNow = new \DateTime('now');
 
         $dql = $this->createQueryBuilder('c')
@@ -48,6 +48,13 @@ class CommunicationRepository extends EntityRepository {
         if (count($alreadyViewedComs) > 0) {
             $dql->andWhere('c not in (:coms)')
                 ->setParameter('coms', $alreadyViewedComs);
+        }
+
+        if ($project) {
+            $dql->andWhere('c.scope = :scope')
+                ->setParameter('scope', $project);
+        } else {
+            $dql->andWhere('c.scope is NULL');
         }
 
         return $dql->getQuery()->getResult();

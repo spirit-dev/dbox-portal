@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Communication.php
- * Updated the    15/05/16 11:47
+ * Updated the    19/05/16 15:48
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Entity;
@@ -62,6 +62,13 @@ class Communication {
      * @ORM\Column(name="show_to_date", type="date", nullable=true)
      */
     private $showToDate;
+
+    /**
+     * @var integer
+     * @ORM\ManyToOne(targetEntity="SpiritDev\Bundle\DBoxPortalBundle\Entity\Project", inversedBy="name")
+     * @ORM\JoinColumn(name="project", referencedColumnName="id", nullable=true)
+     */
+    private $scope;
 
     /**
      * @var boolean
@@ -147,6 +154,20 @@ class Communication {
      */
     public function setShowToDate($showToDate) {
         $this->showToDate = $showToDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getScope() {
+        return $this->scope;
+    }
+
+    /**
+     * @param int $scope
+     */
+    public function setScope($scope) {
+        $this->scope = $scope;
     }
 
     /**

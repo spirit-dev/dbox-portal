@@ -15,13 +15,23 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           communication.js
- * Updated the    17/05/16 21:18
+ * Updated the    19/05/16 15:49
  */
 
 $(document).ready(function () {
 
+    // Extracting current url
+    pathArray = location.href.split('/');
+    console.log(pathArray);
+
+    // If we are in a project page
+    if (pathArray[3] === "project") {
+        // Ask communications for this project
+        showCommunications(pathArray[4]);
+    }
+
     // Call for retrieving communications
-    showCommunications();
+    showCommunications('global');
 
 });
 
@@ -46,10 +56,10 @@ function showCommunication(title, text, type) {
 /**
  * Reach communications and
  */
-function showCommunications() {
+function showCommunications(scope) {
     showLoader();
     // Post request
-    $.post("/communication/available", function (data) {
+    $.post("/communication/available/" + scope, function (data) {
         var communications = data.communications;
         // If datas available
         if (communications.length > 0) {
@@ -60,19 +70,6 @@ function showCommunications() {
                 var textPN = '<p>' + communications[i].content + '</p><p id="com-slot-' + communications[i].id + '"><button class="btn btn-vsm btn-primary pull-right" onclick="setCommunicationViewed(\'' + communications[i].id + '\');">Hide away</button></p>';
 
                 showCommunication(communications[i].title, textPN, communications[i].type);
-                // Create PNotify
-                //new PNotify({
-                //    title: communications[i].title,
-                //    text: textPN,
-                //    type: communications[i].type
-                //    //hide: false
-                //    //addclass: communications[i].id,
-                //    //after_close: function(notice, timer_hide) {
-                //    //    $.post("/communication/setviewed", {com_id: notice.options.addclass}, function(data) {
-                //    //        console.log(data);
-                //    //    }) ;
-                //    //}
-                //});
 
             }
         }

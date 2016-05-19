@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *
+ *    
  * Since 2K10 until today
- *
+ *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *
+ *  
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *
+ *  
  * File           CommunicationController.php
- * Updated the    15/05/16 11:47
+ * Updated the    19/05/16 15:48
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -36,20 +36,27 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class CommunicationController extends Controller {
 
     /**
-     * @Route("/communication/available", name="spirit_dev_dbox_portal_bundle_communications_available")
+     * @Route("/communication/available/{scope}", name="spirit_dev_dbox_portal_bundle_communications_available")
      * @Security("has_role('ROLE_USER')")
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
      */
-    public function getAvailableComsAction() {
+    public function getAvailableComsAction($scope) {
 
         // Getting necessary informations
         $currentUser = $this->getCurrentUser();
+        $project = null;
         $returnedComs = array();
         $i = 0;
 
         // Get communications dependings on roles
         if (!in_array('ROLE_ADMIN', $currentUser->getRoles())) {
             // Check DB
-            $coms = $this->getDoctrine()->getRepository('SpiritDevDBoxPortalBundle:Communication')->findAvailableCommunications($currentUser->getViewedCommunications());
+            if ($scope != 'global') {
+                $project = $this->getDoctrine()->getRepository('SpiritDevDBoxPortalBundle:Project')->findOneBy(array('name' => $scope));
+            }
+            $coms = $this->getDoctrine()->getRepository('SpiritDevDBoxPortalBundle:Communication')->findAvailableCommunications($currentUser->getViewedCommunications(), $project);
             // Recompose returned datas
             foreach ($coms as $com) {
                 $returnedComs[$i]['id'] = $com->getId();
