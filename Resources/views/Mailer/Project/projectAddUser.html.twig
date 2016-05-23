@@ -1,227 +1,219 @@
-{% include('SpiritDevDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+{% extends('SpiritDevDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block mailTitle %}
+            {% if scope == 'admin' %}
+                {{ 'mail.global.hello_admin'|trans }}
+            {% elseif scope == 'owner' %}
+                {{ 'mail.global.hello_user'|trans({'%firstname%': project.owner.firstname, '%lastname%': project.owner.lastname}) }}
+            {% elseif scope == 'user' %}
+                {{ 'mail.global.hello_user'|trans({'%firstname%': user.firstname, '%lastname%': user.lastname}) }}
+            {% endif %}
+{% endblock mailTitle %}
 
 {% block content %}
 
-    <style media="all" type="text/css">
-        table tr th, table tr td {
-            border: 1px solid;
-        }
-    </style>
+    <table width="600px" height="100%" align="center" border="0" cellspacing="0" cellpadding="0"
+           style="PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; PADDING-LEFT: 0px !important; MARGIN: 0px; PADDING-RIGHT: 0px !important; COLOR: #FFFFFF;; Z-INDEX: 2;">
 
-    <div class="row">
-
-        <div class="col-sm-12">
-            <h1>{{ 'mail.global.header'|trans|raw }}</h1>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-12">
-
+        <tr style="TEXT-ALIGN: center;">
+            <td>
+                <h1>
             {% if scope == 'admin' %}
-                <h3>{{ 'mail.global.hello_admin'|trans }}</h3>
+                {{ 'mail.global.hello_admin'|trans }}
             {% elseif scope == 'owner' %}
-                <h3>{{ 'mail.global.hello_user'|trans({
-                        '%firstname%': project.owner.firstname,
-                        '%lastname%': project.owner.lastname}) }}</h3>
+                {{ 'mail.global.hello_user'|trans({'%firstname%': project.owner.firstname, '%lastname%': project.owner.lastname}) }}
             {% elseif scope == 'user' %}
-                <h3>{{ 'mail.global.hello_user'|trans({
-                        '%firstname%': user.firstname,
-                        '%lastname%': user.lastname}) }}</h3>
+                {{ 'mail.global.hello_user'|trans({'%firstname%': user.firstname, '%lastname%': user.lastname}) }}
             {% endif %}
+                </h1>
+            </td>
+        </tr>
 
+        <tr style="TEXT-ALIGN: center;">
+            <td>
 
-            {% if scope == 'admin' %}
-                <p>{{ 'mail.project.add_user.adm.slot1'|trans }}</p>
-                <table>
-                    <tr>
-                        <td>{{ 'mail.project.add_user.common.tab1'|trans }}</td>
-                        <td><strong>{{ project.name }}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>{{ 'mail.project.add_user.common.tab2'|trans }}</td>
-                        <td><strong>{{ user.commonName }}</strong></td>
-                    </tr>
-                </table>
-            {% elseif scope == 'owner' %}
-                <p>{{ 'mail.project.add_user.owner.slot1'|trans }}</p>
-                <table>
-                    <tr>
-                        <td>{{ 'mail.project.add_user.common.tab1'|trans }}</td>
-                        <td><strong>{{ project.name }}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>{{ 'mail.project.add_user.common.tab2'|trans }}</td>
-                        <td><strong>{{ user.commonName }}</strong></td>
-                    </tr>
-                </table>
-            {% elseif scope == 'user' %}
-                <p><strong>{{ project.owner.commonName }}</strong> {{ 'mail.project.add_user.user.slot1'|trans }}</p>
-                <p><strong>{{ project.name }}</strong></p>
-                <p>{{ 'mail.project.add_user.user.slot2'|trans }}</p>
-                <table class="table">
-
-                    {# COMMON INFOS #}
-
-                    <tr>
-                        <th rowspan="5" style="text-align: end; transform: rotate(-45deg);">
-                            {{ 'mail.project.creation.tabslot1.tabh'|trans }}
-                        </th>
-                    </tr>
-
-                    <tr>
-                        <th>{{ 'mail.project.creation.tabslot1.tab1'|trans }}</th>
-                        <td>{{ project.name }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>{{ 'mail.project.creation.tabslot1.tab2'|trans }}</th>
-                        <td>{{ project.description }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>{{ 'mail.project.creation.tabslot1.tab3'|trans }}</th>
-                        <td>{{ project.owner }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>{{ 'mail.project.creation.tabslot1.tab4'|trans }}</th>
-                        <td>
-                            <ul>
-                                {% for user in project.teamMembers %}
-                                    <li>{{ user.firstname }} {{ user.lastname }}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                    </tr>
-
-                    {# VCS INFOS #}
-
-                    {% if project.vcsManaged %}
+                {% if scope == 'admin' %}
+                    <p>{{ 'mail.project.add_user.adm.slot1'|trans }}</p>
+                    <table width="600px" height="100%" style="TEXT-ALIGN: left !important;">
                         <tr>
-                            <th rowspan="3" style="text-align: end; transform: rotate(-45deg);">
-                                {{ 'mail.project.creation.tabslot2.tabh'|trans }}
+                            <td>{{ 'mail.project.add_user.common.tab1'|trans }}</td>
+                            <td><strong>{{ project.name }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'mail.project.add_user.common.tab2'|trans }}</td>
+                            <td><strong>{{ user.commonName }}</strong></td>
+                        </tr>
+                    </table>
+                {% elseif scope == 'owner' %}
+                    <p>{{ 'mail.project.add_user.owner.slot1'|trans }}</p>
+                    <table width="600px" height="100%" style="TEXT-ALIGN: left !important;">
+                        <tr>
+                            <td>{{ 'mail.project.add_user.common.tab1'|trans }}</td>
+                            <td><strong>{{ project.name }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'mail.project.add_user.common.tab2'|trans }}</td>
+                            <td><strong>{{ user.commonName }}</strong></td>
+                        </tr>
+                    </table>
+                {% elseif scope == 'user' %}
+                    <p><strong>{{ project.owner.commonName }}</strong> {{ 'mail.project.add_user.user.slot1'|trans }}
+                    </p>
+                    <p><strong>{{ project.name }}</strong></p>
+                    <p>{{ 'mail.project.add_user.user.slot2'|trans }}</p>
+                    <table width="600px" height="100%" style="TEXT-ALIGN: left !important;">
+
+                        {# COMMON INFOS #}
+
+                        <tr>
+                            <th rowspan="5" style="text-align: end; transform: rotate(-45deg);">
+                                {{ 'mail.project.creation.tabslot1.tabh'|trans }}
                             </th>
                         </tr>
 
                         <tr>
-                            <th>{{ 'mail.project.creation.tabslot2.tab1'|trans }}</th>
-                            <td>
-                                <a class="btn btn-success btn-small" href="{{ project.gitLabWebUrl }}"
-                                   target="_blank">VCS</a>
-                            </td>
+                            <th>{{ 'mail.project.creation.tabslot1.tab1'|trans }}</th>
+                            <td>{{ project.name }}</td>
                         </tr>
 
                         <tr>
-                            <th>{{ 'mail.project.creation.tabslot2.tab2'|trans }}</th>
+                            <th>{{ 'mail.project.creation.tabslot1.tab2'|trans }}</th>
+                            <td>{{ project.description }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>{{ 'mail.project.creation.tabslot1.tab3'|trans }}</th>
+                            <td>{{ project.owner }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>{{ 'mail.project.creation.tabslot1.tab4'|trans }}</th>
                             <td>
                                 <ul>
-                                    <li>{{ project.gitLabSshUrlToRepo }}</li>
-                                    <li>{{ project.gitLabHttpUrlToRepo }}</li>
+                                    {% for user in project.teamMembers %}
+                                        <li>{{ user.firstname }} {{ user.lastname }}</li>
+                                    {% endfor %}
                                 </ul>
                             </td>
                         </tr>
-                    {% else %}
-                        <tr>
-                            <th colspan="2">
-                                {{ 'mail.project.creation.tabslot2.tabh'|trans }}
-                            </th>
-                            <td>
-                                {{ 'mail.project.creation.not_managed'|trans }}
-                            </td>
-                        </tr>
-                    {% endif %}
 
-                    {# PM INFOS #}
+                        {# VCS INFOS #}
 
-                    {% if project.pmManaged %}
-                        <tr>
-                            <th>
-                                {{ 'mail.project.creation.tabslot3.tabh'|trans }}
-                            </th>
-                            <th>{{ 'mail.project.creation.tabslot3.tab1'|trans }}</th>
-                            <td>
-                                <a class="btn btn-success btn-small" href="{{ project.redmineWebUrl }}"
-                                   target="_blank">Redmine</a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <th colspan="2">
-                                {{ 'mail.project.creation.tabslot3.tabh'|trans }}
-                            </th>
-                            <td>
-                                {{ 'mail.project.creation.not_managed'|trans }}
-                            </td>
-                        </tr>
-                    {% endif %}
+                        {% if project.vcsManaged %}
+                            <tr>
+                                <th rowspan="3" style="text-align: end; transform: rotate(-45deg);">
+                                    {{ 'mail.project.creation.tabslot2.tabh'|trans }}
+                                </th>
+                            </tr>
 
-                    {# CI INFOS #}
+                            <tr>
+                                <th>{{ 'mail.project.creation.tabslot2.tab1'|trans }}</th>
+                                <td>
+                                    <a class="btn btn-success btn-small" href="{{ project.gitLabWebUrl }}"
+                                       target="_blank">VCS</a>
+                                </td>
+                            </tr>
 
-                    {% if project.ciDevManaged %}
-                        <tr>
-                            <th colspan="2">
-                                {{ 'mail.project.creation.tabslot4.tabh'|trans }}
-                            </th>
-                            <td>
-                                {{ 'mail.project.creation.tabslot4.tab1'|trans }}
-                                <a class="btn btn-success btn-small" href="{{ project_url }}"
-                                   target="_blank">{{ project.name }}</a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <th colspan="2">
-                                {{ 'mail.project.creation.tabslot4.tabh'|trans }}
-                            </th>
-                            <td>
-                                {{ 'mail.project.creation.not_managed'|trans }}
-                            </td>
-                        </tr>
-                    {% endif %}
+                            <tr>
+                                <th>{{ 'mail.project.creation.tabslot2.tab2'|trans }}</th>
+                                <td>
+                                    <ul>
+                                        <li>{{ project.gitLabSshUrlToRepo }}</li>
+                                        <li>{{ project.gitLabHttpUrlToRepo }}</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th colspan="2">
+                                    {{ 'mail.project.creation.tabslot2.tabh'|trans }}
+                                </th>
+                                <td>
+                                    {{ 'mail.project.creation.not_managed'|trans }}
+                                </td>
+                            </tr>
+                        {% endif %}
 
-                    {# QA INFOS #}
+                        {# PM INFOS #}
 
-                    {% if project.qaDevManaged %}
-                        <tr>
-                            <th colspan="2">
-                                {{ 'mail.project.creation.tabslot5.tabh'|trans }}
-                            </th>
-                            <td>
-                                {{ 'mail.project.creation.tabslot5.tab1'|trans }}
-                                <a class="btn btn-success btn-small" href="{{ project_url }}"
-                                   target="_blank">{{ project.name }}</a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <th colspan="2">
-                                {{ 'mail.project.creation.tabslot5.tabh'|trans }}
-                            </th>
-                            <td>
-                                {{ 'mail.project.creation.not_managed'|trans }}
-                            </td>
-                        </tr>
-                    {% endif %}
+                        {% if project.pmManaged %}
+                            <tr>
+                                <th>
+                                    {{ 'mail.project.creation.tabslot3.tabh'|trans }}
+                                </th>
+                                <th>{{ 'mail.project.creation.tabslot3.tab1'|trans }}</th>
+                                <td>
+                                    <a class="btn btn-success btn-small" href="{{ project.redmineWebUrl }}"
+                                       target="_blank">Redmine</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th colspan="2">
+                                    {{ 'mail.project.creation.tabslot3.tabh'|trans }}
+                                </th>
+                                <td>
+                                    {{ 'mail.project.creation.not_managed'|trans }}
+                                </td>
+                            </tr>
+                        {% endif %}
 
-                </table>
+                        {# CI INFOS #}
 
-                <p>{{ 'mail.project.add_user.user.slot3'|trans }}</p>
-            {% endif %}
+                        {% if project.ciDevManaged %}
+                            <tr>
+                                <th colspan="2">
+                                    {{ 'mail.project.creation.tabslot4.tabh'|trans }}
+                                </th>
+                                <td>
+                                    {{ 'mail.project.creation.tabslot4.tab1'|trans }}
+                                    <a class="btn btn-success btn-small" href="{{ project_url }}"
+                                       target="_blank">{{ project.name }}</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th colspan="2">
+                                    {{ 'mail.project.creation.tabslot4.tabh'|trans }}
+                                </th>
+                                <td>
+                                    {{ 'mail.project.creation.not_managed'|trans }}
+                                </td>
+                            </tr>
+                        {% endif %}
 
-        </div>
+                        {# QA INFOS #}
 
-    </div>
+                        {% if project.qaDevManaged %}
+                            <tr>
+                                <th colspan="2">
+                                    {{ 'mail.project.creation.tabslot5.tabh'|trans }}
+                                </th>
+                                <td>
+                                    {{ 'mail.project.creation.tabslot5.tab1'|trans }}
+                                    <a class="btn btn-success btn-small" href="{{ project_url }}"
+                                       target="_blank">{{ project.name }}</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th colspan="2">
+                                    {{ 'mail.project.creation.tabslot5.tabh'|trans }}
+                                </th>
+                                <td>
+                                    {{ 'mail.project.creation.not_managed'|trans }}
+                                </td>
+                            </tr>
+                        {% endif %}
 
-    <div class="row">
+                    </table>
 
-        <div class="col-sm-12">
-            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
-            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
-        </div>
+                    <p>{{ 'mail.project.add_user.user.slot3'|trans }}</p>
+                {% endif %}
 
-    </div>
+            </td>
+        </tr>
+
+    </table>
 
 {% endblock content %}

@@ -1,73 +1,63 @@
-{% include('SpiritDevDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+{% extends('SpiritDevDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block mailTitle %}{{ 'mail.global.hello_user'|trans({'%firstname%': firstname,'%lastname%': lastname}) }}{% endblock mailTitle %}
 
 {% block content %}
 
-    <div class="row">
+    <table width="600px" height="100%" align="center" border="0" cellspacing="0" cellpadding="0"
+           style="PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; PADDING-LEFT: 0px !important; MARGIN: 0px; PADDING-RIGHT: 0px !important; COLOR: #FFFFFF;; Z-INDEX: 2;">
 
-        <div class="col-sm-12">
-            <h1>{{ 'mail.global.header'|trans|raw }}</h1>
-        </div>
+        <tr style="TEXT-ALIGN: center;">
+            <td>
+                <h1>{{ 'mail.global.hello_user'|trans({'%firstname%': firstname,'%lastname%': lastname}) }}</h1>
+            </td>
+        </tr>
 
-    </div>
+        <tr style="TEXT-ALIGN: center;">
+            <td>
 
-    <div class="row">
+                <p>{{ 'mail.project.request.slot1'|trans }}</p>
+                <p>{{ 'mail.project.request.slot2'|trans }}</p>
 
-        <div class="col-sm-12">
-            <h3>{{ 'mail.global.hello_user'|trans({
-                    '%firstname%': firstname,
-                    '%lastname%': lastname}) }}</h3>
+                <table width="600px" height="100%" style="TEXT-ALIGN: left !important;">
 
-            <p>{{ 'mail.project.request.slot1'|trans }}</p>
-            <p>{{ 'mail.project.request.slot2'|trans }}</p>
+                    <tr>
+                        <th width="180px">{{ 'mail.project.request.tabslot1.tab1'|trans }}</th>
+                        <td style="PADDING-LEFT: 43px;">{{ project_name }}</td>
+                    </tr>
 
+                    <tr>
+                        <th width="180px">{{ 'mail.project.request.tabslot1.tab2'|trans }}</th>
+                        <td style="PADDING-LEFT: 43px;">{{ project_description }}</td>
+                    </tr>
 
-            <table class="table">
+                    <tr>
+                        <th width="180px">{{ 'mail.project.request.tabslot1.tab3'|trans }}</th>
+                        <td style="PADDING-LEFT: 43px;">{{ project_owner }}</td>
+                    </tr>
 
-                <tr>
-                    <th>{{ 'mail.project.request.tabslot1.tab1'|trans }}</th>
-                    <td>{{ project_name }}</td>
-                </tr>
+                    <tr>
+                        <th width="180px">{{ 'mail.project.request.tabslot1.tab4'|trans }}</th>
+                        <td>
+                            <ul>
+                                {% for user in project_team %}
+                                    <li>{{ user.firstname }} {{ user.lastname }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>{{ 'mail.project.request.tabslot1.tab2'|trans }}</th>
-                    <td>{{ project_description }}</td>
-                </tr>
+                </table>
 
-                <tr>
-                    <th>{{ 'mail.project.request.tabslot1.tab3'|trans }}</th>
-                    <td>{{ project_owner }}</td>
-                </tr>
+                <h4>{{ 'mail.project.request.slot3'|trans }}</h4>
+                <p>{{ 'mail.project.request.slot4'|trans }}</p>
 
-                <tr>
-                    <th>{{ 'mail.project.request.tabslot1.tab4'|trans }}</th>
-                    <td>
-                        <ul>
-                            {% for user in project_team %}
-                                <li>{{ user.firstname }} {{ user.lastname }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                </tr>
+                <p>{{ 'mail.project.request.slot5'|trans }}</p>
+                <a class="btn btn-success btn-small" href="{{ demand_url }}" target="_blank">{{ project_name }}</a>
 
-            </table>
+            </td>
+        </tr>
 
-            <h4>{{ 'mail.project.request.slot3'|trans }}</h4>
-            <p>{{ 'mail.project.request.slot4'|trans }}</p>
-
-            <p>{{ 'mail.project.request.slot5'|trans }}</p>
-            <a class="btn btn-success btn-small" href="{{ demand_url }}" target="_blank">{{ project_name }}</a>
-
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-12">
-            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
-            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
-        </div>
-
-    </div>
+    </table>
 
 {% endblock content %}

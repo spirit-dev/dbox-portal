@@ -1,73 +1,70 @@
-{% include('SpiritDevDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+{% extends('SpiritDevDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block mailTitle %}
+    {% if scope == 'admin' %}
+        {{ 'mail.global.hello_admin'|trans }}
+    {% elseif scope == 'owner' %}
+        {{ 'mail.global.hello_user'|trans({'%firstname%': project.owner.firstname, '%lastname%': project.owner.lastname}) }}
+    {% elseif scope == 'user' %}
+        {{ 'mail.global.hello_user'|trans({'%firstname%': user.firstname, '%lastname%': user.lastname}) }}
+    {% endif %}
+{% endblock mailTitle %}
 
 {% block content %}
 
-    <div class="row">
+    <table width="600px" height="100%" align="center" border="0" cellspacing="0" cellpadding="0"
+           style="PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; PADDING-LEFT: 0px !important; MARGIN: 0px; PADDING-RIGHT: 0px !important; COLOR: #FFFFFF;; Z-INDEX: 2;">
 
-        <div class="col-sm-12">
-            <h1>{{ 'mail.global.header'|trans|raw }}</h1>
-        </div>
+        <tr style="TEXT-ALIGN: center;">
+            <td>
+                <h1>
+                    {% if scope == 'admin' %}
+                        {{ 'mail.global.hello_admin'|trans }}
+                    {% elseif scope == 'owner' %}
+                        {{ 'mail.global.hello_user'|trans({'%firstname%': project.owner.firstname, '%lastname%': project.owner.lastname}) }}
+                    {% elseif scope == 'user' %}
+                        {{ 'mail.global.hello_user'|trans({'%firstname%': user.firstname, '%lastname%': user.lastname}) }}
+                    {% endif %}
+                </h1>
+            </td>
+        </tr>
 
-    </div>
+        <tr style="TEXT-ALIGN: center;">
+            <td>
 
-    <div class="row">
+                {% if scope == 'admin' %}
+                    <p>{{ 'mail.project.remove_user.adm.slot1'|trans }}</p>
+                    <table width="600px" height="100%" style="TEXT-ALIGN: left !important;">
+                        <tr>
+                            <td>{{ 'mail.project.remove_user.common.tab1'|trans }}</td>
+                            <td><strong>{{ project.name }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'mail.project.remove_user.common.tab2'|trans }}</td>
+                            <td><strong>{{ user.commonName }}</strong></td>
+                        </tr>
+                    </table>
+                {% elseif scope == 'owner' %}
+                    <p>{{ 'mail.project.remove_user.owner.slot1'|trans }}</p>
+                    <table width="600px" height="100%" style="TEXT-ALIGN: left !important;">
+                        <tr>
+                            <td>{{ 'mail.project.remove_user.common.tab1'|trans }}</td>
+                            <td><strong>{{ project.name }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'mail.project.remove_user.common.tab2'|trans }}</td>
+                            <td><strong>{{ user.commonName }}</strong></td>
+                        </tr>
+                    </table>
+                {% elseif scope == 'user' %}
+                    <p>{{ project.owner.commonName }} {{ 'mail.project.remove_user.user.slot1'|trans }}</p>
+                    <strong>{{ project.name }}</strong>
+                    <p>{{ 'mail.project.remove_user.user.slot2'|trans }}</p>
+                {% endif %}
 
-        <div class="col-sm-12">
+            </td>
+        </tr>
 
-            {% if scope == 'admin' %}
-                <h3>{{ 'mail.global.hello_admin'|trans }}</h3>
-            {% elseif scope == 'owner' %}
-                <h3>{{ 'mail.global.hello_user'|trans({
-                        '%firstname%': project.owner.firstname,
-                        '%lastname%': project.owner.lastname}) }}</h3>
-            {% elseif scope == 'user' %}
-                <h3>{{ 'mail.global.hello_user'|trans({
-                        '%firstname%': user.firstname,
-                        '%lastname%': user.lastname}) }}</h3>
-            {% endif %}
-
-
-            {% if scope == 'admin' %}
-                <p>{{ 'mail.project.remove_user.adm.slot1'|trans }}</p>
-                <table>
-                    <tr>
-                        <td>{{ 'mail.project.remove_user.common.tab1'|trans }}</td>
-                        <td><strong>{{ project.name }}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>{{ 'mail.project.remove_user.common.tab2'|trans }}</td>
-                        <td><strong>{{ user.commonName }}</strong></td>
-                    </tr>
-                </table>
-            {% elseif scope == 'owner' %}
-                <p>{{ 'mail.project.remove_user.owner.slot1'|trans }}</p>
-                <table>
-                    <tr>
-                        <td>{{ 'mail.project.remove_user.common.tab1'|trans }}</td>
-                        <td><strong>{{ project.name }}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>{{ 'mail.project.remove_user.common.tab2'|trans }}</td>
-                        <td><strong>{{ user.commonName }}</strong></td>
-                    </tr>
-                </table>
-            {% elseif scope == 'user' %}
-                <p>{{ project.owner.commonName }} {{ 'mail.project.remove_user.user.slot1'|trans }}</p>
-                <strong>{{ project.name }}</strong>
-                <p>{{ 'mail.project.remove_user.user.slot2'|trans }}</p>
-            {% endif %}
-
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-12">
-            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
-            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
-        </div>
-
-    </div>
+    </table>
 
 {% endblock content %}

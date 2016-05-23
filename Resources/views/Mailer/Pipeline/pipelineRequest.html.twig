@@ -1,45 +1,40 @@
-{% include('SpiritDevDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+{% extends('SpiritDevDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block mailTitle %}
+    {{ 'mail.global.hello_user'|trans({'%firstname%': firstname,'%lastname%': lastname}) }}
+{% endblock mailTitle %}
 
 {% block content %}
 
-    <div class="row">
+    <table width="600px" height="100%" align="center" border="0" cellspacing="0" cellpadding="0"
+           style="PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; PADDING-LEFT: 0px !important; MARGIN: 0px; PADDING-RIGHT: 0px !important; COLOR: #FFFFFF;; Z-INDEX: 2;">
 
-        <div class="col-sm-12">
-            <h1>{{ 'mail.global.header'|trans|raw }}</h1>
-        </div>
+        <tr style="TEXT-ALIGN: center;">
+            <td>
+                <h1>
+                    {{ 'mail.global.hello_user'|trans({'%firstname%': firstname,'%lastname%': lastname}) }}
+                </h1>
+            </td>
+        </tr>
 
-    </div>
+        <tr style="TEXT-ALIGN: center;">
+            <td>
 
-    <div class="row">
-
-        <div class="col-sm-12">
-            <h3>{{ 'mail.global.hello_user'|trans({
-                    '%firstname%': firstname,
-                    '%lastname%': lastname}) }}</h3>
-
-            <p>{{ 'mail.pipeline.request.slot1'|trans }}</p>
-            <ul>
-                <li>{{ project_name }}</li>
-            </ul>
+                <p>{{ 'mail.pipeline.request.slot1'|trans }}</p>
+                <ul>
+                    <li>{{ project_name }}</li>
+                </ul>
 
 
-            <h4>{{ 'mail.pipeline.request.slot2'|trans }}</h4>
-            <p>{{ 'mail.pipeline.request.slot3'|trans }}</p>
+                <h4>{{ 'mail.pipeline.request.slot2'|trans }}</h4>
+                <p>{{ 'mail.pipeline.request.slot3'|trans }}</p>
 
-            <p>{{ 'mail.pipeline.request.slot4'|trans }}</p>
-            <a class="btn btn-success btn-small" href="{{ demand_url }}" target="_blank">{{ project_name }}</a>
+                <p>{{ 'mail.pipeline.request.slot4'|trans }}</p>
+                <a class="btn btn-success btn-small" href="{{ demand_url }}" target="_blank">{{ project_name }}</a>
 
-        </div>
+            </td>
+        </tr>
 
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-12">
-            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
-            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
-        </div>
-
-    </div>
+    </table>
 
 {% endblock content %}

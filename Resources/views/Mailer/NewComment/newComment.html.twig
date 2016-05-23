@@ -1,42 +1,46 @@
-{% include('SpiritDevDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+{% extends('SpiritDevDBoxPortalBundle:Mailer:mailLayout.html.twig') %}
+
+{% block mailTitle %}
+    {% if user != null %}
+        {{ 'mail.global.hello_user'|trans({
+            '%firstname%': user.firstname,
+            '%lastname%': user.lastname}) }}
+    {% else %}
+        {{ 'mail.global.hello_admin'|trans }}
+    {% endif %}
+{% endblock mailTitle %}
 
 {% block content %}
 
-    <div class="row">
+    <table width="600px" height="100%" align="center" border="0" cellspacing="0" cellpadding="0"
+           style="PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; PADDING-LEFT: 0px !important; MARGIN: 0px; PADDING-RIGHT: 0px !important; COLOR: #FFFFFF;; Z-INDEX: 2;">
 
-        <div class="col-sm-12">
-            <h1>{{ 'mail.global.header'|trans|raw }}</h1>
-        </div>
+        <tr style="TEXT-ALIGN: center;">
+            <td>
+                <h1>
+                    {% if user != null %}
+                        {{ 'mail.global.hello_user'|trans({
+                            '%firstname%': user.firstname,
+                            '%lastname%': user.lastname}) }}
+                    {% else %}
+                        {{ 'mail.global.hello_admin'|trans }}
+                    {% endif %}
+                </h1>
+            </td>
+        </tr>
 
-    </div>
+        <tr style="TEXT-ALIGN: center;">
+            <td>
 
-    <div class="row">
+                <p>{{ 'mail.both.new_comment.slot1'|trans }}</p>
+                <p>{{ 'mail.both.new_comment.slot2'|trans }}
+                    <a class="btn btn-primary"
+                       href="{{ demand_url }}">{{ 'mail.both.new_comment.link1'|trans }}</a>
+                </p>
 
-        <div class="col-sm-12">
+            </td>
+        </tr>
 
-            {% if user != null %}
-                <h3>{{ 'mail.global.hello_user'|trans({
-                        '%firstname%': user.firstname,
-                        '%lastname%': user.lastname}) }}</h3>
-            {% else %}
-                <h3>{{ 'mail.global.hello_admin'|trans }}</h3>
-            {% endif %}
-            <p>{{ 'mail.both.new_comment.slot1'|trans }}</p>
-            <p>{{ 'mail.both.new_comment.slot2'|trans }}
-                <a class="btn btn-primary"
-                   href="{{ demand_url }}">{{ 'mail.both.new_comment.link1'|trans }}</a>
-            </p>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-12">
-            <h4>{{ 'mail.global.footer.slot1'|trans }}</h4>
-            <h4>{{ 'mail.global.footer.slot2'|trans }}</h4>
-        </div>
-
-    </div>
+    </table>
 
 {% endblock content %}
