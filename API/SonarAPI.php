@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *
+ *    
  * Since 2K10 until today
- *
+ *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *
+ *  
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *
+ *  
  * File           SonarAPI.php
- * Updated the    15/05/16 11:47
+ * Updated the    24/05/16 20:32
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -214,7 +214,7 @@ class SonarAPI extends SonarAPICore implements SonarAPIInterface {
         try {
             return $this->sonarClient->api('projects')->deleteProject(
                 array(
-                    "id" => $project->getSonarProjectId()
+                    "key" => $project->getSonarProjectKey()
                 ));
         } catch (\Exception $e) {
             return null;
