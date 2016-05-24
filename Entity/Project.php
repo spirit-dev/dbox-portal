@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Project.php
- * Updated the    24/05/16 15:49
+ * Updated the    24/05/16 15:50
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Entity;
@@ -250,7 +250,8 @@ class Project {
 
     /**
      * @var boolean
-     * @ORM\Column(name="security_assessments", type="boolean", nullable=true)
+     * @ORM\Column(name="security_assessments", type="boolean", nullable=true
+     *     )
      */
     private $securityAssessments;
 
