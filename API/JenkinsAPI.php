@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           JenkinsAPI.php
- * Updated the    17/05/16 08:23
+ * Updated the    24/05/16 20:35
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -272,7 +272,9 @@ class JenkinsAPI extends JenkinsAPICore implements JenkinsAPICoreInterface {
         }
 
         try {
-            $this->jenkinsClient->deleteJob($jobName);
+            // FIXME Background API bug to resolve
+            $issue = $this->jenkinsClient->deleteJob($jobName);
+            dump($issue);
             return true;
         } catch (\Exception $e) {
             return false;
