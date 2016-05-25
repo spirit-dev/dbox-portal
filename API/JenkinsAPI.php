@@ -6,7 +6,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           JenkinsAPI.php
- * Updated the    24/05/16 20:35
+ * Updated the    25/05/16 14:59
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -273,8 +273,16 @@ class JenkinsAPI extends JenkinsAPICore implements JenkinsAPICoreInterface {
 
         try {
             // FIXME Background API bug to resolve
-            $issue = $this->jenkinsClient->deleteJob($jobName);
-            dump($issue);
+            $url = sprintf("job/%s/doDelete", $jobName);
+            $issue = $this->sendRequest($this::POST, $url, null, true, true, array(
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type' => 'application/x-www-form-urlencoded',
+                        'Authorization' => 'Basic ' . base64_encode($this->jenkinsUser . ':C3t74l4dM1n')
+                    ),
+//                CURLOPT_USERPWD => $this->jenkinsUser . ':C3t74l4dM1n',
+                )
+            );
+            $issue = $this->sendRequest($this::POST, $url);
             return true;
         } catch (\Exception $e) {
             return false;
