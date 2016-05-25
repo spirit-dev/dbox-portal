@@ -6,7 +6,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           DemandController.php
- * Updated the    15/05/16 11:47
+ * Updated the    25/05/16 10:55
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -300,8 +300,8 @@ class DemandController extends Controller {
 
                 // Send mail to admin and manager
                 $mailer = $this->get('spirit_dev_dbox_portal_bundle.mailer');
-                // TODO Send mail
-//                $mailer->newPipelineRequestSendMail($issue, $request->request->get('project'));
+                // Send mail
+                $mailer->newSecurityRequestSendMail($issue, $request->request->get('project'));
 
                 // Flashbag
                 $this->get('session')->getFlashBag()->set('success', 'flashbag.demand.new_security.success');

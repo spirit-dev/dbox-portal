@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Mailer.php
- * Updated the    25/05/16 10:44
+ * Updated the    25/05/16 11:02
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Mailer;
@@ -408,6 +408,33 @@ class Mailer extends MailerCore implements MailerCoreInterface {
             $rendered = $this->templating->render($template, $renderingDatas); // Template rendering
             $this->sendEmailMessage($rendered, $subject, $user->getEmail());
         }
+    }
+
+    /**
+     * Send mail for a new Security request
+     *  To Admin
+     *  To project owner
+     * @param Demand $demand
+     * @param $projectName
+     * @return mixed
+     */
+    public function newSecurityRequestSendMail(Demand $demand, $projectName) {
+        // User mail
+        $template = "SpiritDevDBoxPortalBundle:Mailer/Security:securityRequest.html.twig"; // Template
+        $subject = $this->getSubject('New security assessment request - ' . $projectName); // Subject
+        $demandUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_demand', array('id' => $demand->getId()), true);
+        $rendered = $this->templating->render($template, array(
+            'firstname' => $demand->getApplicant()->getFirstName(),
+            'lastname' => $demand->getApplicant()->getLastName(),
+            'demand' => $demand,
+            'project_name' => $projectName,
+            'demand_url' => $demandUrl
+        )); // Template rendering
+        // Send mail effectively
+        $this->sendEmailMessage($rendered, $subject, $demand->getApplicant()->getEmail());
+
+        // Admin mail
+        $this->sendNewDemandAdminMail($demand, 'Admin - New security request - ' . $projectName);
     }
     
 }

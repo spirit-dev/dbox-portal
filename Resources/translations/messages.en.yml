@@ -385,6 +385,12 @@ mail:
             slot2: Your demand will be processed as soon as possible.
             slot3: You will be informed by mail about the developments.
             slot4: Follow the related demand via this link.
+    security:
+        request:
+            slot1: You have requested a new Security assessment development for the following project.
+            slot2: Your demand will be processed as soon as possible.
+            slot3: You will be informed by mail about the developments.
+            slot4: Follow the related demand via this link.
 
     admin:
         register_demand:

@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           MailerCoreInterface.php
- * Updated the    25/05/16 10:44
+ * Updated the    25/05/16 11:03
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Mailer;
@@ -151,4 +151,14 @@ interface MailerCoreInterface {
      */
     public function processProjectDeletionSendMail(Project $project);
 
+    /**
+     * Send mail for a new Security request
+     *  To Admin
+     *  To project owner
+     * @param Demand $demand
+     * @param $projectName
+     * @return mixed
+     */
+    public function newSecurityRequestSendMail(Demand $demand, $projectName);
+    
 }
