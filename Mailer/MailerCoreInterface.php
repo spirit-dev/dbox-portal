@@ -6,7 +6,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           MailerCoreInterface.php
- * Updated the    15/05/16 11:47
+ * Updated the    25/05/16 10:44
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Mailer;
@@ -142,5 +142,13 @@ interface MailerCoreInterface {
      * @return mixed
      */
     public function newPipelineRequestSendMail(Demand $demand, $projectName);
+
+    /**
+     * Send mail to project memebers to apply a project deletion
+     *  To project team
+     * @param Project $project
+     * @return mixed
+     */
+    public function processProjectDeletionSendMail(Project $project);
 
 }

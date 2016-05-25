@@ -374,6 +374,11 @@ mail:
             common:
                 tab1: Project
                 tab2: User
+        deletion:
+            slot1: This mail is here to inform you.
+            slot2: The project
+            slot3: Has been removed...
+            slot4: Take in consideration that this project will not be accessible anymore.
     pipeline:
         request:
             slot1: You have requested a new Pipeline creation for the following project.

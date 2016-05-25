@@ -6,7 +6,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Mailer.php
- * Updated the    16/05/16 14:54
+ * Updated the    25/05/16 10:44
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Mailer;
@@ -387,5 +387,27 @@ class Mailer extends MailerCore implements MailerCoreInterface {
         $this->sendNewDemandAdminMail($demand, 'Admin - New pipeline request - ' . $projectName);
     }
 
+    /**
+     * Send mail to project memebers to apply a project deletion
+     *  To project team
+     * @param Project $project
+     * @return mixed
+     */
+    public function processProjectDeletionSendMail(Project $project) {
+        // Define necessary vars
+        $template = "SpiritDevDBoxPortalBundle:Mailer/Project:projectDeletion.html.twig"; // Template
+        $subject = $this->getSubject('Project deletion - ' . $project->getName()); // Subject
+        $renderingDatas = array(
+            'project' => $project
+        ); // Template rendering datas
 
+        // Send mail(s) effectively
+        foreach ($project->getTeamMembers() as $user) {
+            $renderingDatas['firstname'] = $user->getFirstname();
+            $renderingDatas['lastname'] = $user->getLastname();
+            $rendered = $this->templating->render($template, $renderingDatas); // Template rendering
+            $this->sendEmailMessage($rendered, $subject, $user->getEmail());
+        }
+    }
+    
 }
