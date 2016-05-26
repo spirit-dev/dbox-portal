@@ -16,11 +16,13 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           JenkinsAPI.php
- * Updated the    25/05/16 14:59
+ * Updated the    26/05/16 15:25
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
 
+use Buzz\Browser;
+use Buzz\Listener\BasicAuthListener;
 use SpiritDev\Bundle\DBoxPortalBundle\Entity\ContinuousIntegration;
 use SpiritDev\Bundle\DBoxUserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -271,20 +273,14 @@ class JenkinsAPI extends JenkinsAPICore implements JenkinsAPICoreInterface {
             return null;
         }
 
-        try {
-            // FIXME Background API bug to resolve
-            $url = sprintf("job/%s/doDelete", $jobName);
-            $issue = $this->sendRequest($this::POST, $url, null, true, true, array(
-                    CURLOPT_HTTPHEADER => array(
-                        'Content-Type' => 'application/x-www-form-urlencoded',
-                        'Authorization' => 'Basic ' . base64_encode($this->jenkinsUser . ':C3t74l4dM1n')
-                    ),
-//                CURLOPT_USERPWD => $this->jenkinsUser . ':C3t74l4dM1n',
-                )
-            );
-            $issue = $this->sendRequest($this::POST, $url);
+        $url = sprintf('%s%s/job/%s/doDelete', $this->jenkinsProto, $this->jenkinsUrl, $jobName);
+        $browser = new Browser();
+        $browser->addListener(new BasicAuthListener($this->jenkinsUser, $this->jenkinsPass));
+        $response = $browser->post($url);
+        $statusCode = $response->getStatusCode();
+        if ($statusCode == 200) {
             return true;
-        } catch (\Exception $e) {
+        } else {
             return false;
         }
     }

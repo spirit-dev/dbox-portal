@@ -6,7 +6,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Configuration.php
- * Updated the    17/05/16 08:50
+ * Updated the    26/05/16 15:27
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -79,6 +79,7 @@ class Configuration implements ConfigurationInterface {
                 ->scalarNode('protocol')->end()
                 ->scalarNode('user')->end()
                 ->scalarNode('token')->end()
+            ->scalarNode('password')->end()
                 ->scalarNode('path')->end()
                 ->scalarNode('default_pipeline_name')->end()
             ->end()

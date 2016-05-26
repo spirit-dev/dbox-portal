@@ -6,7 +6,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           JenkinsAPICore.php
- * Updated the    17/05/16 08:23
+ * Updated the    26/05/16 15:25
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -57,6 +57,10 @@ abstract class JenkinsAPICore {
      * @var
      */
     protected $jenkinsToken;
+    /**
+     * @var
+     */
+    protected $jenkinsPass;
 
     /**
      * @var
@@ -107,6 +111,7 @@ abstract class JenkinsAPICore {
         $this->jenkinsProto = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.protocol");
         $this->jenkinsUser = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.user");
         $this->jenkinsToken = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.token");
+        $this->jenkinsPass = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.password");
         $this->basePath = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.path");
         
         // Important values

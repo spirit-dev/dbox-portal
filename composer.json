@@ -25,7 +25,8 @@
     "liip/imagine-bundle": "1.4.2",
     "coresphere/console-bundle": "0.4.0",
     "lexik/maintenance-bundle": "v2.0.0",
-    "vich/uploader-bundle": "1.0.0-beta7"
+    "vich/uploader-bundle": "1.0.0-beta7",
+    "kriswallsmith/buzz": ">=0.7"
   },
   "autoload": {
     "psr-0": { "SpiritDev\\Bundle\\DBoxPortalBundle": "" }

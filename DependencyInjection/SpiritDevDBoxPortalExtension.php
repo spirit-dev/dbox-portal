@@ -6,7 +6,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           SpiritDevDBoxPortalExtension.php
- * Updated the    17/05/16 08:50
+ * Updated the    26/05/16 15:25
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -75,6 +75,7 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config['jenkins_api'], 'protocol', 'jenkins_api.protocol', true);
         $this->checkConfig($container, $config['jenkins_api'], 'user', 'jenkins_api.user', true);
         $this->checkConfig($container, $config['jenkins_api'], 'token', 'jenkins_api.token', true);
+        $this->checkConfig($container, $config['jenkins_api'], 'password', 'jenkins_api.password', true);
         $this->checkConfig($container, $config['jenkins_api'], 'path', 'jenkins_api.path', true);
         $this->checkConfig($container, $config['jenkins_api'], 'default_pipeline_name', 'jenkins_api.default_pipeline_name', true);
 
