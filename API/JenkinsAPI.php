@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           JenkinsAPI.php
- * Updated the    26/05/16 15:25
+ * Updated the    26/05/16 17:59
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -337,7 +337,16 @@ class JenkinsAPI extends JenkinsAPICore implements JenkinsAPICoreInterface {
             return null;
         }
 
-        $response = $this->sendRequest($this::POST, "view/" . $viewName . "/doDelete");
+        $url = sprintf('%s%s/view/%s/doDelete', $this->jenkinsProto, $this->jenkinsUrl, $viewName);
+        $browser = new Browser();
+        $browser->addListener(new BasicAuthListener($this->jenkinsUser, $this->jenkinsPass));
+        $response = $browser->post($url);
+        $statusCode = $response->getStatusCode();
+        if ($statusCode == 200) {
+            return true;
+        } else {
+            return false;
+        }
 
         return $response;
     }
