@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *
+ *  
  * Since 2K10 until today
- *
+ *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *
+ *  
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *
+ *  
  * File           DefaultController.php
- * Updated the    16/05/16 14:48
+ * Updated the    06/06/16 17:46
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -25,6 +25,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -121,5 +122,53 @@ class DefaultController extends Controller {
         }
 
         return array('no_server_check' => true);
+    }
+
+    /**
+     * @Route("/status/{app}", name="spirit_dev_dbox_portal_bundle_status")
+     * @param null $app
+     * @return JsonResponse
+     */
+    public function serverStatusAction($app = null) {
+        // Set default vars
+        $format = 'Y-m-d H:i:s';
+        $returnValues = array();
+        $dateStart = new \DateTime();
+
+        // Calling each API
+        if ($app == null || $app == 'ci') {
+            $returnValues['bool']['ci'] = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->isAvailable();
+            $returnValues['int']['ci'] = $this->get('spirit_dev_dbox_portal_bundle.api.jenkins')->isAvailable() ? 1 : 0;
+        }
+        if ($app == null || $app == 'vcs') {
+            $returnValues['bool']['vcs'] = $this->get('spirit_dev_dbox_portal_bundle.api.gitlab')->isAvailable();
+            $returnValues['int']['vcs'] = $this->get('spirit_dev_dbox_portal_bundle.api.gitlab')->isAvailable() ? 1 : 0;
+        }
+        if ($app == null || $app == 'pm') {
+            $returnValues['bool']['pm'] = $this->get('spirit_dev_dbox_portal_bundle.api.redmine')->isAvailable();
+            $returnValues['int']['pm'] = $this->get('spirit_dev_dbox_portal_bundle.api.redmine')->isAvailable() ? 1 : 0;
+        }
+        if ($app == null || $app == 'qa') {
+            $returnValues['bool']['qa'] = $this->get('spirit_dev_dbox_portal_bundle.api.sonar')->isAvailable();
+            $returnValues['int']['qa'] = $this->get('spirit_dev_dbox_portal_bundle.api.sonar')->isAvailable() ? 1 : 0;
+        }
+        if ($app == null || $app == 'portal') {
+            $returnValues['bool']['portal'] = true;
+            $returnValues['int']['portal'] = 1;
+        }
+
+        $dateEnd = new \DateTime();
+
+        return new JsonResponse(array(
+            'servers_availability' => array(
+                'bool' => $returnValues['bool'],
+                'int' => $returnValues['int'],
+            ),
+            'requests' => array(
+                'start' => $dateStart->format($format),
+                'end' => $dateEnd->format($format),
+                'duration' => $dateStart->diff($dateEnd)
+            )
+        ));
     }
 }
