@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           SpiritDevDBoxPortalExtension.php
- * Updated the    26/05/16 15:25
+ * Updated the    06/06/16 16:10
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -46,18 +46,6 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
-        // Checking LDAP Drivers configuration
-
-        $this->checkConfig($container, $config, 'ldap_driver', 'ldap_driver', false);
-        $this->checkConfig($container, $config['ldap_driver'], 'driver', 'ldap_driver.driver', false);
-        $this->checkConfig($container, $config['ldap_driver']['driver'], 'host', 'ldap_driver.driver.host', true);
-        $this->checkConfig($container, $config['ldap_driver']['driver'], 'port', 'ldap_driver.driver.port', true);
-        $this->checkConfig($container, $config['ldap_driver']['driver'], 'username', 'ldap_driver.driver.username', true);
-        $this->checkConfig($container, $config['ldap_driver']['driver'], 'password', 'ldap_driver.driver.password', true);
-        $this->checkConfig($container, $config['ldap_driver'], 'user', 'ldap_driver.user', false);
-        $this->checkConfig($container, $config['ldap_driver']['user'], 'basedn', 'ldap_driver.user.basedn', true);
-        $this->checkConfig($container, $config['ldap_driver'], 'provider', 'ldap_driver.provider', true);
-
         // Checking Applicative configuration
         $this->checkConfig($container, $config, 'app', 'app', false);
         $this->checkConfig($container, $config['app'], 'admin_mail', 'app.admin_mail', true);
@@ -85,7 +73,6 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config['redmine_api'], 'protocol', 'redmine_api.protocol', true);
         $this->checkConfig($container, $config['redmine_api'], 'port', 'redmine_api.port', true);
         $this->checkConfig($container, $config['redmine_api'], 'token', 'redmine_api.token', true);
-        
         $this->checkConfig($container, $config['redmine_api'], 'role_dev', 'redmine_api.role_dev', true);
         $this->checkConfig($container, $config['redmine_api'], 'role_manager', 'redmine_api.role_manager', true);
         $this->checkConfig($container, $config['redmine_api'], 'pm_modules', 'redmine_api.pm_modules', true);

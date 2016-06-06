@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Configuration.php
- * Updated the    26/05/16 15:27
+ * Updated the    06/06/16 16:10
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -42,24 +42,6 @@ class Configuration implements ConfigurationInterface {
         // more information on that topic.
         $rootNode
         ->children()
-        ->arrayNode('ldap_driver')
-            ->children()
-                ->arrayNode('driver')
-                    ->children()
-                        ->scalarNode('host')->end()
-                        ->integerNode('port')->end()
-                        ->scalarNode('username')->end()
-                        ->scalarNode('password')->end()
-                    ->end()
-                ->end()
-                ->arrayNode('user')
-                    ->children()
-                        ->scalarNode('basedn')->end()
-                    ->end()
-                ->end()
-                ->scalarNode('provider')->end()
-            ->end()
-        ->end()
         ->arrayNode('app')
             ->children()
                 ->scalarNode('admin_mail')->end()
