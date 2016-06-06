@@ -6,7 +6,7 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *  
  * Since 2K10 until today
  *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           LoadApplicationData.php
- * Updated the    17/05/16 09:34
+ * Updated the    06/06/16 11:29
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DataFixtures\ORM;
@@ -41,7 +41,7 @@ class LoadApplicationData implements FixtureInterface {
         $redmine = new Application();
         $redmine->setName('Redmine - PM');
         $redmine->setCanonicalName('redmine');
-        $redmine->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/REDMINE.png');
+        $redmine->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/REDMINE_logo.png');
 
         $redmine->setUrl('http://redmine.devtest.fr/');
         $redmine->setOrder('1');
@@ -51,7 +51,7 @@ class LoadApplicationData implements FixtureInterface {
         $gitlab = new Application();
         $gitlab->setName('GitLab - VCS');
         $gitlab->setCanonicalName('gitlab');
-        $gitlab->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/GITLAB.png');
+        $gitlab->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/GITLAB_logo.png');
         $gitlab->setUrl('http://git.devtest.fr/');
         $gitlab->setOrder(2);
         $manager->persist($gitlab);
@@ -60,7 +60,7 @@ class LoadApplicationData implements FixtureInterface {
         $sonar = new Application();
         $sonar->setName('Sonar - QA');
         $sonar->setCanonicalName('sonar');
-        $sonar->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/SONAR.png');
+        $sonar->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/SONAR_logo.png');
         $sonar->setUrl('http://sonar.devtest.fr/');
         $sonar->setOrder(3);
         $manager->persist($sonar);
@@ -69,7 +69,7 @@ class LoadApplicationData implements FixtureInterface {
         $jenkins = new Application();
         $jenkins->setName('Jenkins - CI');
         $jenkins->setCanonicalName('jenkins');
-        $jenkins->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/JENKINS.png');
+        $jenkins->setCaptionUri('http://portal.devtest.fr/bundles/spiritdevdboxportal/images/logos/JENKINS_logo.png');
         $jenkins->setUrl('http://jenkins.devtest.fr/');
         $jenkins->setOrder(4);
         $manager->persist($jenkins);
