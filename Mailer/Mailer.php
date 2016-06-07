@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Mailer.php
- * Updated the    25/05/16 11:02
+ * Updated the    07/06/16 17:51
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Mailer;
@@ -136,7 +136,7 @@ class Mailer extends MailerCore implements MailerCoreInterface {
         $template = "SpiritDevDBoxPortalBundle:Mailer/Registration:userRegistrationDone.html.twig"; // Template
         $subject = $this->getSubject('Registration done!'); // Subject
         $homepageUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_homepage', array(), true);
-        $profileUrl = $this->router->generate('spirit_dev_dbox_portal_bundle_user_profile_edit', array(), true);
+        $profileUrl = $this->router->generate('spirit_dev_dbox_user_bundle_profile_edit', array(), true);
         $rendered = $this->templating->render($template, array(
             'firstname' => $newUser['givenName'],
             'lastname' => $newUser['sn'],
