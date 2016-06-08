@@ -98,7 +98,7 @@
                         {% endif %}
 
                         {# defining grantings #}
-                        {{ include('@SpiritDevDBoxPortalBundle:Default:index_grantings.html.twig') }}
+                        {{ include('SpiritDevDBoxPortalBundle:Default:index_grantings.html.twig') }}
 
                         <h4>{{ project.name }}</h4>
                     <span class="text-muted">
@@ -140,7 +140,7 @@
                                  alt="{{ project.name }} thumbnail"/>
                         {% endif %}
                         {# Project grantings #}
-                        {{ include('@SpiritDevDBoxPortalBundle:Default:index_grantings.html.twig') }}
+                        {{ include('SpiritDevDBoxPortalBundle:Default:index_grantings.html.twig') }}
                         <h4>{{ project.name }}</h4>
                     <span class="text-muted">
                         {% if project.description|length > 38 %}
