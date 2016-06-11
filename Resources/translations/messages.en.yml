@@ -9,7 +9,7 @@ left:
         demand: Demands
 
 menu:
-    profile: Profil
+    profile: Profile
     login: Login
     register: Registration
     logout: Logout
@@ -288,7 +288,7 @@ mail:
             slot4: Once you're connected for the first time, you should change your password.
             slot5: You can follow this link to change it!
             link2: Here.
-            slot6: Remember, no will ask you your password.
+            slot6: Remember, anyone will ask you your password.
         account:
             deletion:
                 slot1: Your account have been definitively deleted !
@@ -304,7 +304,7 @@ mail:
                 slot2: Welcome back to your EcosystemV2.
     project:
         request:
-            slot1: You've requested the craetion of a new project.
+            slot1: You've requested the creation of a new project.
             slot2: Find bellow some informations you've requested for this project:
             tabslot1:
                 tab1: Project name
@@ -365,7 +365,7 @@ mail:
                 tab2: User
         remove_user:
             adm:
-                slot1: A user have been demoved from project:
+                slot1: A user have been removed from project:
             owner:
                 slot1: You have removed the following user from your project:
             user:
@@ -395,7 +395,7 @@ mail:
     admin:
         register_demand:
             slot1: Hello Admin
-            slot2: you have received a new demand request:
+            slot2: You have received a new demand request:
             slot3: Demand type:
             slot4: Go directly to the demand
             link1: to process

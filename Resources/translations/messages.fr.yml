@@ -1,19 +1,437 @@
+pagetitle:
+    index: Bienvenu
+    demand: Demandes
+    admin: Admin
+
 left:
     menu:
         home: Accueil
         demand: Demandes
-        
+
 menu:
-    profile: Profile
+    profile: Profil
     login: Connexion
-    logout: Déconnexion
+    register: Enregistrement
+    logout: Quitter
     help: Aide
-    
+    admin: Administration
+    todos: Todos (%nb_todos%)
+    feedbacks: Feedbacks (%nb_feedbacks%)
+
 demands:
-    demands: Demandes
-    users: Utilisateurs
-    btn:
-        new_users: Nouvel utilisateur
-        projects: Nouveau projet
-    projects: Projets
-    admin: Admin
+    leftmenu:
+        dashboard: Tableau de bord - Demandes
+        demands: Demandes
+        users: Utilisateurs
+        btn:
+            new_users: Nouvel utilisateur
+            projects: Nouveau projet
+            dashboard: Tableau de bord
+            pipeline: Nouveau Pipeline
+            security: Sécurité
+        projects: Projets
+        admin: Admin
+        security: Sécurité
+    dashboard:
+        formhead: Tableau de bord - Demandes
+        demand: Demande
+        demand_id: ID Demande
+        type: Demande relative a
+        ask_date: Créée le
+        update_date: Mise à jour
+        resolution_date: Résolue le
+        content: Contenue de la demande
+        status: Statut de la demande
+        btn_return: Retour au tableau de bord
+        comments: Commentaires
+        tab:
+            new: Nouvelle demande
+            processing: Traitement en cours
+            cancelled: Demande annulée
+            resolved: Demande résolue
+            problem: Problème sur la demande
+        update: Mise à jour de la demande
+        process: Traitement de la demande
+    nusersform:
+        formhead: Enregistrement
+        email: E-mail
+        firstname: Prénom
+        lastname: Nom
+        username: Nom d'utilisateur
+        submit: Envoie de la demande d'enregistrement
+    nprojectform:
+        formhead: Nouveau projet - demande
+        name: Nom du projet
+        description: Description
+        languageType: Type de language
+        logo: Logo du projet
+        issueenabled: Activer les issues ?
+        wikienabled: Activer le wiki ?
+        snippetsenabled: Activer les snippets ?
+        owner: Chef de projet
+        members: Membres du projet
+        submit: Envoyer la demande
+        manage_vcs: Gestion du  VCS
+        manage_pm: Gestion du PM
+        manage_ci: Gestion du CI
+        manage_ci_dev: Activer l'intégration continue (Dev pipeline) ?
+        manage_qa_dev: Activer l'analyse de code (Dev pipeline) ?
+    ncommentform:
+        formhead: Nouveau commentaire
+        content: Commentaire
+        com_user: Commenté par :
+        com_date: Le :
+        submit: Envoyer
+    nstatusform:
+        formhead: Changer le statut de la demande
+        status: Nouveau statut
+        submit: Changer
+    resolution:
+        formhead: Résolution de la demande
+        returnto: Retour au(x) demande(s).
+    npipelineform:
+        formhead: Nouveau CI pipeline
+        noproject:
+            1: Désolé vous n'êtes pas chef de projet.
+            2: Vous devriez contacter votre chef de projet pour effectuer ce genre de demande.
+        submit: Envoyer
+        project: Projet
+        ticketid: Requestor Ticket/Demand Id
+        pipelinetype: Type de pipeline
+        servertarget:
+            placeholder: Nom ou IP du server (123.123.123.123)
+            label: Serveur cible
+        moreinfo:
+            placeholder: Ajoutez toutes les informations vous paraîssant necessaires de transmettre.
+            label: Plus d'informations
+    nsecurityform:
+        formhead: Améliorationde la sécurité des applications
+        noproject:
+            1: Désolé, vous n'êtes pas chef de projet, ou botre projet n'a pas encore de plan d'intégration continue!
+            2: Vous devriez contacter votre chef de projet pour effectuer ce type de demande.
+        securityanalysis: Type d'analyse de sécurité
+        mention1: Un serveur distant où votre projet est hébergé doit être défini.
+
+project:
+    header:
+        project: Projet
+        nologo: %project% n'a pas de logo...
+    settings:
+        settings: paramètres
+        teammembers: Membres de l'équipe
+        adduser: Ajout d'un membre
+        not_managed:
+            title: Créer un item
+            vcs:
+                title: Ajout VCS
+                tooltip: Créer un repo Git
+            pm:
+                title: Ajout PM
+                tooltip: Ajout d'un gestionnaire de projet (Redmine)
+            ci:
+                title: Ajout CI
+                tooltip: Ajout de l'intégration continue (Dev pipeline uniquement)
+            qa:
+                title: Ajout QA
+                tooltip: Ajout d'un analyseur de code (Couplé à la CI Dev Pipeline)
+    top_content:
+        created: Créé le :
+        updated: Mis à jour le :
+        owner: Chef de projet
+        team: Equipe
+    project_links:
+        title: Liens du projet
+        project_urls:
+            title: URL(s) projet
+            select: Selectionez une URL
+        clone_url:
+            title: Clone URL
+    pm_info:
+        title: Gestion de projet
+        issues: Issues
+        total_issues: Total issues
+        bug_issues: Bug issues
+        evol_issues: Evolution issues
+        test_issues: Test cases
+        qa_issues: QA issues
+    vcs_info:
+        title: Informations VCS
+        total_commits: Total des commits
+    qa_info:
+        title: Informations QA
+        issues_ratio: Résolutions des issues
+        issue_severities: Issues par sévérités
+        total_issues: Total des issues:
+    secu_info:
+        title: Evaluations de sécurité
+        static:
+            title: Analyses statiques
+            btn_modal1: Check report
+            btn_modal2: Check vulnerabilities
+            btn_modal3: Zap Scanner report
+    ci_info:
+        title: Intégration continue
+        last_build_status: Statut dernier build: <strong>%status%</strong>
+        last_build_timestamp: Dernier build : <strong>%timestamp%</strong>
+        no_build_yet: Ce pipeline n'a jamais été construit <br/> Cliquez ici pour lancer un build
+        no_ci_active1: Vous avez effetué une requête pour un pipeline en Dev, Ce pipeline n'est pas encore actif.
+        no_ci_active2: Votre administrateur travaille dessus.
+        no_ci_active3: Ci ce n'est pas le cas faite une demande ici.
+        new_pipeline:
+            1: Créez un nouveau pipeline en
+            2: cliquant ici
+    tooltip:
+        teammember:
+            remove: Retirer %member% du projet
+            owner: %member% est chef de projet
+            add: Ajouter un membre au projet
+        project_link:
+            goto: Cliquez pour accéder à l'url
+            clipboard: Cliquez pour ajouter l'url au presse-papier
+        branch:
+            protected: %branch% est protégée
+        ci:
+            link: Aller au job distant
+            launch: Lancer le job en cliquant ici
+            console: Cliquez ici pour voir le résultat console
+    not_managed:
+        title: Des itemes ne sont pas gérés
+        vcs: Ce projet n'a pas VCS repository !
+        pm: Ce projet n'a pas de gestionnaire de projet !
+        ci: Ce projet n'a pas de pipeline CI définie !
+        qa: Ce projet n'a pas de Quality Analyis définie (requiert CI) !
+        manager_action: Vous devriez demander a votre chef de projet de les créer si nécessaire.
+
+communication:
+    form:
+        formhead: Nouvelle communication
+        showfrom: Commence le
+        showto: Termine le
+        active: Active
+        type: Type de communication
+        title:  Titre
+        content: Contenu
+        submit: Enregistrement
+
+flashbag:
+    demand:
+        new_user:
+            success: Cette demande pour la création d'un nouvel utilisateur a bien été enregistrée. Elle sera traitée dés que posible.
+            error: Une erreur s'est produite lors de l'enregistrement de la demande. Désolé pour la gêne occasionée.
+        new_comment:
+            success: Votre commentaire a bien été ajouté.
+            error: Une erreur s'est produite lors de l'ajout du commentiare à la demande. Désolé pour la gêne occasionée.
+        change_status:
+            success: Le statut de votre demande a bien été changée.
+            error: Désolé le changement de statut a été refusé. Désolé pour la gêne occasionée.
+        processing_user:
+            success: Auto-Process Nouvel utilisateur LDAP OK.
+            error: Auto-Process Nouvel utilisateur LDAP a rencontré un problème!
+        new_project:
+            success: Votre demande pour la création d'un prjet a bien été transmise.
+            error: Désolé une erreur s'est produite! Désolé pour la gêne occasionée.
+        processing_project:
+            success: Auto-Process pour la création d'un projet OK.
+            error: Auto-Process pour la création d'un projet a rencontré un problème!
+        processing_deletion_project:
+            success: Auto-Process pour la suppression d'un projet OK.
+            error: Auto-Process pour la suppression d'un projet a rencontré un problème!
+        new_pipeline:
+            success: La demande pour un nouveau ipeline a bien été transmise.
+            error: Désolé une erreur s'est produite lors de l'enregistrement de votre demande. Désolé pour la gêne occasionée.
+        new_security:
+            success: Demande pour des tests de sécurité a bien été transmise.
+            error: Désolé une erreur s'est produite lors l'enregistrement de cette demande.
+    project:
+        rm_member:
+            not_allowed: Désolé vous n'êtes pas autorisé à supprimer un membre de l'équipe sur ce projet!!
+            success: Membre retiré avec succés de ce projet!
+            error: Désolé une erreur s'est produite. Le membre n'a pas pu être supprimé.
+        add_member:
+            not_allowed: Désolé vous n'êtes pas autorisé a ajouter un membre d'équipe a ce projet!!
+            success: Membre d'équipe ajouté avec succés.
+            error: Désolé une erreur s'est produite lors de l'ajout d'un membre a ce projet.
+    new_communication:
+        success: Votre communication a bien été enregistrée
+        error: Désolé une erreur s'est produit lors de l'enregistrement de votre communication
+
+mail:
+    global:
+        header: Ecosystem V2.
+        header_admin: Ecosystem V2 - Admin contact.
+        footer:
+            slot1: Cordialement,
+            slot2: L'équipe Tools.
+        hello_user: Bonjour %firstname% %lastname% !
+        hello_admin: Bonjour Admin !
+    user:
+        register_demand:
+            slot2: Vous avez effectué une demande d'enregistrement.
+            slot3: Votre requête sera prise en considération dés que possible par votre administrateur.
+            slot4: Merci pour votre enregistrement.
+        change_status:
+            slot1: Le statut de voter demande a changé.
+            slot2: Le statu est maintenant en : %status%
+            slot3: Cliquez pour plus d'informations sur
+            link1: ce lien
+        registration_done:
+            slot1: Votre compte a été créé par un administrateur.
+            slot2: Vous trouverez ci-dessous toutes informations concernant votre compte:
+            tabh: Voici les informations vous concernant:
+            tab1: Prénom
+            tab2: Nom
+            tab3: Nom d'utilisateur
+            tab4: Mail
+            tab5: Votre mot de passe
+            slot3: Vous pouvez vous connecter dés maintenant en suivant
+            link1: ce lien
+            slot4: Une fois connecté pour la premiere fois, vous devriez changer votre mot de passe.
+            slot5: Vouss pouvez suivre ce lien pour le changer!
+            link2: Ici.
+            slot6: Souvenez-vous, personne ne vous demandera votre mot de passe.
+        account:
+            deletion:
+                slot1: Votre compte a été définitivement supprimé!
+                slot2: Vous ne pourrais plus accéder à l'EcosystemV2
+                slot3: Vous pouvez toutefois écrire a votre administrateur a cette addresse:
+            deactivation:
+                slot1: Votre compte a été désactivé par un administrateur!
+                slot2: Cette action est peut-être temporaire.
+                slot3: Cepandant vous n'aurais plus accés à l'EcosystemV2
+                slot4: Vous pouvez toutefois écrire a votre administrateur a cette addresse:
+            activation:
+                slot1: Votre compte a été activé par un administrateur.
+                slot2: Bon retour sur l'EcosystemV2.
+    project:
+        request:
+            slot1: Vous avez demandé la création d'un nouveau projet.
+            slot2: Vous trouverez ci-dessous des informations sur votre projet:
+            tabslot1:
+                tab1: Nom du projet
+                tab2: Description
+                tab3: Chef de projet
+                tab4: Membres d'équipe
+            slot3: Votre demande sera traitée dés que possible/
+            slot4: Vous serez tenu informé de l'évolution de la demande.
+            slot5: Suivez l'évolution de la demande en suivant ce lien.
+
+        creation:
+            slot1: Un nouveau projet a été créé pour vous et votre équipe.
+            slot2: Vous êtes autorisé a accéder au projet %project_name%.
+            slot3: Trouvez ci-dessous toutes les informations concernant votre projet:
+            tabslot1:
+                tabh: Commun
+                tab1: Nom du projet
+                tab2: Description
+                tab3: Chef de projet
+                tab4: Membre d'équipes
+            tabslot2:
+                tabh: Gestion du versionning
+                tab1: Url du projet
+                tab2: Uri pour cloner le projet
+            tabslot3:
+                tabh: Gestionnaire de projet
+                tab1: Url du projet
+            tabslot4:
+                tabh: Intégration continue
+                tab1: Plus d'informations ici
+            tabslot5:
+                tabh: Analyse du code
+                tab1: Plus d'informations ici
+            not_managed: Non managé
+            slot4: Vous pouvez cliquer ici pour plus d'informations.
+            slot5: A votre tour de jouer.
+            slot6: Au plaisir!
+        new_manager:
+            slot1: Votre projet a un nouveau manager.
+            slot2: Vérifiez les informations ci-dessous
+        add_user:
+            adm:
+                slot1: Un nouveau memebre a été ajouté sur ce projet:
+            owner:
+                slot1: Vous avez ajouté un nouveau membre au projet:
+            user:
+                slot1: vous a donné des accés au projet suivant:
+                slot2: Vous trouverez les informations necessaires ci-dessous:
+                slot3: Vous pouvez commencer à travailler sur ce projet.
+                tabslot1:
+                    tab1: Nom du projet
+                    tab2: Description
+                    tab3: Chef de projet
+                    tab4: Equipes
+                    tab5: URL's du projet
+            common:
+                tab1: Projet
+                tab2: Membre
+        remove_user:
+            adm:
+                slot1: Un membre a été supprimé de ce projet:
+            owner:
+                slot1: Vous avez retiré un membre de votre projet:
+            user:
+                slot1: vous a retiré du projet:
+                slot2: Vous n'êtes plus autorisé a y accéder.
+            common:
+                tab1: Projet
+                tab2: Membre
+        deletion:
+            slot1: Ce mail vous informe:
+            slot2: Le projet
+            slot3: A été supprimé...
+            slot4: Prenez en considération que ce projet ne sera plus accéssible.
+    pipeline:
+        request:
+            slot1: Vous avez demandé la création d'un nouveau pipeline pour le projet suivant.
+            slot2: Votre demande sera traitée dans les plus bref délais.
+            slot3: Vous serez informé par mail de l'évolution de la demande.
+            slot4: Pour plus d'informations sur la demande, suivez ce lien.
+    security:
+        request:
+            slot1: Vous avez effectué une demande pour des tests de sécurité pour le projet suivant.
+            slot2: Votre demande sera traitée dans les plus bref délais.
+            slot3: Vous serez informé par mail de l'évolution de la demande.
+            slot4: Pour plus d'informations sur la demande, suivez ce lien.
+
+    admin:
+        register_demand:
+            slot1: Bonjour Admin
+            slot2: Vous avez reçu une nouvelle demande:
+            slot3: Type de demande:
+            slot4: Allez directement à la demande
+            link1: pour la traiter
+    both:
+        new_comment:
+            slot1: Quelq'un a commenté votre demande
+            slot2: Allez voir en suivant
+            link1: ce lien.
+homepage:
+    pagelabel: Tableau de bord
+    all_projects: Projets --
+    memberof: Membre des projets --
+    owned: Mes projets --
+    metrics:
+        label: Quelques métriques
+        active: Projets actifs
+        nbmemberof: Nb de projets dont je suis membre
+        nbowned: Mes projets
+    servers:
+        label: Disponibilité des serveurs
+        available: Disponible
+        unavailable: Coupé
+        unreachable: Injoignable
+    long_operation: Cette opération peut prendre du temps!
+
+admin:
+    pagelabel: Administration
+    resolution:
+        user_deletion:
+            title: User deletion
+            return_to: Return to users
+        user_de_actvate:
+            title: User (De)Activate
+
+intro:
+    skip: Passer l'intro
+
+help:
+    header: Bienvenu sur l'aide de l'EcosystemV2
