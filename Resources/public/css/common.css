@@ -15,7 +15,7 @@
  * Mail           <bordat.jean@gmail.com>
  *
  * File           common.css
- * Updated the    18/05/16 18:07
+ * Updated the    27/05/16 10:07
  */
 
 /*
@@ -26,6 +26,13 @@
 body {
     padding-top: 50px;
     font-family: 'Electrolize', sans-serif !important;
+    /*-webkit-touch-callout: none;*/
+    /*-webkit-user-select: none;*/
+    /*-khtml-user-select: none;*/
+    /*-moz-user-select: none;*/
+    /*-ms-user-select: none;*/
+    /*user-select: none;*/
+    cursor: default;
 }
 
 iframe {
