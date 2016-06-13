@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           GitLabAPICoreInterface.php
- * Updated the    12/06/16 20:31
+ * Updated the    13/06/16 20:11
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -55,6 +55,13 @@ interface GitLabAPICoreInterface {
      * @return mixed
      */
     public function getProject($projectId);
+
+    /**
+     * Retrieve the project ID from it's name
+     * @param $name
+     * @return mixed
+     */
+    public function getProjectIdByName($name);
 
     /**
      * Deletes a project

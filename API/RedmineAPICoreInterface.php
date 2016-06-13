@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *
+ *    
  * Since 2K10 until today
- *
+ *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *
+ *  
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *
+ *  
  * File           RedmineAPICoreInterface.php
- * Updated the    15/05/16 11:47
+ * Updated the    13/06/16 20:11
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -82,7 +82,7 @@ interface RedmineAPICoreInterface {
      * Get a project list
      * @return mixed
      */
-    public function listProject();
+    public function listProjects(array $parameters = array());
 
     /**
      * Show a project details
@@ -111,6 +111,13 @@ interface RedmineAPICoreInterface {
      * @return mixed
      */
     public function deleteProject(Project $project);
+
+    /**
+     * Get a project id from it's name
+     * @param $name
+     * @return mixed
+     */
+    public function getProjectIdByName($name);
 
     /**
      * Set project members

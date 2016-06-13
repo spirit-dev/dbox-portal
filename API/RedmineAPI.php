@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           RedmineAPI.php
- * Updated the    17/05/16 08:50
+ * Updated the    13/06/16 20:11
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -196,13 +196,13 @@ class RedmineAPI extends RedmineAPICore implements RedmineAPICoreInterface {
      * Get a project list
      * @return mixed
      */
-    public function listProject() {
+    public function listProjects(array $parameters = array()) {
         // Fast Return in case of server stopped
         if (!$this->serverAvailable) {
             return null;
         }
 
-        return $this->redmineClient->api($this::API_PROJECT)->listing(true);
+        return $this->redmineClient->api($this::API_PROJECT)->all($parameters);
     }
 
     /**
@@ -216,7 +216,7 @@ class RedmineAPI extends RedmineAPICore implements RedmineAPICoreInterface {
             return null;
         }
 
-        return $this->redmineClient->api($this::API_PROJECT)->show($project->getRedmineId());
+        return $this->redmineClient->api($this::API_PROJECT)->show($project->getRedmineProjectId());
     }
 
     /**
@@ -281,6 +281,21 @@ class RedmineAPI extends RedmineAPICore implements RedmineAPICoreInterface {
 
         return $this->redmineClient->api($this::API_PROJECT)->remove($project->getRedmineProjectId());
     }
+
+    /**
+     * Get a project id from it's name
+     * @param $name
+     * @return mixed
+     */
+    public function getProjectIdByName($name) {
+        // Fast Return in case of server stopped
+        if (!$this->serverAvailable) {
+            return null;
+        }
+
+        return $this->redmineClient->api($this::API_PROJECT)->getIdByName($name);
+    }
+
 
     /**
      * Set project members

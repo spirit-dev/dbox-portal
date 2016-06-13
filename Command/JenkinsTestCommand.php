@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *
+ *    
  * Since 2K10 until today
- *
+ *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *
+ *  
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *
+ *  
  * File           JenkinsTestCommand.php
- * Updated the    15/05/16 11:47
+ * Updated the    13/06/16 18:21
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Command;
@@ -40,13 +40,13 @@ class JenkinsTestCommand extends ContainerAwareCommand {
      */
     protected function configure() {
         $this
-            ->setName('portal:jenkins:test')
+            ->setName('dbox:portal:jenkins:test')
             ->setDescription('Test for jenkins config')
 //            ->setDefinition(array(
 //                new InputArgument('username', InputArgument::REQUIRED, 'Username'),
 //            ))
             ->setHelp(<<<EOT
-The <info>portal:jenkins:test</info> tests jenkins configuration via xml file:
+The <info>dbox:portal:jenkins:test</info> tests jenkins configuration via xml file:
 
   <info>php app/console portal:jenkins:test</info>
 EOT

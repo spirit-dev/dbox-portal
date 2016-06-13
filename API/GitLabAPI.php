@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           GitLabAPI.php
- * Updated the    12/06/16 20:31
+ * Updated the    13/06/16 20:13
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -59,17 +59,6 @@ class GitLabAPI extends GitLabAPICore implements GitLabAPICoreInterface {
     }
 
     /**
-     * @return mixed
-     */
-    public function listProjects($page = 1, $perPage = 20) {
-        // Fast Return in case of server stopped
-        if (!$this->isServerAvailable()) {
-            return null;
-        }
-        return $this->gitLabClient->api($this::API_PROJECTS)->all($page, $perPage);
-    }
-
-    /**
      * @param Project $project
      * @return array|\Gitlab\Model\Project|null
      */
@@ -100,6 +89,38 @@ class GitLabAPI extends GitLabAPICore implements GitLabAPICoreInterface {
             return null;
         }
         return $this->gitLabClient->api($this::API_PROJECTS)->show($projectId);
+    }
+
+    /**
+     * Retrieve the project ID from it's name
+     * @param $name
+     * @return mixed
+     */
+    public function getProjectIdByName($name) {
+        // Fast Return in case of server stopped
+        if (!$this->isServerAvailable()) {
+            return null;
+        }
+        // Get VCS Projects
+        $allProjects = $this->listProjects(1, 10000);
+        $project = false;
+        foreach ($allProjects as $pjt) {
+            if (strtolower($pjt['name']) == strtolower($name)) {
+                $project = $pjt['id'];
+            }
+        }
+        return $project;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function listProjects($page = 1, $perPage = 20) {
+        // Fast Return in case of server stopped
+        if (!$this->isServerAvailable()) {
+            return null;
+        }
+        return $this->gitLabClient->api($this::API_PROJECTS)->all($page, $perPage);
     }
 
     /**

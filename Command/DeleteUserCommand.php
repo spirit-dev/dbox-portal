@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *
+ *    
  * Since 2K10 until today
- *
+ *  
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *
+ *  
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *
+ *  
  * File           DeleteUserCommand.php
- * Updated the    15/05/16 11:47
+ * Updated the    13/06/16 18:21
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Command;
@@ -37,13 +37,13 @@ class DeleteUserCommand extends ContainerAwareCommand {
      */
     protected function configure() {
         $this
-            ->setName('portal:user:remove')
+            ->setName('dbox:user:remove')
             ->setDescription('Remove user from local and distant apps')
             ->setDefinition(array(
                 new InputArgument('username', InputArgument::REQUIRED, 'Username'),
             ))
             ->setHelp(<<<EOT
-The <info>portal:user:remove</info> command removes a user from local DB and from VCS-PM-CI-QA applications:
+The <info>dbox:user:remove</info> command removes a user from local DB and from VCS-PM-CI-QA applications:
 
   <info>php app/console portal:user:remove jdoe</info>
 EOT
