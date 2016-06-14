@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           RedmineAPICore.php
- * Updated the    17/05/16 08:53
+ * Updated the    14/06/16 20:42
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -30,6 +30,22 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class RedmineAPICore {
 
+    /**
+     *
+     */
+    const API_USER = 'user';
+    /**
+     *
+     */
+    const API_MEMBERSHIP = 'membership';
+    /**
+     *
+     */
+    const API_PROJECT = 'project';
+    /**
+     *
+     */
+    const API_ISSUE = 'issue';
     /**
      * @var
      */
@@ -62,23 +78,10 @@ abstract class RedmineAPICore {
      * @var
      */
     protected $authSourceId;
-
     /**
-     *
+     * @var
      */
-    const API_USER = 'user';
-    /**
-     *
-     */
-    const API_MEMBERSHIP = 'membership';
-    /**
-     *
-     */
-    const API_PROJECT = 'project';
-    /**
-     *
-     */
-    const API_ISSUE = 'issue';
+    protected $redmineProtocol;
 
     /**
      * @var
@@ -112,6 +115,7 @@ abstract class RedmineAPICore {
      */
     public function __construct(ContainerInterface $container) {
         // Getting datas
+        $this->redmineProtocol = $container->getParameter('spirit_dev_d_box_portal.redmine_api.protocol');
         $this->redmineUrl = $container->getParameter('spirit_dev_d_box_portal.redmine_api.url');
         $this->redmineToken = $container->getParameter('spirit_dev_d_box_portal.redmine_api.token');
         $this->redminePort = $container->getParameter('spirit_dev_d_box_portal.redmine_api.port');
@@ -138,7 +142,7 @@ abstract class RedmineAPICore {
      * @return Redmine
      */
     protected function authenticate() {
-        $redmine = new Redmine($this->redmineUrl, $this->redmineToken);
+        $redmine = new Redmine($this->redmineProtocol . $this->redmineUrl, $this->redmineToken);
         $redmine->setPort($this->redminePort);
         return $redmine;
     }
@@ -187,11 +191,14 @@ abstract class RedmineAPICore {
 
         // Create curl
         $curl = curl_init();
-        $curlOptions[CURLOPT_URL] = $this->redmineUrl . $url;
+        $curlOptions[CURLOPT_URL] = $this->redmineProtocol . $this->redmineUrl . $url;
         $curlOptions[CURLOPT_HTTPHEADER] = $defaultHeader;
 
         if ($type == 'post') {
             $curlOptions[CURLOPT_POST] = 1;
+            $curlOptions[CURLOPT_POSTFIELDS] = $datas;
+        } else {
+            $curlOptions[CURLOPT_CUSTOMREQUEST] = $type;
             $curlOptions[CURLOPT_POSTFIELDS] = $datas;
         }
 

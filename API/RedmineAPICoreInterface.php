@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           RedmineAPICoreInterface.php
- * Updated the    13/06/16 20:11
+ * Updated the    14/06/16 20:41
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -118,6 +118,13 @@ interface RedmineAPICoreInterface {
      * @return mixed
      */
     public function getProjectIdByName($name);
+
+    /**
+     * Define project web url from Project->canonicalName()
+     * @param Project $project
+     * @return mixed
+     */
+    public function getProjectWebUrl(Project $project);
 
     /**
      * Set project members

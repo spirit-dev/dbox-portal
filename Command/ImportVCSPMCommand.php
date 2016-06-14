@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           ImportVCSPMCommand.php
- * Updated the    13/06/16 20:13
+ * Updated the    14/06/16 20:42
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Command;
@@ -27,6 +27,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -47,6 +48,8 @@ class ImportVCSPMCommand extends ContainerAwareCommand {
             ->setDefinition(array(
                 new InputArgument('from', InputArgument::REQUIRED, 'Import from (pm|vcs|both)'),
                 new InputArgument('pjtname', InputArgument::OPTIONAL, 'Project Name'),
+                new InputOption('force-update', false, InputOption::VALUE_NONE, 'Force the local entity update.'),
+                new InputOption('force', false, InputOption::VALUE_NONE, 'Force the local entity creation.')
             ))
             ->setHelp(<<<EOF
 The <info>dbox:portal:pmvcs:import</info> checks existing projects from PM and VCS:
@@ -136,6 +139,91 @@ EOF
         } else {
             $io->note('Project -- ' . $pjtname . ' -- does not exists in database!');
             $io->note('A local DB Project will be created');
+        }
+
+        // Starting import
+        $io->section('Starting Importation');
+        if ($dbProject) {
+            // Updating entity
+            if ($input->getOption('force-update') && $io->confirm('Do you want to continue ?', true)) {
+                // Import PM Values
+                if ($from == "pm" || $from == "both") {
+                    $io->writeln('Importing from PM');
+                    $dbProject->setRedmineProjectId($pmProject['project']['id']);
+                    $dbProject->setRedmineProjectIdentifier($pmProject['project']['identifier']);
+                    $dbProject->setRedmineWebUrl($apiPM->getProjectWebUrl($dbProject));
+
+                    $io->writeln('Updating PM remote project');
+                    $dbProject->setName($pjtname);
+                    $update = $apiPM->updateProject($dbProject);
+                    dump($update);
+                }
+                // Import VCS Values
+                if ($from == "vcs" || $from == "both") {
+                    $io->writeln('Importing from VCS');
+                    $dbProject->setGitLabIssueEnabled($vcsProject['issues_enabled']);
+                    $dbProject->setGitLabWikiEnabled($vcsProject['wiki_enabled']);
+                    $dbProject->setGitLabSnippetsEnabled($vcsProject['snippets_enabled']);
+                    $dbProject->setGitLabProjectId($vcsProject['id']);
+                    $dbProject->setGitLabSshUrlToRepo($vcsProject['ssh_url_to_repo']);
+                    $dbProject->setGitLabHttpUrlToRepo($vcsProject['http_url_to_repo']);
+                    $dbProject->setGitLabWebUrl($vcsProject['web_url']);
+                    $dbProject->setGitLabNamespace($vcsProject['path_with_namespace']);
+
+//                    $io->writeln('Updating VCS remote project');
+                }
+                $io->writeln('Updating entity');
+                $dbProject->setName($pjtname);
+                $dbProject->setActive(true);
+//                $em->persist($dbProject);
+                $em->flush();
+                $io->success('Done');
+            } else {
+                $io->error('You may reload the command with the --force-update option');
+                $io->note('php app/console dbox:portal:pmvcs:import ' . $from . ' ' . $pjtname . ' --force-update');
+                exit(0);
+            }
+        } else {
+            // Creating entity
+            if ($input->getOption('force') && $io->confirm('Do you want to continue ?', true)) {
+                $project = new Project();
+                // Import PM Values
+                if ($from == "pm" || $from == "both") {
+                    $io->writeln('Importing from PM');
+                    $project->setRedmineProjectId($pmProject['project']['id']);
+                    $project->setRedmineProjectIdentifier($pmProject['project']['identifier']);
+                    $project->setRedmineWebUrl($apiPM->getProjectWebUrl($project));
+
+                    $io->writeln('Updating PM remote project');
+                    $project->setName($pjtname);
+                    $update = $apiPM->updateProject($project);
+                    dump($update);
+                }
+                // Import VCS Values
+                if ($from == "vcs" || $from == "both") {
+                    $io->writeln('Importing from VCS');
+                    $project->setGitLabIssueEnabled($vcsProject['issues_enabled']);
+                    $project->setGitLabWikiEnabled($vcsProject['wiki_enabled']);
+                    $project->setGitLabSnippetsEnabled($vcsProject['snippets_enabled']);
+                    $project->setGitLabProjectId($vcsProject['id']);
+                    $project->setGitLabSshUrlToRepo($vcsProject['ssh_url_to_repo']);
+                    $project->setGitLabHttpUrlToRepo($vcsProject['http_url_to_repo']);
+                    $project->setGitLabWebUrl($vcsProject['web_url']);
+                    $project->setGitLabNamespace($vcsProject['path_with_namespace']);
+
+//                    $io->writeln('Updating VCS remote project');
+                }
+                $io->writeln('Creating entity');
+                $project->setName($pjtname);
+                $project->setActive(true);
+                $em->persist($project);
+                $em->flush();
+                $io->success('Done');
+            } else {
+                $io->error('You may reload the command with the --force option');
+                $io->note('php app/console dbox:portal:pmvcs:import ' . $from . ' ' . $pjtname . ' --force');
+                exit(0);
+            }
         }
     }
 

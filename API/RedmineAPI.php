@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           RedmineAPI.php
- * Updated the    13/06/16 20:11
+ * Updated the    14/06/16 20:41
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -266,6 +266,31 @@ class RedmineAPI extends RedmineAPICore implements RedmineAPICoreInterface {
         if (!$this->serverAvailable) {
             return null;
         }
+
+        $xml = new \SimpleXMLElement('<?xml version="1.0"?><project></project>');
+        $xml->addChild('name', $project->getName());
+        $xml->addChild('identifier', $this->defineIdentifier($project->getName()));
+        $xml->addChild('description', $project->getDescription());
+        $xml->addChild('homepage', $this->defineHomepage($project->getName()));
+        $xml->addChild('is_public', 'false');
+
+        // Adding modules
+        foreach ($this->pmModules as $pmModule) {
+            $xml->addChild('enabled_module_names', $pmModule);
+        }
+
+        return $this->sendRequest(
+            "/projects/" . $project->getRedmineProjectId() . ".xml",
+            $xml->asXML(),
+            'PUT',
+            array('Content-Type: text/xml'),
+            true,
+            array(
+                CURLOPT_VERBOSE => 0,
+                CURLOPT_HEADER => 0,
+                CURLOPT_RETURNTRANSFER => 1
+            )
+        );
     }
 
     /**
@@ -294,6 +319,15 @@ class RedmineAPI extends RedmineAPICore implements RedmineAPICoreInterface {
         }
 
         return $this->redmineClient->api($this::API_PROJECT)->getIdByName($name);
+    }
+
+    /**
+     * Define project web url from Project->canonicalName()
+     * @param Project $project
+     * @return mixed
+     */
+    public function getProjectWebUrl(Project $project) {
+        return $this->redmineProtocol . $this->redmineUrl . '/projects/' . $project->getRedmineProjectIdentifier();
     }
 
 
