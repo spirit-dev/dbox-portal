@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           JenkinsAPI.php
- * Updated the    26/05/16 17:59
+ * Updated the    28/07/16 11:32
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -74,7 +74,7 @@ class JenkinsAPI extends JenkinsAPICore implements JenkinsAPICoreInterface {
             $fs->chown($userPathFolder, 'jenkins');
             $fs->chgrp($userPathFolder, 'jenkins');
         } catch (IOExceptionInterface $e) {
-            dump("An error occurred while creating your directory at " . $e->getPath());
+//            dump("An error occurred while creating your directory at " . $e->getPath());
         }
         // Updating return values
         $retval['userPath'] = $userPathFolder;
@@ -399,7 +399,7 @@ class JenkinsAPI extends JenkinsAPICore implements JenkinsAPICoreInterface {
 
         $build = $this->jenkinsClient->getJob($ci->getCiName())->getBuilds()[0];
         $progress = $build->getProgress();
-        dump($progress);
+//        dump($progress);
 
         return $progress;
     }

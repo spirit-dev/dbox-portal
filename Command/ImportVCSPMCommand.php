@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *
  * Since 2K10 until today
- *  
+ *
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *  
+ *
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *  
+ *
  * File           ImportVCSPMCommand.php
- * Updated the    14/06/16 20:42
+ * Updated the    28/07/16 11:32
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Command;
@@ -156,7 +156,7 @@ EOF
                     $io->writeln('Updating PM remote project');
                     $dbProject->setName($pjtname);
                     $update = $apiPM->updateProject($dbProject);
-                    dump($update);
+//                    dump($update);
                 }
                 // Import VCS Values
                 if ($from == "vcs" || $from == "both") {
@@ -197,7 +197,7 @@ EOF
                     $io->writeln('Updating PM remote project');
                     $project->setName($pjtname);
                     $update = $apiPM->updateProject($project);
-                    dump($update);
+//                    dump($update);
                 }
                 // Import VCS Values
                 if ($from == "vcs" || $from == "both") {
