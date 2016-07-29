@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Configuration.php
- * Updated the    06/06/16 16:10
+ * Updated the    29/07/16 11:50
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -59,6 +59,7 @@ class Configuration implements ConfigurationInterface {
             ->children()
                 ->scalarNode('url')->end()
                 ->scalarNode('protocol')->end()
+            ->booleanNode('ssl_verify')->end()
                 ->scalarNode('user')->end()
                 ->scalarNode('token')->end()
             ->scalarNode('password')->end()
@@ -72,7 +73,7 @@ class Configuration implements ConfigurationInterface {
                 ->scalarNode('protocol')->end()
                 ->integerNode('port')->end()
                 ->scalarNode('token')->end()
-
+            ->booleanNode('ssl_verify')->end()
                 ->integerNode('role_dev')->end()
                 ->integerNode('role_manager')->end()
                 ->arrayNode('pm_modules')

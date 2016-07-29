@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           JenkinsAPICore.php
- * Updated the    26/05/16 15:25
+ * Updated the    29/07/16 11:01
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -49,6 +49,10 @@ abstract class JenkinsAPICore {
      * @var
      */
     protected $jenkinsProto;
+    /**
+     * @var
+     */
+    protected $sslVerify;
     /**
      * @var
      */
@@ -109,6 +113,7 @@ abstract class JenkinsAPICore {
         // Applying API connection info
         $this->jenkinsUrl = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.url");
         $this->jenkinsProto = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.protocol");
+        $this->sslVerify = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.ssl_verify");
         $this->jenkinsUser = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.user");
         $this->jenkinsToken = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.token");
         $this->jenkinsPass = $container->getParameter("spirit_dev_d_box_portal.jenkins_api.password");
@@ -210,6 +215,7 @@ abstract class JenkinsAPICore {
         }
 
         $curlOpt[CURLOPT_RETURNTRANSFER] = 1;
+        $curlOpt[CURLOPT_SSL_VERIFYPEER] = $this->sslVerify ? 64 : 0;
 
         $response = $this->jenkinsClient->execute($url, $curlOpt);
 

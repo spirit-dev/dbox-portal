@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           SpiritDevDBoxPortalExtension.php
- * Updated the    06/06/16 16:10
+ * Updated the    29/07/16 11:01
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -61,6 +61,7 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config, 'jenkins_api', 'jenkins_api', false);
         $this->checkConfig($container, $config['jenkins_api'], 'url', 'jenkins_api.url', true);
         $this->checkConfig($container, $config['jenkins_api'], 'protocol', 'jenkins_api.protocol', true);
+        $this->checkConfig($container, $config['jenkins_api'], 'ssl_verify', 'jenkins_api.ssl_verify', true);
         $this->checkConfig($container, $config['jenkins_api'], 'user', 'jenkins_api.user', true);
         $this->checkConfig($container, $config['jenkins_api'], 'token', 'jenkins_api.token', true);
         $this->checkConfig($container, $config['jenkins_api'], 'password', 'jenkins_api.password', true);
@@ -73,6 +74,7 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config['redmine_api'], 'protocol', 'redmine_api.protocol', true);
         $this->checkConfig($container, $config['redmine_api'], 'port', 'redmine_api.port', true);
         $this->checkConfig($container, $config['redmine_api'], 'token', 'redmine_api.token', true);
+        $this->checkConfig($container, $config['redmine_api'], 'ssl_verify', 'redmine_api.ssl_verify', true);
         $this->checkConfig($container, $config['redmine_api'], 'role_dev', 'redmine_api.role_dev', true);
         $this->checkConfig($container, $config['redmine_api'], 'role_manager', 'redmine_api.role_manager', true);
         $this->checkConfig($container, $config['redmine_api'], 'pm_modules', 'redmine_api.pm_modules', true);
