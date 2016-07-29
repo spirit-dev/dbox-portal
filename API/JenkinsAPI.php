@@ -6,27 +6,24 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *  
+ *
  * Since 2K10 until today
- *  
+ *
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *  
+ *
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *  
+ *
  * File           JenkinsAPI.php
- * Updated the    28/07/16 11:32
+ * Updated the    29/07/16 17:47
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
 
-use Buzz\Browser;
-use Buzz\Listener\BasicAuthListener;
 use SpiritDev\Bundle\DBoxPortalBundle\Entity\ContinuousIntegration;
 use SpiritDev\Bundle\DBoxUserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -273,15 +270,13 @@ class JenkinsAPI extends JenkinsAPICore implements JenkinsAPICoreInterface {
             return null;
         }
 
-        $url = sprintf('%s%s/job/%s/doDelete', $this->jenkinsProto, $this->jenkinsUrl, $jobName);
-        $browser = new Browser();
-        $browser->addListener(new BasicAuthListener($this->jenkinsUser, $this->jenkinsPass));
-        $response = $browser->post($url);
-        $statusCode = $response->getStatusCode();
-        if ($statusCode == 200) {
-            return true;
-        } else {
-            return false;
+        $url = sprintf('job/%s/doDelete', $jobName);
+
+        try {
+            $response = $this->sendRequest($this::POST, $url);
+            return $response;
+        } catch (\RuntimeException $e) {
+            return $e->getMessage();
         }
     }
 
@@ -337,18 +332,14 @@ class JenkinsAPI extends JenkinsAPICore implements JenkinsAPICoreInterface {
             return null;
         }
 
-        $url = sprintf('%s%s/view/%s/doDelete', $this->jenkinsProto, $this->jenkinsUrl, $viewName);
-        $browser = new Browser();
-        $browser->addListener(new BasicAuthListener($this->jenkinsUser, $this->jenkinsPass));
-        $response = $browser->post($url);
-        $statusCode = $response->getStatusCode();
-        if ($statusCode == 200) {
-            return true;
-        } else {
-            return false;
-        }
+        $url = sprintf('view/%s/doDelete', $viewName);
 
-        return $response;
+        try {
+            $response = $this->sendRequest($this::POST, $url);
+            return $response;
+        } catch (\RuntimeException $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
