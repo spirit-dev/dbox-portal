@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *
  * Since 2K10 until today
- *  
+ *
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *  
+ *
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *  
+ *
  * File           ProjectController.php
- * Updated the    19/05/16 15:57
+ * Updated the    02/08/16 17:28
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -90,7 +90,12 @@ class ProjectController extends Controller {
                 'project' => $project,
                 'active' => true
             ));
-            $ciViewUrl = $this->getParameter("spirit_dev_d_box_portal.jenkins_api.protocol") . $this->getParameter("spirit_dev_d_box_portal.jenkins_api.url") . "/view/";
+            # Setting view url
+            if ($this->getParameter("spirit_dev_d_box_portal.jenkins_api.external_uri") == "none") {
+                $ciViewUrl = $this->getParameter("spirit_dev_d_box_portal.jenkins_api.protocol") . $this->getParameter("spirit_dev_d_box_portal.jenkins_api.url") . "/view/";
+            } else {
+                $ciViewUrl = $this->getParameter("spirit_dev_d_box_portal.jenkins_api.external_uri") . "/view/";
+            }
             $buildsToReturn = null;
             foreach ($ciActivePipelines as $pipe) {
                 // Redefine entity params to apply json_decode function

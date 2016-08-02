@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Configuration.php
- * Updated the    29/07/16 11:50
+ * Updated the    02/08/16 17:28
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -57,23 +57,26 @@ class Configuration implements ConfigurationInterface {
         ->end()
         ->arrayNode('jenkins_api')
             ->children()
+            ->addDefaultsIfNotSet()
                 ->scalarNode('url')->end()
                 ->scalarNode('protocol')->end()
-            ->booleanNode('ssl_verify')->end()
+            ->booleanNode('ssl_verify')->defaultTrue()->end()
                 ->scalarNode('user')->end()
                 ->scalarNode('token')->end()
             ->scalarNode('password')->end()
                 ->scalarNode('path')->end()
                 ->scalarNode('default_pipeline_name')->end()
+            ->scalarNode('external_uri')->defaultValue('none')->end()
             ->end()
         ->end()
         ->arrayNode('redmine_api')
             ->children()
+            ->addDefaultsIfNotSet()
                 ->scalarNode('url')->end()
                 ->scalarNode('protocol')->end()
                 ->integerNode('port')->end()
                 ->scalarNode('token')->end()
-            ->booleanNode('ssl_verify')->end()
+            ->booleanNode('ssl_verify')->defaultTrue()->end()
                 ->integerNode('role_dev')->end()
                 ->integerNode('role_manager')->end()
                 ->arrayNode('pm_modules')
@@ -84,7 +87,6 @@ class Configuration implements ConfigurationInterface {
                 ->integerNode('test_tracker')->end()
                 ->integerNode('qa_tracker')->end()
                 ->integerNode('auth_source')->end()
-                
             ->end()
         ->end()
         ->arrayNode('sonar_api')
