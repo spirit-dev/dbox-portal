@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *
  * File           JenkinsAPI.php
- * Updated the    29/07/16 17:47
+ * Updated the    03/08/16 17:23
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -274,7 +274,12 @@ class JenkinsAPI extends JenkinsAPICore implements JenkinsAPICoreInterface {
 
         try {
             $response = $this->sendRequest($this::POST, $url);
-            return $response;
+            if (strpos($response, '302') != false) {
+                return true;
+            } else if (strpos($response, 'Error') != false) {
+                return false;
+            }
+            return false;
         } catch (\RuntimeException $e) {
             return $e->getMessage();
         }
