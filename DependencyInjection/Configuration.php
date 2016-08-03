@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Configuration.php
- * Updated the    02/08/16 17:28
+ * Updated the    03/08/16 13:44
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -57,7 +57,6 @@ class Configuration implements ConfigurationInterface {
         ->end()
         ->arrayNode('jenkins_api')
             ->children()
-            ->addDefaultsIfNotSet()
                 ->scalarNode('url')->end()
                 ->scalarNode('protocol')->end()
             ->booleanNode('ssl_verify')->defaultTrue()->end()
@@ -71,7 +70,6 @@ class Configuration implements ConfigurationInterface {
         ->end()
         ->arrayNode('redmine_api')
             ->children()
-            ->addDefaultsIfNotSet()
                 ->scalarNode('url')->end()
                 ->scalarNode('protocol')->end()
                 ->integerNode('port')->end()
