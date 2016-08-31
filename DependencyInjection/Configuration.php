@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           Configuration.php
- * Updated the    03/08/16 13:44
+ * Updated the    31/08/16 14:31
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -66,6 +66,7 @@ class Configuration implements ConfigurationInterface {
                 ->scalarNode('path')->end()
                 ->scalarNode('default_pipeline_name')->end()
             ->scalarNode('external_uri')->defaultValue('none')->end()
+            ->scalarNode('ci_hook_uri')->defaultValue('none')->end()
             ->end()
         ->end()
         ->arrayNode('redmine_api')
