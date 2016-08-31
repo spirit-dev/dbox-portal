@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *  
  * File           SpiritDevDBoxPortalExtension.php
- * Updated the    31/08/16 14:31
+ * Updated the    31/08/16 15:10
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -68,7 +68,7 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config['jenkins_api'], 'path', 'jenkins_api.path', true);
         $this->checkConfig($container, $config['jenkins_api'], 'default_pipeline_name', 'jenkins_api.default_pipeline_name', true);
         $this->checkConfig($container, $config['jenkins_api'], 'external_uri', 'jenkins_api.external_uri', true);
-        $this->checkConfig($container, $config['jenkins_api'], 'ci_hook_uri', 'jenkins_api.ci_hook_uri', true);
+        $this->checkConfig($container, $config['jenkins_api'], 'web_hook_use_external', 'jenkins_api.web_hook_use_external', true);
 
         // Checking Redmine configuration
         $this->checkConfig($container, $config, 'redmine_api', 'redmine_api', false);
