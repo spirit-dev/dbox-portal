@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *  
+ *
  * Since 2K10 until today
- *  
+ *
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *  
+ *
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *  
+ *
  * File           SpiritDevDBoxPortalExtension.php
- * Updated the    31/08/16 15:10
+ * Updated the    01/09/16 16:23
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -51,6 +51,7 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config['app'], 'admin_mail', 'app.admin_mail', true);
         $this->checkConfig($container, $config['app'], 'from_mail', 'app.from_mail', true);
         $this->checkConfig($container, $config['app'], 'subject_prepend', 'app.subject_prepend', true);
+        $this->checkConfig($container, $config['app'], 'self_base_url', 'app.self_base_url', true);
 
         // Checking GitLab configuration
         $this->checkConfig($container, $config, 'gitlab_api', 'gitlab_api', false);

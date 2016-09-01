@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *  
+ *
  * Since 2K10 until today
- *  
+ *
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *  
+ *
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *  
+ *
  * File           Configuration.php
- * Updated the    31/08/16 15:11
+ * Updated the    01/09/16 16:25
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -47,6 +47,7 @@ class Configuration implements ConfigurationInterface {
                 ->scalarNode('admin_mail')->end()
                 ->scalarNode('from_mail')->end()
                 ->scalarNode('subject_prepend')->end()
+            ->scalarNode('self_base_url')->defaultValue('none')->end()
             ->end()
         ->end()
         ->arrayNode('gitlab_api')
