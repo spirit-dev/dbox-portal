@@ -6,29 +6,27 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *
  * Since 2K10 until today
- *  
+ *
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *  
+ *
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *  
+ *
  * File           ImportVCSPMCommand.php
- * Updated the    14/06/16 20:42
+ * Updated the    01/09/16 16:23
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Command;
 
+use SpiritDev\Bundle\DBoxAdminBundle\Processor\Processor;
 use SpiritDev\Bundle\DBoxPortalBundle\Entity\Project;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -70,6 +68,8 @@ EOF
         $pjtname = $input->getArgument('pjtname');
         // Important vars
         $container = $this->getContainer();
+        $router = $container->get('router');
+        $selfBaseUrl = $container->getParameter('spirit_dev_d_box_portal.app.self_base_url');
         $em = $container->get('doctrine')->getManager();
         $io = new SymfonyStyle($input, $output);
 //        // API's
@@ -156,7 +156,6 @@ EOF
                     $io->writeln('Updating PM remote project');
                     $dbProject->setName($pjtname);
                     $update = $apiPM->updateProject($dbProject);
-                    dump($update);
                 }
                 // Import VCS Values
                 if ($from == "vcs" || $from == "both") {
@@ -170,12 +169,19 @@ EOF
                     $dbProject->setGitLabWebUrl($vcsProject['web_url']);
                     $dbProject->setGitLabNamespace($vcsProject['path_with_namespace']);
 
-//                    $io->writeln('Updating VCS remote project');
+                    $io->writeln('Updating VCS remote project');
+                    // Create hooks
+                    $nbCommitHookUrl = $selfBaseUrl != 'none' ? $selfBaseUrl . "web_hook/update/nb_commit/" . $dbProject->getId() : $router->generate('spirit_dev_dbox_portal_bundle_webhook_pjt_update_nbcommits', array('pjt_id' => $dbProject->getId()), true);
+                    // var_dump($nbCommitHookUrl);
+                    $apiVCS->setProjectWebHook($dbProject, $nbCommitHookUrl);
+                    // Push hook to ci server
+                    $processor = $container->get('spirit_dev_dbox_admin_bundle.admin.processor');
+                    $jenkinsUrl = $processor->defineJenkinsProjectUrl($dbProject);
+                    $apiVCS->setProjectWebHook($dbProject, $jenkinsUrl);
                 }
                 $io->writeln('Updating entity');
                 $dbProject->setName($pjtname);
                 $dbProject->setActive(true);
-//                $em->persist($dbProject);
                 $em->flush();
                 $io->success('Done');
             } else {
@@ -197,7 +203,7 @@ EOF
                     $io->writeln('Updating PM remote project');
                     $project->setName($pjtname);
                     $update = $apiPM->updateProject($project);
-                    dump($update);
+//                    dump($update);
                 }
                 // Import VCS Values
                 if ($from == "vcs" || $from == "both") {
@@ -211,7 +217,14 @@ EOF
                     $project->setGitLabWebUrl($vcsProject['web_url']);
                     $project->setGitLabNamespace($vcsProject['path_with_namespace']);
 
-//                    $io->writeln('Updating VCS remote project');
+                    $io->writeln('Updating VCS remote project');
+                    // Create hooks
+                    $nbCommitHookUrl = $selfBaseUrl != 'none' ? $selfBaseUrl . "web_hook/update/nb_commit/" . $project->getId() : $router->generate('spirit_dev_dbox_portal_bundle_webhook_pjt_update_nbcommits', array('pjt_id' => $project->getId()), true);
+                    $apiVCS->setProjectWebHook($project, $nbCommitHookUrl);
+                    // Push hook to ci server
+                    $processor = $container->get('spirit_dev_dbox_admin_bundle.admin.processor');
+                    $jenkinsUrl = $processor->defineJenkinsProjectUrl($project);
+                    $apiVCS->setProjectWebHook($project, $jenkinsUrl);
                 }
                 $io->writeln('Creating entity');
                 $project->setName($pjtname);

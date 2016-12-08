@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *  
+ *
  * Since 2K10 until today
- *  
+ *
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *  
+ *
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *  
+ *
  * File           SpiritDevDBoxPortalExtension.php
- * Updated the    06/06/16 16:10
+ * Updated the    01/09/16 16:23
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -51,6 +51,7 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config['app'], 'admin_mail', 'app.admin_mail', true);
         $this->checkConfig($container, $config['app'], 'from_mail', 'app.from_mail', true);
         $this->checkConfig($container, $config['app'], 'subject_prepend', 'app.subject_prepend', true);
+        $this->checkConfig($container, $config['app'], 'self_base_url', 'app.self_base_url', true);
 
         // Checking GitLab configuration
         $this->checkConfig($container, $config, 'gitlab_api', 'gitlab_api', false);
@@ -61,11 +62,14 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config, 'jenkins_api', 'jenkins_api', false);
         $this->checkConfig($container, $config['jenkins_api'], 'url', 'jenkins_api.url', true);
         $this->checkConfig($container, $config['jenkins_api'], 'protocol', 'jenkins_api.protocol', true);
+        $this->checkConfig($container, $config['jenkins_api'], 'ssl_verify', 'jenkins_api.ssl_verify', true);
         $this->checkConfig($container, $config['jenkins_api'], 'user', 'jenkins_api.user', true);
         $this->checkConfig($container, $config['jenkins_api'], 'token', 'jenkins_api.token', true);
         $this->checkConfig($container, $config['jenkins_api'], 'password', 'jenkins_api.password', true);
         $this->checkConfig($container, $config['jenkins_api'], 'path', 'jenkins_api.path', true);
         $this->checkConfig($container, $config['jenkins_api'], 'default_pipeline_name', 'jenkins_api.default_pipeline_name', true);
+        $this->checkConfig($container, $config['jenkins_api'], 'external_uri', 'jenkins_api.external_uri', true);
+        $this->checkConfig($container, $config['jenkins_api'], 'web_hook_use_external', 'jenkins_api.web_hook_use_external', true);
 
         // Checking Redmine configuration
         $this->checkConfig($container, $config, 'redmine_api', 'redmine_api', false);
@@ -73,6 +77,7 @@ class SpiritDevDBoxPortalExtension extends Extension {
         $this->checkConfig($container, $config['redmine_api'], 'protocol', 'redmine_api.protocol', true);
         $this->checkConfig($container, $config['redmine_api'], 'port', 'redmine_api.port', true);
         $this->checkConfig($container, $config['redmine_api'], 'token', 'redmine_api.token', true);
+        $this->checkConfig($container, $config['redmine_api'], 'ssl_verify', 'redmine_api.ssl_verify', true);
         $this->checkConfig($container, $config['redmine_api'], 'role_dev', 'redmine_api.role_dev', true);
         $this->checkConfig($container, $config['redmine_api'], 'role_manager', 'redmine_api.role_manager', true);
         $this->checkConfig($container, $config['redmine_api'], 'pm_modules', 'redmine_api.pm_modules', true);

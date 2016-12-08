@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *  
+ *
  * Since 2K10 until today
- *  
+ *
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *  
+ *
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *  
+ *
  * File           Configuration.php
- * Updated the    06/06/16 16:10
+ * Updated the    01/09/16 16:25
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\DependencyInjection;
@@ -47,6 +47,7 @@ class Configuration implements ConfigurationInterface {
                 ->scalarNode('admin_mail')->end()
                 ->scalarNode('from_mail')->end()
                 ->scalarNode('subject_prepend')->end()
+            ->scalarNode('self_base_url')->defaultValue('none')->end()
             ->end()
         ->end()
         ->arrayNode('gitlab_api')
@@ -59,11 +60,14 @@ class Configuration implements ConfigurationInterface {
             ->children()
                 ->scalarNode('url')->end()
                 ->scalarNode('protocol')->end()
+            ->booleanNode('ssl_verify')->defaultTrue()->end()
                 ->scalarNode('user')->end()
                 ->scalarNode('token')->end()
             ->scalarNode('password')->end()
                 ->scalarNode('path')->end()
                 ->scalarNode('default_pipeline_name')->end()
+            ->scalarNode('external_uri')->defaultValue('none')->end()
+            ->scalarNode('web_hook_use_external')->defaultFalse()->end()
             ->end()
         ->end()
         ->arrayNode('redmine_api')
@@ -72,7 +76,7 @@ class Configuration implements ConfigurationInterface {
                 ->scalarNode('protocol')->end()
                 ->integerNode('port')->end()
                 ->scalarNode('token')->end()
-
+            ->booleanNode('ssl_verify')->defaultTrue()->end()
                 ->integerNode('role_dev')->end()
                 ->integerNode('role_manager')->end()
                 ->arrayNode('pm_modules')
@@ -83,7 +87,6 @@ class Configuration implements ConfigurationInterface {
                 ->integerNode('test_tracker')->end()
                 ->integerNode('qa_tracker')->end()
                 ->integerNode('auth_source')->end()
-                
             ->end()
         ->end()
         ->arrayNode('sonar_api')

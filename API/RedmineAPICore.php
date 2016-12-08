@@ -6,17 +6,17 @@
  *   /_`_  ._._/___/ | _
  * . _//_//// /   /_.'/_'|/
  *    /
- *    
+ *
  * Since 2K10 until today
- *  
+ *
  * Hex            53 70 69 72 69 74 2d 44 65 76
- *  
+ *
  * By             Jean Bordat
  * Twitter        @Ji_Bay_
  * Mail           <bordat.jean@gmail.com>
- *  
+ *
  * File           RedmineAPICore.php
- * Updated the    14/06/16 20:42
+ * Updated the    29/07/16 10:36
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\API;
@@ -95,6 +95,10 @@ abstract class RedmineAPICore {
      * @var
      */
     protected $redminePort;
+    /**
+     * @var
+     */
+    protected $sslVerify;
 
     /**
      * @var Redmine
@@ -119,6 +123,7 @@ abstract class RedmineAPICore {
         $this->redmineUrl = $container->getParameter('spirit_dev_d_box_portal.redmine_api.url');
         $this->redmineToken = $container->getParameter('spirit_dev_d_box_portal.redmine_api.token');
         $this->redminePort = $container->getParameter('spirit_dev_d_box_portal.redmine_api.port');
+        $this->sslVerify = $container->getParameter('spirit_dev_d_box_portal.redmine_api.ssl_verify');
 
         // Setting constants
         $this->roleDev = $container->getParameter('spirit_dev_d_box_portal.redmine_api.role_dev');
@@ -193,6 +198,7 @@ abstract class RedmineAPICore {
         $curl = curl_init();
         $curlOptions[CURLOPT_URL] = $this->redmineProtocol . $this->redmineUrl . $url;
         $curlOptions[CURLOPT_HTTPHEADER] = $defaultHeader;
+        $curlOptions[CURLOPT_SSL_VERIFYPEER] = $this->sslVerify ? 64 : 0;
 
         if ($type == 'post') {
             $curlOptions[CURLOPT_POST] = 1;
