@@ -19,6 +19,7 @@
     "doctrine/doctrine-fixtures-bundle": "2.2.0",
     "symfony/assetic-bundle": "v2.7.1",
     "m4tthumphrey/php-gitlab-api": "7.13.0",
+    "jenkins-khan/jenkins-api": "dev-master",
     "spirit-dev/php-sonarqube-api": "0.0.4",
     "kbsali/redmine-api": "v1.5.9",
     "liip/imagine-bundle": "1.4.2",
@@ -30,5 +31,6 @@
   "autoload": {
     "psr-0": { "SpiritDev\\Bundle\\DBoxPortalBundle": "" }
   },
-  "target-dir": "SpiritDev/Bundle/DBoxPortalBundle"
+  "target-dir": "SpiritDev/Bundle/DBoxPortalBundle",
+  "minimum-stability": "dev"
 }
