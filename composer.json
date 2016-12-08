@@ -31,6 +31,5 @@
   "autoload": {
     "psr-0": { "SpiritDev\\Bundle\\DBoxPortalBundle": "" }
   },
-  "target-dir": "SpiritDev/Bundle/DBoxPortalBundle",
-  "minimum-stability": "dev"
+  "target-dir": "SpiritDev/Bundle/DBoxPortalBundle"
 }
