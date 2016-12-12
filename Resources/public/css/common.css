@@ -15,7 +15,7 @@
  * Mail           <bordat.jean@gmail.com>
  *
  * File           common.css
- * Updated the    27/05/16 10:07
+ * Updated the    12/12/16 21:01
  */
 
 /*
@@ -122,14 +122,31 @@ iframe {
     text-shadow: 0 0 20px rgba(232, 0, 0, 0.75) !important;
 }
 
-/* Menu loader */
-.menu-loader {
-    background: url("../images/EcosysV2/EcosystemV2-loader-3-vfast.gif") no-repeat scroll 0 0 / 46px 46px;
-    height: 46px;
-    margin-left: 2px;
-    margin-top: 2px;
-    width: 46px;
+@media (min-width: 765px) and (max-width: 794px) {
+    .serverAvailability {
+        display: none;
+    }
 }
+
+@media (min-width: 795px) and (max-width: 870px) {
+    .serverAvailability li a {
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 871px) and (max-width: 940px) {
+    .serverAvailability li a {
+        padding: 15px 7px;
+    }
+}
+
+@media (max-width: 870px) {
+    .serverAvailability li a {
+        padding: 15px 2px;
+    }
+}
+
+
 
 /*
  * Large loader
@@ -155,17 +172,6 @@ iframe {
     position: fixed;
     top: 50%;
     width: 400px;
-}
-
-.large-loader-loading-icon {
-    background: url('../images/EcosysV2/EcosystemV2-loader-3-vfast.gif') no-repeat scroll 0 0 / 256px 256px;
-    display: block;
-    height: 256px;
-    line-height: 100px;
-    margin: 0;
-    padding: 1px;
-    text-align: center;
-    width: 256px;
 }
 
 .large-loader-loading-text {
@@ -616,4 +622,13 @@ iframe {
 
 .content-td hr {
     margin: -11px 0 10px 22px;
+}
+
+/*
+ * Introduction
+ */
+#intro-loader {
+    max-width: 100%;
+    height: auto;
+    width: auto;
 }

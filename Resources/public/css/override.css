@@ -1,0 +1,44 @@
+/*
+ * Copyright (c) 2016. Spirit-Dev
+ * Licensed under GPLv3 GNU License - http://www.gnu.org/licenses/gpl-3.0.html
+ *    _             _
+ *   /_`_  ._._/___/ | _
+ * . _//_//// /   /_.'/_'|/
+ *    /
+ *
+ * Since 2K10 until today
+ *
+ * Hex            53 70 69 72 69 74 2d 44 65 76
+ *
+ * By             Jean Bordat
+ * Twitter        @Ji_Bay_
+ * Mail           <bordat.jean@gmail.com>
+ *
+ * File           override.css
+ * Updated the    12/12/16 21:01
+ */
+
+/*
+ * Menu loader
+ */
+.menu-loader {
+    background: url("../images/EcosysV2/EcosystemV2-loader-3-vfast.gif") no-repeat scroll 0 0 / 46px 46px;
+    height: 46px;
+    margin-left: 2px;
+    margin-top: 2px;
+    width: 46px;
+}
+
+/*
+ * Large loader
+ */
+.large-loader-loading-icon {
+    background: url('../images/EcosysV2/EcosystemV2-loader-3-vfast.gif') no-repeat scroll 0 0 / 256px 256px;
+    display: block;
+    height: 256px;
+    line-height: 100px;
+    margin: 0;
+    padding: 1px;
+    text-align: center;
+    width: 256px;
+}
