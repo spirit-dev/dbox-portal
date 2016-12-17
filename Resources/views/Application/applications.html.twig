@@ -1,21 +1,34 @@
 {% for appli in applications %}
 
-    <li class="left-menu-item">
-        <div class="left-menu-item-main">
-            <a href="{{ path('spirit_dev_dbox_portal_bundle_application_redirect', {'app': appli.id}) }}">
+    {% if zone == 'left' %}
+        <li class="left-menu-item">
+            <div class="left-menu-item-main">
+                <a href="{{ path('spirit_dev_dbox_portal_bundle_application_redirect', {'app': appli.id}) }}">
+                    <ul class="list-inline">
+                        <li>
+                            <img class="left-menu-logo" src="{{ appli.captionUri }}"/>
+                        </li>
+                        <li class="left-menu-item-text">{{ appli.name }}</li>
+                    </ul>
+                </a>
+            </div>
+            <div class="left-menu-item-link pull-right">
+                <a href="{{ appli.url }}" target="_blank">
+                    <img src="{{ asset('bundles/spiritdevdboxportal/images/icons/glyphicons_050_link.png') }}"/>
+                </a>
+            </div>
+        </li>
+    {% elseif zone == "xs" %}
+        <li class="left-menu-item-xs">
+            <a href="{{ appli.url }}" target="_blank">
                 <ul class="list-inline">
                     <li>
                         <img class="left-menu-logo" src="{{ appli.captionUri }}"/>
                     </li>
-                    <li class="left-menu-item-text">{{ appli.name }}</li>
+                    <li class="left-menu-item-text-xs">{{ appli.name }}</li>
                 </ul>
             </a>
-        </div>
-        <div class="left-menu-item-link pull-right">
-            <a href="{{ appli.url }}" target="_blank">
-                <img src="{{ asset('bundles/spiritdevdboxportal/images/icons/glyphicons_050_link.png') }}"/>
-            </a>
-        </div>
-    </li>
+        </li>
+    {% endif %}
 
 {% endfor %}

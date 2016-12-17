@@ -16,7 +16,7 @@
  * Mail           <bordat.jean@gmail.com>
  *
  * File           ApplicationController.php
- * Updated the    15/05/16 11:47
+ * Updated the    17/12/16 21:35
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Controller;
@@ -36,16 +36,18 @@ class ApplicationController extends Controller {
     /**
      * @return array
      *
-     * @Route("/lmapplications", name="spirit_dev_dbox_portal_bundle_applications")
+     * @Route("/lmapplications/{zone}", name="spirit_dev_dbox_portal_bundle_applications")
      * @Template()
+     * @param $zone
+     * @return array
      */
-    public function applicationsAction() {
+    public function applicationsAction($zone) {
 
         $em = $this->getDoctrine()->getManager();
 
         $applications = $em->getRepository('SpiritDevDBoxPortalBundle:Application')->findAll();
 
-        return array('applications' => $applications);
+        return array('applications' => $applications, 'zone' => $zone);
     }
 
     /**

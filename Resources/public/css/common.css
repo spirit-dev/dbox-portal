@@ -15,7 +15,7 @@
  * Mail           <bordat.jean@gmail.com>
  *
  * File           common.css
- * Updated the    12/12/16 21:01
+ * Updated the    17/12/16 21:43
  */
 
 /*
@@ -122,9 +122,21 @@ iframe {
     text-shadow: 0 0 20px rgba(232, 0, 0, 0.75) !important;
 }
 
-@media (min-width: 765px) and (max-width: 794px) {
-    .serverAvailability {
-        display: none;
+@media (min-width: 941px) {
+    .serverAvailability li a {
+        font-size: 14px;
+        padding: 15px 15px;
+    }
+}
+
+@media (max-width: 870px) {
+    .serverAvailability li a {
+        padding: 15px 2px;
+    }
+}
+@media (min-width: 871px) and (max-width: 940px) {
+    .serverAvailability li a {
+        padding: 15px 7px;
     }
 }
 
@@ -134,15 +146,9 @@ iframe {
     }
 }
 
-@media (min-width: 871px) and (max-width: 940px) {
-    .serverAvailability li a {
-        padding: 15px 7px;
-    }
-}
-
-@media (max-width: 870px) {
-    .serverAvailability li a {
-        padding: 15px 2px;
+@media (min-width: 765px) and (max-width: 794px) {
+    .serverAvailability {
+        display: none;
     }
 }
 

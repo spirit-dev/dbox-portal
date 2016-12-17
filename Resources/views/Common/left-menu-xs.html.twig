@@ -1,0 +1,28 @@
+<div class="row left-menu-xs">
+
+    <ul class="list-inline">
+
+        <li {% if app.request.attributes.get('_route') ==  'homepage' %}class="active"{% endif %}>
+            <a href="{{ path('spirit_dev_dbox_portal_bundle_homepage') }}">
+                <ul class="list-inline">
+                    <li><img class="left-menu-logo"
+                             src="{{ asset('bundles/spiritdevdboxportal/images/logos/HOME_logo.png') }}"></li>
+                    <li class="left-menu-item-text-xs">{{ 'left.menu.home'|trans }}</li>
+                </ul>
+            </a>
+        </li>
+        <li {% if app.request.attributes.get('_route') ==  'demand' %}class="active"{% endif %}>
+            <a href="{{ path('spirit_dev_dbox_portal_bundle_demands') }}">
+                <ul class="list-inline">
+                    <li><img class="left-menu-logo"
+                             src="{{ asset('bundles/spiritdevdboxportal/images/logos/DEMAND_logo.png') }}">
+                    </li>
+                    <li class="left-menu-item-text-xs">{{ 'left.menu.demand'|trans }}</li>
+                </ul>
+            </a>
+        </li>
+
+        {{ render(path('spirit_dev_dbox_portal_bundle_applications', {'zone': 'xs'})) }}
+    </ul>
+
+</div>
