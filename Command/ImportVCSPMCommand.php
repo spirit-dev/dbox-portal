@@ -16,13 +16,14 @@
  * Mail           <bordat.jean@gmail.com>
  *
  * File           ImportVCSPMCommand.php
- * Updated the    01/09/16 16:23
+ * Updated the    18/12/16 17:55
  */
 
 namespace SpiritDev\Bundle\DBoxPortalBundle\Command;
 
 use SpiritDev\Bundle\DBoxAdminBundle\Processor\Processor;
 use SpiritDev\Bundle\DBoxPortalBundle\Entity\Project;
+use SpiritDev\Bundle\DBoxUserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -156,6 +157,9 @@ EOF
                     $io->writeln('Updating PM remote project');
                     $dbProject->setName($pjtname);
                     $update = $apiPM->updateProject($dbProject);
+
+                    // Update managed entity
+                    $dbProject->setPmManaged(true);
                 }
                 // Import VCS Values
                 if ($from == "vcs" || $from == "both") {
@@ -178,6 +182,9 @@ EOF
                     $processor = $container->get('spirit_dev_dbox_admin_bundle.admin.processor');
                     $jenkinsUrl = $processor->defineJenkinsProjectUrl($dbProject);
                     $apiVCS->setProjectWebHook($dbProject, $jenkinsUrl);
+
+                    // Update managed entity
+                    $dbProject->setVcsManaged(true);
                 }
                 $io->writeln('Updating entity');
                 $dbProject->setName($pjtname);
@@ -204,7 +211,18 @@ EOF
                     $project->setName($pjtname);
                     $update = $apiPM->updateProject($project);
 //                    dump($update);
+
+                    // Update managed entity
+                    $project->setPmManaged(true);
                 }
+                // Create entity
+                $io->writeln('Creating entity');
+                $project->setName($pjtname);
+                $project->setActive(true);
+                $userDefault = $em->getRepository('SpiritDevDBoxUserBundle:User')->findOneBy(array('username' => 'admin'));
+                $project->setOwner($userDefault);
+                $em->persist($project);
+                $em->flush();
                 // Import VCS Values
                 if ($from == "vcs" || $from == "both") {
                     $io->writeln('Importing from VCS');
@@ -225,11 +243,10 @@ EOF
                     $processor = $container->get('spirit_dev_dbox_admin_bundle.admin.processor');
                     $jenkinsUrl = $processor->defineJenkinsProjectUrl($project);
                     $apiVCS->setProjectWebHook($project, $jenkinsUrl);
+
+                    // Update managed entity
+                    $project->setVcsManaged(true);
                 }
-                $io->writeln('Creating entity');
-                $project->setName($pjtname);
-                $project->setActive(true);
-                $em->persist($project);
                 $em->flush();
                 $io->success('Done');
             } else {
